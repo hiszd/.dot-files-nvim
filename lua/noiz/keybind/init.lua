@@ -26,3 +26,4 @@ map('n', '<leader>td', ':lua require"telescope.builtin".diagnostics({bufnr=0})<c
 map('n', '<leader>tr', ':Telescope lsp_references<cr>', { noremap = true })
 map('n', '<leader>tk', ':Telescope keymaps<cr>', { noremap = true })
 map('n', '<leader>tg', ':Telescope grep_string<cr>', { noremap = true })
+map('v', '<leader>tg', '"zy:Telescope grep_string default_text=<C-r>z<cr>', { noremap = true })
