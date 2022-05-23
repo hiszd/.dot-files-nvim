@@ -96,18 +96,18 @@ vim.g.mapleader = " "
 
 vim.opt_local.conceallevel = 2
 
-vim.opt.tabstop = 2
 vim.opt.expandtab = true
 vim.opt.exrc = true
 vim.opt.errorbells = false
 vim.opt.shiftwidth = 2
+vim.opt.tabstop = 2
 vim.opt.wrap = false
 vim.opt.incsearch = true
 vim.opt.scrolloff = 8
 vim.opt.signcolumn = 'yes'
 vim.opt.colorcolumn:append { 80 }
 vim.opt.cmdheight = 4
-vim.opt.updatetime = 50
+vim.opt.updatetime = 1000
 vim.opt.cursorline = true
 vim.opt.foldmethod = 'indent'
 vim.opt.hlsearch = false

@@ -19,7 +19,7 @@ for _, lsp in ipairs(servers) do
     capabilities = config.updated_capabilities,
     flags = {
       -- This will be the default in neovim 0.7+
-      debounce_text_changes = 100,
+      debounce_text_changes = 150,
     }
   }
 end

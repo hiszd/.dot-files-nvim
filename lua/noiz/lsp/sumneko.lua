@@ -4,9 +4,13 @@ table.insert(runtime_path, "lua/?/init.lua")
 
 local config = require('noiz.lsp.config')
 
-require'lspconfig'.sumneko_lua.setup {
+require 'lspconfig'.sumneko_lua.setup {
   on_attach = config.custom_attach,
   capabilities = config.updated_capabilities,
+  flags = {
+    -- This will be the default in neovim 0.7+
+    debounce_text_changes = 150,
+  },
   settings = {
     Lua = {
       runtime = {
