@@ -1,7 +1,7 @@
 require('noiz.utils')
 require('noiz.globals')
 --
-vim.api.nvim_command('set runtimepath+="~/dot-files/vim/.vim_runtime"')
+vim.api.nvim_command('set runtimepath+="~/.config/nvim/.runtime"')
 
 -- vim.cmd('source ~/dot-files/vim/.vim_runtime/vimrcs/plugins_config.vim')
 -- vim.cmd('source ~/dot-files/vim/.vim_runtime/vimrcs/extended.vim')
@@ -14,15 +14,15 @@ if vim.fn.has('win32') == 1 then
   vim.api.nvim_command('let $PLUGDIR = "~/vimfiles/plugged"')
   vim.api.nvim_command('let $VIMDIR = "~/vimfiles/"')
 else
-  vim.api.nvim_command('let $PLUGDIR = "~/dot-files/nvim/.vim/plugged"')
-  vim.api.nvim_command('let $VIMDIR = "~/dot-files/nvim/.vim/"')
+  vim.api.nvim_command('let $PLUGDIR = "~/.config/nvim/.runtime/plugged"')
+  vim.api.nvim_command('let $VIMDIR = "~/.config/nvim/.runtime/"')
 end
 
 vim.cmd(":noh")
 
 -- vim.api.nvim_command("source '~/dot-files/nvim/.vim_runtime/my_configs.nvim'")
 
-vim.api.nvim_command("set viminfo='100,n$HOME/dot-files/vim/.vim/files/info/viminfo")
+vim.api.nvim_command("set viminfo='100,n$HOME/.config/nvim/.runtime/files/info/viminfo")
 
 require('plugins')
 
