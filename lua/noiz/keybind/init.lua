@@ -17,7 +17,7 @@ map('n', '<leader><leader>tnc', ':lua print(vim.fn.expand("%:p"))<cr>', { norema
 
 -- Telescope bindings
 map('n', '<leader>tt', ':Telescope treesitter<cr>', { noremap = true })
-map('n', '<leader>tf', ':Telescope oldfiles<cr>', { noremap = true })
+map('n', '<leader>tf', ':Telescope find_files<cr>', { noremap = true })
 map('n', '<leader>tz', ':Telescope colorscheme<cr>', { noremap = true })
 map('n', '<leader>th', ':Telescope help_tags<cr>', { noremap = true })
 map('n', '<leader>tqf', ':Telescope quickfix<cr>', { noremap = true })
