@@ -11,7 +11,7 @@ M.updated_capabilities = updated_capabilities
 
 local buf_nnoremap = function(opts)
   if opts[3] == nil then
-    opts[3] = {silent = true, noremap = true}
+    opts[3] = { silent = true, noremap = true }
   end
   opts[3].buffer = 0
   if opts[1] == nil then
@@ -26,7 +26,7 @@ end
 
 local buf_inoremap = function(opts)
   if opts[3] == nil then
-    opts[3] = {silent = true, noremap = true}
+    opts[3] = { silent = true, noremap = true }
   end
   opts[3].buffer = 0
   if opts[1] == nil then
@@ -48,6 +48,7 @@ local custom_attach = function(client)
   buf_nnoremap { "<space>ca", vim.lsp.buf.code_action }
 
   buf_nnoremap { "gd", vim.lsp.buf.definition }
+  buf_nnoremap { "gi", vim.lsp.buf.implementation }
   buf_nnoremap { "<leader>gd", vim.lsp.buf.declaration }
   buf_nnoremap { "K", vim.lsp.buf.hover }
   buf_nnoremap { "<leader>gt", vim.lsp.buf.type_definition }
@@ -57,18 +58,15 @@ local custom_attach = function(client)
   buf_nnoremap { "]d", vim.diagnostic.goto_next }
   buf_nnoremap { "<leader>d", vim.diagnostic.set_loclist }
 
-  buf_nnoremap { "<space>lr", "<cmd>lua R('tj.lsp.codelens').run()<CR>" }
-  buf_nnoremap { "<space>rr", "LspRestart" }
-
   -- Set some keybinds conditional on server capabilities
   if client.resolved_capabilities.document_formatting then
     local buf = vim.api.nvim_get_current_buf()
     buf_nnoremap { "<space>f", vim.lsp.buf.formatting }
-    vim.api.nvim_create_autocmd({"BufWritePost"}, {buffer = buf, callback = function()
+    vim.api.nvim_create_autocmd({ "BufWritePost" }, { buffer = buf, callback = function()
       vim.lsp.buf.formatting_sync()
       vim.cmd(':w')
       print('Formatted and saved')
-    end})
+    end })
     -- vim.cmd("autocmd BufWritePost <buffer> lua vim.lsp.buf.formatting() | <buffer> :w")
   end
 
