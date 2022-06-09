@@ -59,7 +59,7 @@ local custom_attach = function(client)
   buf_nnoremap { "<leader>d", vim.diagnostic.set_loclist }
 
   -- Set some keybinds conditional on server capabilities
-  if client.resolved_capabilities.document_formatting then
+  if client.server_capabilities.document_formatting then
     local buf = vim.api.nvim_get_current_buf()
     buf_nnoremap { "<space>f", vim.lsp.buf.formatting }
     vim.api.nvim_create_autocmd({ "BufWritePost" }, { buffer = buf, callback = function()

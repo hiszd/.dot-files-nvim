@@ -41,6 +41,7 @@ return require('packer').startup(function()
 
   use 'nvim-lua/plenary.nvim'
   use 'nvim-treesitter/nvim-treesitter'
+  use 'nvim-treesitter/playground'
   use { 'nvim-orgmode/orgmode', config = function()
     require('orgmode').setup {}
   end

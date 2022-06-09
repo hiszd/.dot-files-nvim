@@ -1,6 +1,6 @@
 require('noiz.utils')
 require('noiz.globals')
---
+
 vim.api.nvim_command('set runtimepath+="~/.config/nvim/.runtime"')
 
 -- vim.cmd('source ~/dot-files/vim/.vim_runtime/vimrcs/plugins_config.vim')

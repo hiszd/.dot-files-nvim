@@ -24,5 +24,6 @@ for _, lsp in ipairs(servers) do
   }
 end
 require('noiz.lsp.sumneko')
+require('noiz.lsp.null-ls')
 
 return M
