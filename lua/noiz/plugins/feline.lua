@@ -13,9 +13,23 @@ table.insert(components.active, {})
 table.insert(components.inactive, {})
 table.insert(components.inactive, {})
 
--- local get_mode_color =function ()
---   local m = vim.api.nvim_get_mode().mode
--- end
+local get_light_dark = function(col, light, dark)
+  local h = 0
+  local s = 0
+  local l = 0
+  local rtrn
+  if col ~= nil then
+    h, s, l = require('noiz.utils').rgb_string_to_hsl(col)
+  end
+
+  if l >= 0.68 then
+    rtrn = dark
+  elseif h > 24 and h < 201 then
+    rtrn = light
+  end
+
+  return rtrn
+end
 
 components.active[1][1] = {
   provider = function()
@@ -52,9 +66,12 @@ components.active[1][1] = {
 components.active[1][2] = {
   provider = 'file_info',
   hl = function()
+    local mode = vim.api.nvim_get_mode().mode
+    local col = package.loaded.feline.colors[mode]
+    local fg = get_light_dark(col, 'white', 'gray')
     return {
-      fg = 'white',
-      bg = vim.api.nvim_get_mode().mode,
+      fg = fg,
+      bg = mode,
       style = 'bold',
     }
   end,
@@ -106,9 +123,10 @@ components.active[3][4] = {
   right_sep = {
     str = ' ',
     hl = function()
+      local mode = vim.api.nvim_get_mode().mode
       return {
-        fg = vim.api.nvim_get_mode().mode,
-        bg = vim.api.nvim_get_mode().mode,
+        fg = mode,
+        bg = mode,
       }
     end,
   },
