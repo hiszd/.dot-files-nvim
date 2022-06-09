@@ -13,6 +13,10 @@ table.insert(components.active, {})
 table.insert(components.inactive, {})
 table.insert(components.inactive, {})
 
+-- local get_mode_color =function ()
+--   local m = vim.api.nvim_get_mode().mode
+-- end
+
 components.active[1][1] = {
   provider = function()
     local str = vim.api.nvim_get_mode().mode
@@ -38,7 +42,7 @@ components.active[1][1] = {
     str = 'block',
     hl = function()
       return {
-        fg = require('feline.providers.vi_mode').get_mode_color(),
+        fg = vim.api.nvim_get_mode().mode,
       }
     end,
   },
@@ -50,7 +54,7 @@ components.active[1][2] = {
   hl = function()
     return {
       fg = 'white',
-      bg = require('feline.providers.vi_mode').get_mode_color(),
+      bg = vim.api.nvim_get_mode().mode,
       style = 'bold',
     }
   end,
@@ -58,7 +62,7 @@ components.active[1][2] = {
     str = 'slant_left',
     hl = function()
       return {
-        fg = require('feline.providers.vi_mode').get_mode_color(),
+        fg = vim.api.nvim_get_mode().mode,
         bg = 'bg',
       }
     end,
@@ -103,8 +107,8 @@ components.active[3][4] = {
     str = ' ',
     hl = function()
       return {
-        fg = require('feline.providers.vi_mode').get_mode_color(),
-        bg = require('feline.providers.vi_mode').get_mode_color(),
+        fg = vim.api.nvim_get_mode().mode,
+        bg = vim.api.nvim_get_mode().mode,
       }
     end,
   },
