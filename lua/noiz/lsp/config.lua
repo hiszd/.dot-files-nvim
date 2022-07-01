@@ -3,7 +3,8 @@ local M = {}
 local tbl = require('teej.tbl')
 
 local updated_capabilities = vim.lsp.protocol.make_client_capabilities()
-updated_capabilities = tbl.tbl_deep_extend("keep", updated_capabilities, require("cmp_nvim_lsp").update_capabilities(updated_capabilities))
+updated_capabilities = tbl.tbl_deep_extend("keep", updated_capabilities,
+  require("cmp_nvim_lsp").update_capabilities(updated_capabilities))
 -- updated_capabilities = tbl.tbl_deep_extend("keep", updated_capabilities, require("lsp_spinner").init_capabilities(updated_capabilities))
 updated_capabilities.textDocument.codeLens = { dynamicRegistration = false }
 
@@ -59,11 +60,11 @@ local custom_attach = function(client)
   buf_nnoremap { "<leader>d", vim.diagnostic.set_loclist }
 
   -- Set some keybinds conditional on server capabilities
-  if client.server_capabilities.document_formatting then
+  if client.server_capabilities.documentFormattingProvider then
     local buf = vim.api.nvim_get_current_buf()
-    buf_nnoremap { "<space>f", vim.lsp.buf.formatting }
+    buf_nnoremap { "<space>f", vim.lsp.buf.format }
     vim.api.nvim_create_autocmd({ "BufWritePost" }, { buffer = buf, callback = function()
-      vim.lsp.buf.formatting_sync()
+      vim.lsp.buf.format()
       vim.cmd(':w')
       print('Formatted and saved')
     end })

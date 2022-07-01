@@ -14,7 +14,7 @@ return require('packer').startup(function()
   use 'tpope/vim-commentary'
   use 'kyazdani42/nvim-web-devicons'
 
-  use '/home/zion/programming/clrtheme.nvim/'
+  use 'hiszd/clrtheme.nvim'
   use 'tjdevries/colorbuddy.nvim'
   use 'norcalli/nvim-colorizer.lua'
 
