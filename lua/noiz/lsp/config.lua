@@ -11,68 +11,72 @@ updated_capabilities.textDocument.codeLens = { dynamicRegistration = false }
 M.updated_capabilities = updated_capabilities
 
 local buf_nnoremap = function(opts)
-  if opts[3] == nil then
-    opts[3] = { silent = true, noremap = true }
-  end
-  opts[3].buffer = 0
-  if opts[1] == nil then
-    return
+  if opts[4] == nil then
+    opts[4] = { silent = true, noremap = true }
   end
   if opts[2] == nil then
     return
   end
+  if opts[3] == nil then
+    return
+  end
 
-  vim.keymap.set("n", opts[1], opts[2], opts[3])
+  vim.api.nvim_buf_set_keymap(opts[1], "n", opts[2], opts[3], opts[4])
 end
 
 local buf_inoremap = function(opts)
-  if opts[3] == nil then
-    opts[3] = { silent = true, noremap = true }
-  end
-  opts[3].buffer = 0
-  if opts[1] == nil then
-    return
+  if opts[4] == nil then
+    opts[4] = { silent = true, noremap = true }
   end
   if opts[2] == nil then
     return
   end
+  if opts[3] == nil then
+    return
+  end
 
-  vim.keymap.set("i", opts[1], opts[2], opts[3])
+  vim.api.nvim_buf_set_keymap(opts[1], "i", opts[2], opts[3], opts[4])
 end
 
-local custom_attach = function(client)
+local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
+
+local custom_attach = function(client, bufnr)
   local filetype = vim.api.nvim_buf_get_option(0, "filetype")
 
-  buf_inoremap { "<c-s>", vim.lsp.buf.signature_help }
+  buf_inoremap { bufnr, "<c-s>", "<cmd>lua vim.lsp.buf.signature_help()<CR>" }
 
-  buf_nnoremap { "<leader>rn", vim.lsp.buf.rename }
-  buf_nnoremap { "<space>ca", vim.lsp.buf.code_action }
+  buf_nnoremap { bufnr, "<leader>rn", "<cmd>lua vim.lsp.buf.rename()<CR>" }
+  buf_nnoremap { bufnr, "<space>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>" }
 
-  buf_nnoremap { "gd", vim.lsp.buf.definition }
-  buf_nnoremap { "gi", vim.lsp.buf.implementation }
-  buf_nnoremap { "<leader>gd", vim.lsp.buf.declaration }
-  buf_nnoremap { "K", vim.lsp.buf.hover }
-  buf_nnoremap { "<leader>gt", vim.lsp.buf.type_definition }
-  buf_nnoremap { "<leader>gr", vim.lsp.buf.references }
-  buf_nnoremap { "<leader>e", vim.diagnostic.show_line_diagnostics }
-  buf_nnoremap { "[d", vim.diagnostic.goto_prev }
-  buf_nnoremap { "]d", vim.diagnostic.goto_next }
-  buf_nnoremap { "<leader>d", vim.diagnostic.set_loclist }
+  buf_nnoremap { bufnr, "gd", "<cmd>lua vim.lsp.buf.definition()<CR>" }
+  buf_nnoremap { bufnr, "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>" }
+  buf_nnoremap { bufnr, "<leader>gd", "<cmd>lua vim.lsp.buf.declaration()<CR>" }
+  buf_nnoremap { bufnr, "K", "<cmd>lua vim.lsp.buf.hover()<CR>" }
+  buf_nnoremap { bufnr, "<leader>gt", "<cmd>lua vim.lsp.buf.type_definition()<CR>" }
+  buf_nnoremap { bufnr, "<leader>gr", "<cmd>lua vim.lsp.buf.references()<CR>" }
+  buf_nnoremap { bufnr, "<leader>e", "<cmd>lua vim.diagnostic.open_float()<CR>" }
+  buf_nnoremap { bufnr, "[d", "<cmd>lua vim.diagnostic.goto_prev()<CR>" }
+  buf_nnoremap { bufnr, "]d", "<cmd>lua vim.diagnostic.goto_next()<CR>" }
+  buf_nnoremap { bufnr, "<leader>d", "<cmd>lua vim.diagnostic.setloclist()<CR>" }
 
   -- Set some keybinds conditional on server capabilities
-  if client.server_capabilities.documentFormattingProvider then
-    local buf = vim.api.nvim_get_current_buf()
-    buf_nnoremap { "<space>f", vim.lsp.buf.format }
-    vim.api.nvim_create_autocmd({ "BufWritePost" }, { buffer = buf, callback = function()
-      vim.lsp.buf.format()
-      vim.cmd(':w')
-      print('Formatted and saved')
-    end })
+  if client.supports_method("textDocument/Formatting") and client.name ~= "tsserver" then
+    buf_nnoremap { bufnr, "<space>f", "<cmd>lua vim.lsp.buf.format()<CR>" }
+    vim.api.nvim_clear_autocmds { group = augroup, buffer = bufnr }
+    vim.api.nvim_create_autocmd("BufWritePre", {
+      group = augroup,
+      buffer = bufnr,
+      callback = function()
+        vim.lsp.buf.format({ bufnr = bufnr })
+        vim.cmd(':w')
+        print('Formatted and saved')
+      end,
+    })
     -- vim.cmd("autocmd BufWritePost <buffer> lua vim.lsp.buf.formatting() | <buffer> :w")
   end
 
   if filetype ~= "lua" then
-    buf_nnoremap { "K", vim.lsp.buf.hover, { desc = "lsp:hover" } }
+    buf_nnoremap { bufnr, "K", "<cmd>lua vim.lsp.buf.hover()<CR>", { desc = "lsp:hover" } }
   end
 
   vim.bo.omnifunc = "v:lua.vim.lsp.omnifunc"

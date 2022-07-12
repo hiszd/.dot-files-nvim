@@ -4,24 +4,19 @@ local code_actions = require('null-ls').builtins.code_actions
 local completion = require('null-ls').builtins.completion
 
 require('null-ls')
+local config = require('noiz.lsp.config')
 
 require('null-ls').setup({
-  on_attach = function(client)
-    if client.server_capabilities.document_formatting then
-      vim.cmd("nnoremap <silent><buffer> <Leader>f :lua vim.lsp.buf.format({async = true})<CR>")
-      -- format on save
-      vim.cmd("autocmd BufWritePost <buffer> lua vim.lsp.buf.format({async = true})")
-    end
-
-    if client.server_capabilities.document_range_formatting then
-      vim.cmd("xnoremap <silent><buffer> <Leader>f :lua vim.lsp.buf.range_formatting({})<CR>")
-    end
-  end,
+  debug = true,
+  on_attach = config.custom_attach,
+  capabilities = config.updated_capabilities,
   sources = {
     code_actions.eslint_d,
     diagnostics.eslint_d,
     completion.luasnip,
     formatting.eslint_d,
-    formatting.prettier,
+    formatting.prettier.with {
+      filetypes = { "handlebars", "graphql", "vue", "less", "jsonc", "scss", "yaml", "markdown", "html", "json", "css" },
+    },
   },
 })
