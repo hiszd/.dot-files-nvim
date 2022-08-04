@@ -41,7 +41,7 @@ end
 local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
 
 local custom_attach = function(client, bufnr)
-  local filetype = vim.api.nvim_buf_get_option(0, "filetype")
+  local filetype = vim.api.nvim_buf_get_option(bufnr, "filetype")
 
   buf_inoremap { bufnr, "<c-s>", "<cmd>lua vim.lsp.buf.signature_help()<CR>" }
 
@@ -60,7 +60,7 @@ local custom_attach = function(client, bufnr)
   buf_nnoremap { bufnr, "<leader>d", "<cmd>lua vim.diagnostic.setloclist()<CR>" }
 
   -- Set some keybinds conditional on server capabilities
-  if client.supports_method("textDocument/Formatting") and client.name ~= "tsserver" then
+  if client.supports_method("textDocument/formatting") and client.name ~= "tsserver" then
     buf_nnoremap { bufnr, "<space>f", "<cmd>lua vim.lsp.buf.format()<CR>" }
     vim.api.nvim_clear_autocmds { group = augroup, buffer = bufnr }
     vim.api.nvim_create_autocmd("BufWritePre", {
@@ -68,8 +68,6 @@ local custom_attach = function(client, bufnr)
       buffer = bufnr,
       callback = function()
         vim.lsp.buf.format({ bufnr = bufnr })
-        vim.cmd(':w')
-        print('Formatted and saved')
       end,
     })
     -- vim.cmd("autocmd BufWritePost <buffer> lua vim.lsp.buf.formatting() | <buffer> :w")
