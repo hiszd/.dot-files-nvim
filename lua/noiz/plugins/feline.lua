@@ -31,9 +31,17 @@ local get_light_dark = function(col, light, dark)
   return rtrn
 end
 
+local get_mode = function()
+  local mode = vim.api.nvim_get_mode().mode
+  if mode == '\22' then
+    mode = 'v'
+  end
+  return mode
+end
+
 components.active[1][1] = {
   provider = function()
-    local str = vim.api.nvim_get_mode().mode
+    local str = get_mode()
     local subby = string.upper(' ' .. str)
     return subby
   end,
@@ -56,7 +64,7 @@ components.active[1][1] = {
     str = 'block',
     hl = function()
       return {
-        fg = vim.api.nvim_get_mode().mode,
+        fg = get_mode(),
       }
     end,
   },
@@ -66,7 +74,7 @@ components.active[1][1] = {
 components.active[1][2] = {
   provider = 'file_info',
   hl = function()
-    local mode = vim.api.nvim_get_mode().mode
+    local mode = get_mode()
     local col = package.loaded.feline.colors[mode]
     local fg = get_light_dark(col, 'white', 'gray')
     return {
@@ -79,7 +87,7 @@ components.active[1][2] = {
     str = 'slant_left',
     hl = function()
       return {
-        fg = vim.api.nvim_get_mode().mode,
+        fg = get_mode(),
         bg = 'bg',
       }
     end,
@@ -123,7 +131,7 @@ components.active[3][4] = {
   right_sep = {
     str = ' ',
     hl = function()
-      local mode = vim.api.nvim_get_mode().mode
+      local mode = get_mode()
       return {
         fg = mode,
         bg = mode,
