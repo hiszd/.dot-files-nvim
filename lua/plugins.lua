@@ -35,7 +35,18 @@ return require('packer').startup(function()
   -- use 'hrsh7th/cmp-vsnip'
   -- use 'hrsh7th/vim-vsnip'
 
-  use 'L3MON4D3/LuaSnip'
+  use({
+    "l3mon4d3/luasnip",
+    -- tag = "v<CurrentMajor>.*",
+    -- event = "BufReadPre",
+    -- wants = "friendly-snippets",
+    config = function()
+      require("luasnip.loaders.from_vscode").lazy_load()
+    end,
+    requires = {
+      "rafamadriz/friendly-snippets",
+    },
+  })
   use 'saadparwaiz1/cmp_luasnip'
   use 'ray-x/cmp-treesitter'
 
