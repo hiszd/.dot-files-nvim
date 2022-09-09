@@ -99,7 +99,7 @@ cmp.setup({
     ['<C-e>'] = cmp.mapping.abort(),
     ['<CR>'] = cmp.mapping.confirm({ select = false }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
     ["<Tab>"] = cmp.mapping(function(fallback)
-      if cmp.visible() then
+      if cmp.visible() and not luasnip.expand_or_jumpable() then
         cmp.select_next_item()
       elseif luasnip and luasnip.expand_or_jumpable() then
         feedkey("<Plug>luasnip-expand-or-jump", "")
@@ -114,7 +114,7 @@ cmp.setup({
       end
     end, { "i", "s" }),
     ["<S-Tab>"] = cmp.mapping(function()
-      if cmp.visible() then
+      if cmp.visible() and not luasnip.jumpable(-1) then
         cmp.select_prev_item()
       elseif luasnip and luasnip.jumpable(-1) then
         feedkey("<Plug>luasnip-jump-prev", "")
@@ -164,7 +164,8 @@ cmp.setup.cmdline(':', {
       if cmp.visible() then
         cmp.abort()
       else
-        fallback()
+        -- fallback()
+        feedkey('<C-c>', '')
       end
     end, { 'i', 'c' }),
     -- ['<CR>'] = cmp.mapping.confirm({ select = true }),
