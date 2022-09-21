@@ -15,6 +15,12 @@ return require('packer').startup(function()
     "windwp/nvim-autopairs",
     config = function() require("nvim-autopairs").setup {} end
   }
+  use {
+    "ur4ltz/surround.nvim",
+    config = function()
+      require "surround".setup { mappings_style = "sandwich" }
+    end
+  }
 
   use 'tpope/vim-commentary'
   use 'kyazdani42/nvim-web-devicons'
@@ -69,7 +75,10 @@ return require('packer').startup(function()
   use 'xolox/vim-misc'
   use {
     'feline-nvim/feline.nvim',
-    requires = { 'kyazdani42/nvim-web-devicons' }
+    requires = {
+      'kyazdani42/nvim-web-devicons',
+      'lewis6991/gitsigns.nvim'
+    }
   }
   use 'doums/lsp_spinner.nvim'
   use({

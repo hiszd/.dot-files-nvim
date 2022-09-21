@@ -95,6 +95,18 @@ components.active[1][2] = {
   right_sep = 'slant_right',
 }
 
+components.active[1][3] = {
+  provider = 'git_branch',
+  left_sep = {
+    str = 'block',
+    hl = function()
+      return {
+        fg = 'bg',
+      }
+    end,
+  },
+}
+
 components.active[2][1] = {
   provider = 'position',
 }
@@ -139,6 +151,8 @@ components.active[3][4] = {
     end,
   },
 }
+
+require('gitsigns').setup()
 
 require('feline').setup({
   components = components,
