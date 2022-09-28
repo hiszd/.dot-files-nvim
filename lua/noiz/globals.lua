@@ -45,6 +45,21 @@ P = function(v)
   return v
 end
 
+RSTLNE = function()
+  map('n', 'n', '<Down>')
+  map('n', 'i', '<Up>')
+  map('n', 'o', '<Right>')
+  map('n', 'k', 'i')
+end
+
+QWERTY = function()
+  map('n', 'n', 'n')
+  map('n', 'i', 'i')
+  map('n', 'o', 'o')
+  map('n', 'k', 'k')
+end
+
+
 RELOAD = function(...)
   return require("plenary.reload").reload_module(...)
 end

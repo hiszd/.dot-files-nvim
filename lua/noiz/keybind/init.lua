@@ -30,3 +30,6 @@ map('v', '<leader>tg', '"zy:Telescope grep_string default_text=<C-r>z<cr>', { no
 map('n', '<leader>eh', ":execute 'hi' synIDattr(synID(line('.'), col('.'), 1), 'name')<cr>", { noremap = true })
 map('n', '<leader>rt', ':lua require("clrtheme").reload()<cr>', { noremap = true })
 map('n', '<leader>ht', ':TSHighlightCapturesUnderCursor<cr>', { noremap = true })
+
+map('n', '<leader>mq', ':lua QWERTY()<cr>', { noremap = true })
+map('n', '<leader>mr', ':lua RSTLNE()<cr>', { noremap = true })
