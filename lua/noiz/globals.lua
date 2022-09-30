@@ -49,7 +49,8 @@ RSTLNE = function()
   map('n', 'n', '<Down>')
   map('n', 'i', '<Up>')
   map('n', 'o', '<Right>')
-  map('n', 'k', 'i')
+  map('n', 'k', '<INSERT>')
+  map('n', '<leader>y', '$a<cr>')
 end
 
 QWERTY = function()
