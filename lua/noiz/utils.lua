@@ -15,6 +15,10 @@ function! SynGroup()
 endfun
 ]])
 
+local feedkey = function(key, mode)
+  vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(key, true, true, true), mode, true)
+end
+
 local util = {}
 
 util.rgb_string_to_hsl = function(rgb)
@@ -80,6 +84,10 @@ util.rgb_to_hsl = function(r, g, b)
 
   -- return math.floor(h * 360), s, l
   return h * 360, s, l
+end
+
+util.log = function()
+  feedkey('viwy<esc>A<enter><esc>Aconsole.log(<esc>pA;<esc>', '')
 end
 
 return util
