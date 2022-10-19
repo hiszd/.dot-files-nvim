@@ -8,6 +8,26 @@ _G.map = function(mode, mapping, command, options)
   vim.api.nvim_set_keymap(mode, mapping, command, options)
 end
 
+-- @param mode           nvim mode(n,v,i, etc.)
+-- @param mapping        lhs(e.g. '<leader>y')
+-- @return               returns all mapping if mapping is omitted, or specific mapping if it exists.
+_G.get_map = function(mode, mapping)
+  local mappings = vim.api.nvim_get_keymap(mode)
+
+  if mapping then
+    for _, v in pairs(mappings) do
+      if v.lhs == mapping then
+        return v
+      end
+    end
+  else
+    return mappings
+  end
+
+  return
+
+end
+
 vim.cmd([[
 function! SynGroup()                                                            
     let l:s = synID(line('.'), col('.'), 1)                                       

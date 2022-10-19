@@ -11,6 +11,7 @@ return require('packer').startup(function()
   use 'hrsh7th/cmp-path'
   use 'hrsh7th/cmp-cmdline'
   use 'hrsh7th/nvim-cmp'
+
   use {
     "windwp/nvim-autopairs",
     config = function() require("nvim-autopairs").setup {} end
@@ -22,14 +23,19 @@ return require('packer').startup(function()
     end
   }
 
-  use 'tpope/vim-commentary'
-  use 'kyazdani42/nvim-web-devicons'
+  use({
+    'tpope/vim-commentary',
+    requires = {
+      'kyazdani42/nvim-web-devicons'
+    }
+  })
 
+  -- Theming and color
   use 'hiszd/clrtheme.nvim'
   use 'tjdevries/colorbuddy.nvim'
   use 'norcalli/nvim-colorizer.lua'
 
-  -- File finders
+  -- File managers
   use({
     "kyazdani42/nvim-tree.lua",
     requires = "kyazdani42/nvim-web-devicons",
@@ -43,9 +49,6 @@ return require('packer').startup(function()
     },
   })
 
-  -- use 'hrsh7th/cmp-vsnip'
-  -- use 'hrsh7th/vim-vsnip'
-
   use({
     "l3mon4d3/luasnip",
     -- tag = "v<CurrentMajor>.*",
@@ -58,28 +61,35 @@ return require('packer').startup(function()
       "rafamadriz/friendly-snippets",
     },
   })
+
   use 'saadparwaiz1/cmp_luasnip'
   use 'ray-x/cmp-treesitter'
 
   use 'nvim-lua/plenary.nvim'
   use 'nvim-treesitter/nvim-treesitter'
   use 'nvim-treesitter/playground'
-  use { 'nvim-orgmode/orgmode', config = function()
-    require('orgmode').setup {}
-  end
+  use {
+    'nvim-orgmode/orgmode',
+    config = function()
+      require('orgmode').setup {}
+    end
   }
+
   use 'famiu/nvim-reload'
 
   use 'chriskempson/base16-vim'
   use 'xolox/vim-colorscheme-switcher'
   use 'xolox/vim-misc'
+
   use {
     'feline-nvim/feline.nvim',
     requires = {
       'kyazdani42/nvim-web-devicons',
-      'lewis6991/gitsigns.nvim'
+      'lewis6991/gitsigns.nvim',
+      'justinhj/battery.nvim'
     }
   }
+
   use 'doums/lsp_spinner.nvim'
   use({
     "romgrk/barbar.nvim",

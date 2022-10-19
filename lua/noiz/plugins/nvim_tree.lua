@@ -1,7 +1,7 @@
 -- setup with all defaults
 -- each of these are documented in `:help nvim-tree.OPTION_NAME`
 -- nested options are documented by accessing them with `.` (eg: `:help nvim-tree.view.mappings.list`).
-require'nvim-tree'.setup { -- BEGIN_DEFAULT_OPTS
+require 'nvim-tree'.setup { -- BEGIN_DEFAULT_OPTS
   auto_reload_on_write = true,
   disable_netrw = true,
   hijack_cursor = false,
@@ -116,12 +116,12 @@ require'nvim-tree'.setup { -- BEGIN_DEFAULT_OPTS
 } -- END_DEFAULT_OPTS
 
 local nvim_tree_events = require('nvim-tree.events')
-local bufferline_state = require('bufferline.state')
+local bufferline_api = require('bufferline.api')
 
-nvim_tree_events.on_tree_open(function ()
-    bufferline_state.set_offset(31, "File Tree")
+nvim_tree_events.on_tree_open(function()
+  bufferline_api.set_offset(31, "File Tree")
 end)
 
-nvim_tree_events.on_tree_close(function ()
-    bufferline_state.set_offset(0)
+nvim_tree_events.on_tree_close(function()
+  bufferline_api.set_offset(0)
 end)

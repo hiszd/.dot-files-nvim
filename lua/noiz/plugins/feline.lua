@@ -72,7 +72,7 @@ components.active[1][1] = {
 }
 
 components.active[1][2] = {
-  provider = 'file_info',
+  provider = 'git_branch',
   hl = function()
     local mode = get_mode()
     local col = package.loaded.feline.colors[mode]
@@ -93,18 +93,6 @@ components.active[1][2] = {
     end,
   },
   right_sep = 'slant_right',
-}
-
-components.active[1][3] = {
-  provider = 'git_branch',
-  left_sep = {
-    str = 'block',
-    hl = function()
-      return {
-        fg = 'bg',
-      }
-    end,
-  },
 }
 
 components.active[2][1] = {

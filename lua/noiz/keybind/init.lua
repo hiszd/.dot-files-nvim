@@ -33,3 +33,5 @@ map('n', '<leader>ht', ':TSHighlightCapturesUnderCursor<cr>', { noremap = true }
 
 map('n', '<leader>mq', ':lua QWERTY()<cr>', { noremap = true })
 map('n', '<leader>mr', ':lua RSTLNE()<cr>', { noremap = true })
+
+map('n', '<leader>y', '"+y', { noremap = true })
