@@ -31,6 +31,17 @@ return require('packer').startup(function()
   })
 
   -- Theming and color
+  use {
+    'numToStr/Comment.nvim',
+    config = function()
+      require('Comment').setup()
+    end
+  }
+  use 'kyazdani42/nvim-web-devicons'
+
+  use "rcarriga/nvim-notify" -- Notifications Popup (Optional)
+  use "stevearc/dressing.nvim" -- Improved UI (Optional)
+
   use 'hiszd/clrtheme.nvim'
   use 'tjdevries/colorbuddy.nvim'
   use 'norcalli/nvim-colorizer.lua'
