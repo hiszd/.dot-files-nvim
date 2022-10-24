@@ -48,9 +48,13 @@ return require('packer').startup(function()
 
   -- File managers
   use({
-    "kyazdani42/nvim-tree.lua",
-    requires = "kyazdani42/nvim-web-devicons",
-    tag = 'nightly' -- optional, updated every week. (see issue #1193)
+    "nvim-neo-tree/neo-tree.nvim",
+    branch = "v2.x",
+    requires = {
+      "nvim-lua/plenary.nvim",
+      "kyazdani42/nvim-web-devicons",
+      "MunifTanjim/nui.nvim",
+    },
   })
   use({
     "nvim-telescope/telescope.nvim",
@@ -59,6 +63,7 @@ return require('packer').startup(function()
       "nvim-lua/popup.nvim",
     },
   })
+  use 'miversen33/netman.nvim'
 
   use({
     "l3mon4d3/luasnip",
