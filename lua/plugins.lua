@@ -30,6 +30,10 @@ return require('packer').startup(function()
     }
   })
 
+  -- Markdown Preview
+  use({ "iamcco/markdown-preview.nvim", run = "cd app && npm install",
+    setup = function() vim.g.mkdp_filetypes = { "markdown" } end, ft = { "markdown" }, })
+
   -- Theming and color
   use {
     'numToStr/Comment.nvim',

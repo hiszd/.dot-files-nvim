@@ -5,7 +5,7 @@ g.lsp_config = {
     settings = {
       Lua = {
         diagnostics = {
-          globals = { "vim", "map", "use" },
+          globals = { "vim", "use" },
         },
       },
     },
