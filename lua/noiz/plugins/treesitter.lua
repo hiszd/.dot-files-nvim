@@ -13,6 +13,8 @@ require "nvim-treesitter.configs".setup {
     'javascript',
     'html',
     'css',
+    'rust',
+    'toml',
   }, -- Or run :TSUpdate org
   playground = {
     enable = true,
@@ -33,3 +35,7 @@ require "nvim-treesitter.configs".setup {
     },
   }
 }
+
+-- Treesitter folding
+vim.wo.foldmethod = 'expr'
+vim.wo.foldexpr = 'nvim_treesitter#foldexpr()'

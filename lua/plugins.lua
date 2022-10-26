@@ -116,4 +116,7 @@ return require('packer').startup(function()
     requires = { "kyazdani42/nvim-web-devicons" },
     config = function() end,
   })
+
+  -- Rust stuff
+  use 'simrat39/rust-tools.nvim'
 end)
