@@ -61,9 +61,6 @@ cmp.event:on(
   cmp_autopairs.on_confirm_done()
 )
 
--- Setup nvim-cmp.
-local cmp = require 'cmp'
-
 cmp.setup({
   experimental = {
     native_menu = false,

@@ -19,7 +19,7 @@ P = function(v)
 end
 
 RSTLNE = function()
-  map('n', '<leader>o', 'A<insert><CR>', { silent = true, nowait = true, desc = 'Insert newline' })
+  map('n', '<leader>o', 'A<CR>', { silent = true, nowait = true, desc = 'Insert newline' })
   map('n', 'k', '<Insert>', { silent = true, desc = 'Enter insert mode' })
   map('n', 'n', '<Down>', { silent = true, desc = 'Move down' })
   map('n', 'i', '<Up>', { silent = true, desc = 'Move up' })

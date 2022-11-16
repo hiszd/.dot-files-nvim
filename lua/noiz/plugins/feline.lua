@@ -72,22 +72,41 @@ components.active[1][1] = {
 }
 
 components.active[1][2] = {
-  provider = 'git_branch',
+  provider = function()
+    local git = require('feline.providers.git')
+    if git.git_info_exists() and git.git_info_exists() ~= '' then
+      return git.git_branch()
+    else
+      return ''
+    end
+  end,
   hl = function()
     local mode = get_mode()
     local col = package.loaded.feline.colors[mode]
     local fg = get_light_dark(col, 'white', 'gray')
+    local bg = mode
+    local git = require('feline.providers.git').git_info_exists()
+    if not git or git == '' then
+      bg = 'bg'
+    end
     return {
       fg = fg,
-      bg = mode,
+      bg = bg,
       style = 'bold',
     }
   end,
   left_sep = {
     str = 'slant_left',
     hl = function()
+      local fg
+      local git = require('feline.providers.git').git_info_exists()
+      if not git or git == '' then
+        fg = 'bg'
+      else
+        fg = get_mode()
+      end
       return {
-        fg = get_mode(),
+        fg = fg,
         bg = 'bg',
       }
     end,
