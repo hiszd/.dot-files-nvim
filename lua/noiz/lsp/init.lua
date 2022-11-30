@@ -40,6 +40,6 @@ end
 require('noiz.lsp.sumneko')
 require('noiz.lsp.null-ls')
 require('noiz.lsp.rust')
-require('noiz.lsp.c')
+-- require('noiz.lsp.c')
 
 return M
