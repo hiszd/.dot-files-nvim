@@ -13,9 +13,11 @@ vim.api.nvim_command('set runtimepath+="~/.config/nvim/.runtime"')
 if vim.fn.has('win32') == 1 then
   vim.api.nvim_command('let $PLUGDIR = "~/vimfiles/plugged"')
   vim.api.nvim_command('let $VIMDIR = "~/vimfiles/"')
+  vim.opt.shell = "powershell.exe"
 else
   vim.api.nvim_command('let $PLUGDIR = "~/.config/nvim/.runtime/plugged"')
   vim.api.nvim_command('let $VIMDIR = "~/.config/nvim/.runtime/"')
+  vim.opt.shell = "/bin/fish"
 end
 
 vim.cmd(":noh")
@@ -92,6 +94,7 @@ vim.cmd([[
 -- vim.opt.laststatus = 2
 -- vim.g.Powerline_symbols = 'fancy'
 
+map('', '<Space>', '<Nop>', { noremap = true })
 vim.g.mapleader = " "
 
 vim.opt_local.conceallevel = 2
@@ -111,7 +114,6 @@ vim.opt.updatetime = 1000
 vim.opt.cursorline = true
 vim.opt.foldmethod = 'indent'
 vim.opt.hlsearch = false
-vim.opt.shell = '/usr/bin/bash'
 
 vim.cmd('set termguicolors')
 

@@ -86,7 +86,13 @@ return require('packer').startup(function()
   use 'ray-x/cmp-treesitter'
 
   use 'nvim-lua/plenary.nvim'
-  use 'nvim-treesitter/nvim-treesitter'
+  use {
+    'nvim-treesitter/nvim-treesitter',
+    run = function()
+      local ts_update = require('nvim-treesitter.install').update({ with_sync = true })
+      ts_update()
+    end,
+  }
   use 'nvim-treesitter/playground'
   use {
     'nvim-orgmode/orgmode',
@@ -116,6 +122,14 @@ return require('packer').startup(function()
     requires = { "kyazdani42/nvim-web-devicons" },
     config = function() end,
   })
+
+  -- Terminal stuff
+  use({ "s1n7ax/nvim-terminal",
+    config = function()
+      require('nvim-terminal').setup({
+        disable_default_keymaps = true,
+      })
+    end, })
 
   -- Rust stuff
   use 'simrat39/rust-tools.nvim'

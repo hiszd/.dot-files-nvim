@@ -7,6 +7,8 @@ require('bufferline').setup({
   icons = true,
   icon_custom_colors = true,
 
+  exclude_ft = { 'terminal', '' },
+
   -- Configure icons on the bufferline.
   icon_separator_active = "▎",
   icon_separator_inactive = "▎",

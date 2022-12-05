@@ -31,9 +31,18 @@ map('n', '<leader>eh', ":execute 'hi' synIDattr(synID(line('.'), col('.'), 1), '
 map('n', '<leader>rt', ':lua require("clrtheme").reload()<cr>', { noremap = true })
 map('n', '<leader>ht', ':TSHighlightCapturesUnderCursor<cr>', { noremap = true })
 
+map('t', '<C-e>', '<C-\\><C-n>:lua NTGlobal["terminal"]:toggle()<cr>', { silent = true })
+map('i', '<C-e>', ':lua NTGlobal["terminal"]:toggle()<cr>', { silent = true })
+map('n', '<C-e>', ':lua NTGlobal["terminal"]:toggle()<cr>', { silent = true })
+map('n', '<leader>l', ':lua require("noiz.utils").log()<cr>', { noremap = true })
+
+map('n', '<leader><leader>x', ':so %<cr>', { noremap = true })
+
 map('n', '<leader>l', ':lua require("noiz.utils").log()<cr>', { noremap = true })
 
 map('n', '<leader>mq', ':lua QWERTY()<cr>', { noremap = true })
 map('n', '<leader>mr', ':lua RSTLNE()<cr>', { noremap = true })
 
 map('n', '<leader>y', '"+y', { noremap = true })
+
+require('noiz.keybind.hid')
