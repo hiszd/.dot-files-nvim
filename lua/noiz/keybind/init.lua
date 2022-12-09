@@ -45,4 +45,6 @@ map('n', '<leader>mr', '<Cmd>lua RSTLNE()<cr>', { noremap = true })
 
 map('n', '<leader>y', '"+y', { noremap = true })
 
+map('v', 'gz', '<Cmd>lua require("noiz.cmp.codex").complete()<cr>', { noremap = true })
+
 require('noiz.keybind.hid')
