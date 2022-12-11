@@ -16,7 +16,10 @@ local __job = __Job:new({
     print("thing: " .. return_val)
   end,
 })
-__job:start()
+
+M.startjob = function()
+  __job:start()
+end
 
 local __waittime = 0
 local __exectimer = vim.loop.new_timer()
@@ -48,7 +51,7 @@ local layer_change = function(on, layer, msg)
 end
 
 local color_change = function(r, g, b, msg)
-  local rgbmsg = FMT("--op rgb_all --rgb %s,%s,%s", r, g, b)
+  local rgbmsg = FMT("--op rgb_ind --rgb %s,%s,%s,34,35,36", r, g, b)
   if msg == "" or msg == nil then
     return rgbmsg
   else
@@ -58,12 +61,12 @@ end
 
 local typingEnter = function()
   local msg = layer_change(true, 1, "")
-  hidwrite(color_change(0, 255, 0, msg))
+  hidwrite(color_change(75, 20, 0, msg))
 end
 
 local typingLeave = function()
   local msg = layer_change(false, 1, "")
-  hidwrite(color_change(255, 0, 0, msg))
+  hidwrite(color_change(0, 20, 10, msg))
 end
 
 vim.api.nvim_create_autocmd("InsertEnter", {
@@ -105,6 +108,6 @@ vim.api.nvim_create_autocmd("TermLeave", {
   end,
 })
 
-M.layer_change = layer_change
-M.color_change = color_change
+M.layer_change = layer_change()
+M.color_change = color_change()
 return M
