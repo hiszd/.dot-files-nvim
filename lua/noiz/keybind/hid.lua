@@ -1,6 +1,11 @@
 local M = {}
 
 local __Job = require 'plenary.job'
+local __isrunning = false
+local __waittime = 0
+local __exectimer = vim.loop.new_timer()
+local __execdelay = 80
+local __hasexecd = false
 
 local __job = __Job:new({
   command = 'node',
@@ -14,25 +19,23 @@ local __job = __Job:new({
   end,
   on_exit = function(_, return_val)
     print("thing: " .. return_val)
+    __isrunning = false
   end,
 })
 
 M.startjob = function()
   __job:start()
+  __isrunning = true
 end
 
-local __waittime = 0
-local __exectimer = vim.loop.new_timer()
-local __execdelay = 80
-
 local hidwrite = function(msg)
-  print(msg)
-  if __job ~= nil then
-    print("sending message")
+  print('message: ' .. msg)
+  if __isrunning == true then
     vim.defer_fn(function() __job:send(msg .. "\n") end, __waittime)
     __waittime = __execdelay
     __exectimer:stop()
     __exectimer:start(__execdelay, 0, function() __waittime = 0 end, __execdelay)
+    __hasexecd = true
   end
 end
 
@@ -65,8 +68,10 @@ local typingEnter = function()
 end
 
 local typingLeave = function()
-  local msg = layer_change(false, 1, "")
-  hidwrite(color_change(0, 20, 10, msg))
+  if __isrunning == true then
+    local msg = layer_change(false, 1, "")
+    hidwrite(color_change(0, 20, 10, msg))
+  end
 end
 
 vim.api.nvim_create_autocmd("InsertEnter", {
@@ -105,6 +110,13 @@ vim.api.nvim_create_autocmd("TermLeave", {
   group = vim.api.nvim_create_augroup("HIDTerminalAutoLeave", { clear = true }),
   callback = function()
     typingLeave()
+  end,
+})
+
+vim.api.nvim_create_autocmd("VimLeavePre", {
+  group = vim.api.nvim_create_augroup("HIDVimAutoLeave", { clear = true }),
+  callback = function()
+
   end,
 })
 

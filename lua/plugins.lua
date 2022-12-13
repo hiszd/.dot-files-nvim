@@ -3,7 +3,7 @@ return require('packer').startup(function()
 
   use 'neovim/nvim-lspconfig'
   use 'jose-elias-alvarez/nvim-lsp-ts-utils'
-  use 'williamboman/nvim-lsp-installer'
+  -- use 'williamboman/nvim-lsp-installer'
   use 'jose-elias-alvarez/null-ls.nvim'
   use 'MunifTanjim/prettier.nvim'
   use 'hrsh7th/cmp-nvim-lsp'
@@ -11,6 +11,9 @@ return require('packer').startup(function()
   use 'hrsh7th/cmp-path'
   use 'hrsh7th/cmp-cmdline'
   use 'hrsh7th/nvim-cmp'
+
+  use 'williamboman/mason.nvim'
+  use 'williamboman/mason-lspconfig.nvim'
 
   use {
     "windwp/nvim-autopairs",

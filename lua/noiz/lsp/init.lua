@@ -1,11 +1,16 @@
 local M = {}
 local config = require('noiz.lsp.config')
 
-local lsp_installer = require("nvim-lsp-installer")
+-- local lsp_installer = require("nvim-lsp-installer")
 
-lsp_installer.setup {
-  automatic_installation = true,
-}
+-- lsp_installer.setup {
+-- automatic_installation = true,
+-- }
+
+require('mason').setup({})
+require('mason-lspconfig').setup({
+  ensure_installed = {'sumneko_lua', 'tsserver', 'rust_analyzer', 'eslint'},
+})
 
 vim.diagnostic.config {
   virtual_text = {
