@@ -61,6 +61,8 @@ cmp.event:on(
   cmp_autopairs.on_confirm_done()
 )
 
+local types = require('cmp.types')
+
 cmp.setup({
   experimental = {
     native_menu = false,
@@ -85,6 +87,36 @@ cmp.setup({
       return vim_item
     end,
   },
+  sorting = {
+    comparators = {
+      cmp.config.compare.offset,
+      cmp.config.compare.exact,
+      cmp.config.compare.score,
+      function(entry1, entry2)
+        local kind1 = entry1:get_kind()
+        kind1 = kind1 == types.lsp.CompletionItemKind.Text and 100 or kind1
+        local kind2 = entry2:get_kind()
+        kind2 = kind2 == types.lsp.CompletionItemKind.Text and 100 or kind2
+        if kind1 ~= kind2 then
+          if kind1 == types.lsp.CompletionItemKind.Snippet then
+            return false
+          end
+          if kind2 == types.lsp.CompletionItemKind.Snippet then
+            return true
+          end
+          local diff = kind1 - kind2
+          if diff < 0 then
+            return true
+          elseif diff > 0 then
+            return false
+          end
+        end
+      end,
+      cmp.config.compare.sort_text,
+      cmp.config.compare.length,
+      cmp.config.compare.order,
+    },
+  },
   snippet = {
     -- REQUIRED - you must specify a snippet engine
     expand = function(args)
@@ -99,7 +131,7 @@ cmp.setup({
     -- documentation = cmp.config.window.bordered(),
   },
   mapping = cmp.mapping.preset.insert({
-    ['<C-b>'] = cmp.mapping.scroll_docs(-4),
+    ['<C-b>'] = cmp.mapping.scroll_docs( -4),
     ['<C-f>'] = cmp.mapping.scroll_docs(4),
     ['<C-p>'] = cmp.mapping.complete(),
     ['<C-e>'] = cmp.mapping.abort(),
@@ -120,9 +152,9 @@ cmp.setup({
       end
     end, { "i", "s" }),
     ["<S-Tab>"] = cmp.mapping(function()
-      if cmp.visible() and not luasnip.jumpable(-1) then
+      if cmp.visible() and not luasnip.jumpable( -1) then
         cmp.select_prev_item()
-      elseif luasnip and luasnip.jumpable(-1) then
+      elseif luasnip and luasnip.jumpable( -1) then
         feedkey("<Plug>luasnip-jump-prev", "")
       else
         feedkey("<S-Tab>", "")
@@ -137,11 +169,11 @@ cmp.setup({
     { name = 'treesitter' },
     { name = 'path' },
     -- { name = 'vsnip' }, -- For vsnip users.
-    { name = 'luasnip' }, -- For luasnip users.
+    { name = 'luasnip',   max_item_count = 4 }, -- For luasnip users.
     -- { name = 'ultisnips' }, -- For ultisnips users.
     -- { name = 'snippy' }, -- For snippy users.
   }, {
-    { name = 'buffer' },
+    { name = 'buffer', max_item_count = 4 },
   }),
   preselect = cmp.PreselectMode.None,
 })
