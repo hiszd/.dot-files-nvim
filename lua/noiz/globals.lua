@@ -19,11 +19,12 @@ P = function(v)
 end
 
 RSTLNE = function()
-  map('n', '<leader>o', 'A<insert><CR>', { silent = true, nowait = true, desc = 'Insert newline' })
+  map('n', '<leader>o', 'A<CR>', { silent = true, nowait = true, desc = 'Insert newline' })
   map('n', 'k', '<Insert>', { silent = true, desc = 'Enter insert mode' })
   map('n', 'n', '<Down>', { silent = true, desc = 'Move down' })
   map('n', 'i', '<Up>', { silent = true, desc = 'Move up' })
   map('n', 'o', '<Right>', { silent = true, desc = 'Move right' })
+  print("RSTLNE")
 end
 
 QWERTY = function()
@@ -31,6 +32,7 @@ QWERTY = function()
   map('n', 'i', 'i')
   map('n', 'o', 'o')
   map('n', 'k', 'k')
+  print("QWERTY")
 end
 
 
@@ -42,3 +44,7 @@ R = function(name)
   RELOAD(name)
   return require(name)
 end
+
+function Printf(...) print(string.format(...)) end
+
+function FMT(...) return string.format(...) end

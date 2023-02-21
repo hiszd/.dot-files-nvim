@@ -13,8 +13,12 @@ require('null-ls').setup({
   sources = {
     code_actions.eslint_d,
     diagnostics.eslint_d,
+    diagnostics.cppcheck.with {
+      extra_args = { "--force" },
+    },
     completion.luasnip,
     formatting.eslint_d,
+    formatting.clang_format,
     formatting.prettier.with {
       filetypes = { "handlebars", "graphql", "vue", "less", "jsonc", "scss", "yaml", "markdown", "html", "json", "css" },
     },

@@ -3,7 +3,7 @@ return require('packer').startup(function()
 
   use 'neovim/nvim-lspconfig'
   use 'jose-elias-alvarez/nvim-lsp-ts-utils'
-  use 'williamboman/nvim-lsp-installer'
+  -- use 'williamboman/nvim-lsp-installer'
   use 'jose-elias-alvarez/null-ls.nvim'
   use 'MunifTanjim/prettier.nvim'
   use 'hrsh7th/cmp-nvim-lsp'
@@ -11,6 +11,9 @@ return require('packer').startup(function()
   use 'hrsh7th/cmp-path'
   use 'hrsh7th/cmp-cmdline'
   use 'hrsh7th/nvim-cmp'
+
+  use 'williamboman/mason.nvim'
+  use 'williamboman/mason-lspconfig.nvim'
 
   use {
     "windwp/nvim-autopairs",
@@ -86,7 +89,13 @@ return require('packer').startup(function()
   use 'ray-x/cmp-treesitter'
 
   use 'nvim-lua/plenary.nvim'
-  use 'nvim-treesitter/nvim-treesitter'
+  use {
+    'nvim-treesitter/nvim-treesitter',
+    run = function()
+      local ts_update = require('nvim-treesitter.install').update({ with_sync = true })
+      ts_update()
+    end,
+  }
   use 'nvim-treesitter/playground'
   use {
     'nvim-orgmode/orgmode',
@@ -116,6 +125,14 @@ return require('packer').startup(function()
     requires = { "kyazdani42/nvim-web-devicons" },
     config = function() end,
   })
+
+  -- Terminal stuff
+  use({ "s1n7ax/nvim-terminal",
+    config = function()
+      require('nvim-terminal').setup({
+        disable_default_keymaps = true,
+      })
+    end, })
 
   -- Rust stuff
   use 'simrat39/rust-tools.nvim'

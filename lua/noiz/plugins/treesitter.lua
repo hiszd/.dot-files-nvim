@@ -39,3 +39,4 @@ require "nvim-treesitter.configs".setup {
 -- Treesitter folding
 vim.wo.foldmethod = 'expr'
 vim.wo.foldexpr = 'nvim_treesitter#foldexpr()'
+vim.cmd("set nofoldenable")

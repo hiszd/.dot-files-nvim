@@ -7,6 +7,8 @@ require('bufferline').setup({
   icons = true,
   icon_custom_colors = true,
 
+  exclude_ft = { 'terminal', '' },
+
   -- Configure icons on the bufferline.
   icon_separator_active = "▎",
   icon_separator_inactive = "▎",
@@ -25,27 +27,27 @@ require('bufferline').setup({
 })
 
 -- Goto buffer in position
-map("n", "<Leader>1", ":BufferGoto 1<CR>")
-map("n", "<Leader>2", ":BufferGoto 2<CR>")
-map("n", "<Leader>3", ":BufferGoto 3<CR>")
-map("n", "<Leader>4", ":BufferGoto 4<CR>")
-map("n", "<Leader>5", ":BufferGoto 5<CR>")
-map("n", "<Leader>6", ":BufferGoto 6<CR>")
-map("n", "<Leader>7", ":BufferGoto 7<CR>")
-map("n", "<Leader>8", ":BufferGoto 8<CR>")
-map("n", "<Leader>9", ":BufferGoto 9<CR>")
-map("n", "<Leader>0", ":BufferLast<CR>")
+map("n", "<Leader>1", "<Cmd>BufferGoto 1<CR>")
+map("n", "<Leader>2", "<Cmd>BufferGoto 2<CR>")
+map("n", "<Leader>3", "<Cmd>BufferGoto 3<CR>")
+map("n", "<Leader>4", "<Cmd>BufferGoto 4<CR>")
+map("n", "<Leader>5", "<Cmd>BufferGoto 5<CR>")
+map("n", "<Leader>6", "<Cmd>BufferGoto 6<CR>")
+map("n", "<Leader>7", "<Cmd>BufferGoto 7<CR>")
+map("n", "<Leader>8", "<Cmd>BufferGoto 8<CR>")
+map("n", "<Leader>9", "<Cmd>BufferGoto 9<CR>")
+map("n", "<Leader>0", "<Cmd>BufferLast<CR>")
 -- Close buffer
-map("n", "<A-c>", ":BufferClose<CR>")
+map("n", "<A-c>", "<Cmd>BufferClose<CR>")
 -- Wipeout buffer
---                 :BufferWipeout<CR>
+--                 <Cmd>BufferWipeout<CR>
 -- Close commands
---                 :BufferCloseAllButCurrent<CR>
---                 :BufferCloseBuffersLeft<CR>
---                 :BufferCloseBuffersRight<CR>
+--                 <Cmd>BufferCloseAllButCurrent<CR>
+--                 <Cmd>BufferCloseBuffersLeft<CR>
+--                 <Cmd>BufferCloseBuffersRight<CR>
 -- Magic buffer-picking mode
-map("n", "<C-p>", ":BufferPick<CR>")
+map("n", "<C-p>", "<Cmd>BufferPick<CR>")
 -- Sort automatically by...
-map("n", "<Space>bb", ":BufferOrderByBufferNumber<CR>")
-map("n", "<Space>bd", ":BufferOrderByDirectory<CR>")
-map("n", "<Space>bl", ":BufferOrderByLanguage<CR>")
+map("n", "<Space>bb", "<Cmd>BufferOrderByBufferNumber<CR>")
+map("n", "<Space>bd", "<Cmd>BufferOrderByDirectory<CR>")
+map("n", "<Space>bl", "<Cmd>BufferOrderByLanguage<CR>")
