@@ -1,6 +1,7 @@
 local lualine_thm = require('clrtheme').load_lualine()
 local colors = require('clrtheme').COLORS
 local get_color = require('clrtheme').get_color
+local get_current_mode = require('clrtheme').get_current_mode
 
 -- Eviline config for lualine
 -- Author: shadmansaleh
@@ -75,6 +76,14 @@ local config = {
   },
 }
 
+local get_mode = function()
+  local mode = vim.api.nvim_get_mode().mode
+  if mode == '\22' then
+    mode = 'v'
+  end
+  return mode
+end
+
 -- Inserts a component in lualine_c at left section
 local function ins_left(component)
   table.insert(config.sections.lualine_c, component)
@@ -105,7 +114,10 @@ ins_left {
 ins_left {
   -- mode component
   function()
-    return ''
+    local str = get_mode()
+    local subby = string.upper(str)
+    return subby
+    -- return ''
   end,
   color = function()
     return mode_color()
@@ -113,21 +125,11 @@ ins_left {
   padding = { right = 1 },
 }
 
-ins_left {
-  -- filesize component
-  'filesize',
-  cond = conditions.buffer_not_empty,
-}
-
-ins_left {
-  'filename',
-  cond = conditions.buffer_not_empty,
-  color = { fg = get_color("magenta"), gui = 'bold' },
-}
-
-ins_left { 'location' }
-
-ins_left { 'progress', color = { fg = get_color("fg"), gui = 'bold' } }
+-- ins_left {
+--   'filename',
+--   cond = conditions.buffer_not_empty,
+--   color = { fg = get_color("magenta"), gui = 'bold' },
+-- }
 
 ins_left {
   'diagnostics',
@@ -157,11 +159,20 @@ ins_left {
     if next(clients) == nil then
       return msg
     end
+    local retstr = ''
     for _, client in ipairs(clients) do
-      local filetypes = client.config.filetypes
-      if filetypes and vim.fn.index(filetypes, buf_ft) ~= -1 then
-        return client.name
+      if retstr == '' then
+        retstr = client.name
+      else
+        retstr = retstr .. ', ' .. client.name
       end
+      -- local filetypes = client.config.filetypes
+      -- if filetypes and vim.fn.index(filetypes, buf_ft) ~= -1 then
+        -- return client.name
+      -- end
+    end
+    if retstr ~= '' then
+      return retstr
     end
     return msg
   end,
@@ -178,23 +189,9 @@ ins_left {
 
 
 ins_right {
-  'o:encoding', -- option component same as &encoding in viml
-  fmt = string.upper, -- I'm not sure why it's upper case either ;)
-  cond = conditions.hide_in_width,
-  color = { fg = get_color("green"), gui = 'bold' },
-}
-
-ins_right {
-  'fileformat',
-  fmt = string.upper,
-  icons_enabled = false, -- I think icons are cool but Eviline doesn't have them. sigh
-  color = { fg = get_color("green"), gui = 'bold' },
-}
-
-ins_right {
   'branch',
-  icon = '',
-  color = { fg = get_color("violet"), gui = 'bold' },
+  icon = '',
+  color = { fg = get_color("orange"), gui = 'bold' },
 }
 
 ins_right {
