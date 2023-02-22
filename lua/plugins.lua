@@ -34,8 +34,12 @@ return require('packer').startup(function()
   })
 
   -- Markdown Preview
-  use({ "iamcco/markdown-preview.nvim", run = "cd app && npm install",
-    setup = function() vim.g.mkdp_filetypes = { "markdown" } end, ft = { "markdown" }, })
+  use({
+    "iamcco/markdown-preview.nvim",
+    run = "cd app && npm install",
+    setup = function() vim.g.mkdp_filetypes = { "markdown" } end,
+    ft = { "markdown" },
+  })
 
   -- Theming and color
   use {
@@ -49,7 +53,8 @@ return require('packer').startup(function()
   use "rcarriga/nvim-notify" -- Notifications Popup (Optional)
   use "stevearc/dressing.nvim" -- Improved UI (Optional)
 
-  use 'hiszd/clrtheme.nvim'
+  -- use 'hiszd/clrtheme.nvim'
+  use '~/programming/clrtheme.nvim'
   use 'tjdevries/colorbuddy.nvim'
   use 'norcalli/nvim-colorizer.lua'
 
@@ -110,29 +115,32 @@ return require('packer').startup(function()
   use 'xolox/vim-colorscheme-switcher'
   use 'xolox/vim-misc'
 
+
   use {
-    'feline-nvim/feline.nvim',
+    'nvim-lualine/lualine.nvim',
     requires = {
       'kyazdani42/nvim-web-devicons',
-      'lewis6991/gitsigns.nvim',
-      'justinhj/battery.nvim'
-    }
+      'lewis6991/gitsigns.nvim'
+      , opt = true }
   }
 
   use 'doums/lsp_spinner.nvim'
   use({
     "romgrk/barbar.nvim",
     requires = { "kyazdani42/nvim-web-devicons" },
-    config = function() end,
+    config = function()
+    end,
   })
 
   -- Terminal stuff
-  use({ "s1n7ax/nvim-terminal",
+  use({
+    "s1n7ax/nvim-terminal",
     config = function()
       require('nvim-terminal').setup({
         disable_default_keymaps = true,
       })
-    end, })
+    end,
+  })
 
   -- Rust stuff
   use 'simrat39/rust-tools.nvim'

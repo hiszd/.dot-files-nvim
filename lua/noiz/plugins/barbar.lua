@@ -4,23 +4,18 @@ require('bufferline').setup({
   tabpages = true,
   closable = true,
   clickable = true,
-  icons = true,
+  icons = 'both',
   icon_custom_colors = true,
-
   exclude_ft = { 'terminal', '' },
-
   -- Configure icons on the bufferline.
   icon_separator_active = "▎",
   icon_separator_inactive = "▎",
   icon_close_tab = "",
-  icon_close_tab_modified = "●",
+  icon_close_tab_modified = "[+]",
   icon_pinned = "車",
-
-  insert_at_end = true,
-
+  insert_at_start = true,
   -- Sets the maximum padding width with which to surround each tab
-  maximum_padding = 2,
-
+  maximum_padding = 1,
   -- Sets the maximum buffer name length.
   maximum_length = 30,
   semantic_letters = true,
@@ -37,6 +32,8 @@ map("n", "<Leader>7", "<Cmd>BufferGoto 7<CR>")
 map("n", "<Leader>8", "<Cmd>BufferGoto 8<CR>")
 map("n", "<Leader>9", "<Cmd>BufferGoto 9<CR>")
 map("n", "<Leader>0", "<Cmd>BufferLast<CR>")
+-- Pin/Unpin Buffer
+map("n", "<leader>p", "<Cmd>BufferPin<CR>")
 -- Close buffer
 map("n", "<A-c>", "<Cmd>BufferClose<CR>")
 -- Wipeout buffer
