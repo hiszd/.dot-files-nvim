@@ -5,6 +5,7 @@ map('n', '<leader>ds', '$a', { noremap = true })
 map('n', '<leader>dq', '<Cmd>BufferClose<cr>', { noremap = true })
 map('n', '<leader>da', '<Cmd>wq<cr>', { noremap = true })
 map('n', '<leader>n', '<Cmd>Neotree reveal toggle<cr>', { noremap = true })
+map('n', '<leader>gn', '<Cmd>Neotree float git_status<cr>', { noremap = true })
 -- map('n', '<leader>n', '<Cmd>NvimTreeFindFile<cr>', { noremap = true })
 map('n', '<leader>df', '<Cmd>lua vim.lsp.buf.formatting()<cr>', { noremap = true })
 map('n', '<leader>dp', '<Cmd>Prettier<cr>', { noremap = true })
@@ -34,6 +35,7 @@ map('n', '<leader>ht', '<Cmd>TSHighlightCapturesUnderCursor<cr>', { noremap = tr
 map('t', '<C-e>', '<C-\\><C-n><Cmd>lua NTGlobal["terminal"]:toggle()<cr>', { silent = true })
 map('i', '<C-e>', '<Cmd>lua NTGlobal["terminal"]:toggle()<cr>', { silent = true })
 map('n', '<C-e>', '<Cmd>lua NTGlobal["terminal"]:toggle()<cr>', { silent = true })
+
 map('n', '<leader>l', '<Cmd>lua require("noiz.utils").log()<cr>', { noremap = true })
 
 map('n', '<leader><leader>x', '<Cmd>so %<cr>', { noremap = true })
@@ -44,6 +46,7 @@ map('n', '<leader>mq', '<Cmd>lua QWERTY()<cr>', { noremap = true })
 map('n', '<leader>mr', '<Cmd>lua RSTLNE()<cr>', { noremap = true })
 
 map('n', '<leader>y', '"+y', { noremap = true })
+map('v', '<leader>y', '"+y', { noremap = true })
 
 map('v', 'gz', '<Cmd>lua require("noiz.cmp.codex").complete()<cr>', { noremap = true })
 

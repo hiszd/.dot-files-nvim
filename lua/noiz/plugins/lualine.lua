@@ -1,7 +1,5 @@
 local lualine_thm = require('clrtheme').load_lualine()
-local colors = require('clrtheme').COLORS
 local get_color = require('clrtheme').get_color
-local get_current_mode = require('clrtheme').get_current_mode
 
 -- Eviline config for lualine
 -- Author: shadmansaleh
@@ -9,28 +7,28 @@ local get_current_mode = require('clrtheme').get_current_mode
 local lualine = require('lualine')
 
 local mode_color = function()
-    local mode_color = {
-      n = get_color("normal"),
-      i = get_color("insert"),
-      v = get_color("visual"),
-      [''] = get_color("blue"),
-      V = get_color("visual"),
-      c = get_color("command"),
-      no = get_color("normal"),
-      s = get_color("visual"),
-      S = get_color("visual"),
-      ic = get_color("insert"),
-      R = get_color("insert"),
-      Rv = get_color("insert"),
-      cv = get_color("visual"),
-      ce = get_color("insert"),
-      r = get_color("insert"),
-      rm = get_color("insert"),
-      ['r?'] = get_color("insert"),
-      ['!'] = get_color("red"),
-      t = get_color("red"),
-    }
-    return { fg = mode_color[vim.fn.mode()] }
+  local mode_color = {
+    n = get_color("normal"),
+    i = get_color("insert"),
+    v = get_color("visual"),
+    [''] = get_color("blue"),
+    V = get_color("visual"),
+    c = get_color("command"),
+    no = get_color("normal"),
+    s = get_color("visual"),
+    S = get_color("visual"),
+    ic = get_color("insert"),
+    R = get_color("insert"),
+    Rv = get_color("insert"),
+    cv = get_color("visual"),
+    ce = get_color("insert"),
+    r = get_color("insert"),
+    rm = get_color("insert"),
+    ['r?'] = get_color("insert"),
+    ['!'] = get_color("red"),
+    t = get_color("red"),
+  }
+  return { fg = mode_color[vim.fn.mode()] }
 end
 
 local conditions = {
@@ -50,6 +48,7 @@ local conditions = {
 -- Config
 local config = {
   options = {
+    icons_enabled = true,
     -- Disable sections and component separators
     component_separators = '',
     section_separators = '',
@@ -125,15 +124,16 @@ ins_left {
   padding = { right = 1 },
 }
 
--- ins_left {
---   'filename',
---   cond = conditions.buffer_not_empty,
---   color = { fg = get_color("magenta"), gui = 'bold' },
--- }
+ins_left {
+  'filename',
+  cond = conditions.buffer_not_empty,
+  color = { fg = get_color("fg"), gui = 'bold' },
+}
 
 ins_left {
   'diagnostics',
   sources = { 'nvim_diagnostic' },
+  sections = { 'error', 'warn', 'info' },
   symbols = { error = ' ', warn = ' ', info = ' ' },
   diagnostics_color = {
     color_error = { fg = get_color("red") },
@@ -154,7 +154,6 @@ ins_left {
   -- Lsp server name .
   function()
     local msg = 'No Active Lsp'
-    local buf_ft = vim.api.nvim_buf_get_option(0, 'filetype')
     local clients = vim.lsp.get_active_clients()
     if next(clients) == nil then
       return msg
@@ -166,10 +165,6 @@ ins_left {
       else
         retstr = retstr .. ', ' .. client.name
       end
-      -- local filetypes = client.config.filetypes
-      -- if filetypes and vim.fn.index(filetypes, buf_ft) ~= -1 then
-        -- return client.name
-      -- end
     end
     if retstr ~= '' then
       return retstr
