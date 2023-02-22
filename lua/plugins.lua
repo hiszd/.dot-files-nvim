@@ -53,8 +53,7 @@ return require('packer').startup(function()
   use "rcarriga/nvim-notify" -- Notifications Popup (Optional)
   use "stevearc/dressing.nvim" -- Improved UI (Optional)
 
-  -- use 'hiszd/clrtheme.nvim'
-  use '~/programming/clrtheme.nvim'
+  use 'hiszd/clrtheme.nvim'
   use 'tjdevries/colorbuddy.nvim'
   use 'norcalli/nvim-colorizer.lua'
 
