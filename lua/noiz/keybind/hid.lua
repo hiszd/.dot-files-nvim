@@ -63,14 +63,14 @@ local color_change = function(r, g, b, msg)
 end
 
 local typingEnter = function()
-  local msg = layer_change(true, 1, "")
-  hidwrite(color_change(75, 20, 0, msg))
+  -- local msg = layer_change(true, 1, "")
+  hidwrite(color_change(75, 20, 0, ""))
 end
 
 local typingLeave = function()
   if __isrunning == true then
-    local msg = layer_change(false, 1, "")
-    hidwrite(color_change(0, 20, 10, msg))
+    -- local msg = layer_change(false, 1, "")
+    hidwrite(color_change(0, 20, 10, ""))
   end
 end
 
