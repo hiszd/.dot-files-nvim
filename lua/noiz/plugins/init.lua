@@ -1,4 +1,5 @@
-require('noiz.plugins.barbar')
+-- require('noiz.plugins.barbar')
+require('noiz.plugins.bufferline')
 require('noiz.plugins.orgmode')
 require('noiz.plugins.prettier')
 -- require('noiz.plugins.feline')
@@ -9,4 +10,4 @@ require('colorizer').setup()
 
 require('noiz.plugins.neotree')
 
-require('netman')
+-- require('netman')

@@ -62,8 +62,6 @@ vim.cmd('colorscheme base16-classic-dark')
 
 vim.cmd([[
 
-  autocmd BufNewFile,BufRead *.rs set filetype=rust
-
   let g:rustfmt_autosave = 1
 
   vnoremap // y/\V<C-R>=escape(@",'/\')<CR><CR>
@@ -121,7 +119,7 @@ require('noiz.keybind')
 require('noiz.cmp')
 require('noiz.lsp')
 require('noiz.plugins')
-require('clrtheme')
+-- require('clrtheme')
 -- require('clrtheme').load_feline()
 -- require('colorbuddy').colorscheme('clrtheme')
 -- vim.cmd('colorscheme clrtheme')
