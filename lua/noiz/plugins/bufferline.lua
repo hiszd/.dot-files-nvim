@@ -39,20 +39,27 @@ map("n", "<leader>bp", "<Cmd>BufferLinePick<CR>")
 map("n", "<leader>bc", "<Cmd>BufferLinePickClose<CR>")
 
 -- Goto buffer in position
-map("n", "<Leader>1", "<Cmd>BufferLineGoto 1<CR>")
-map("n", "<Leader>2", "<Cmd>BufferLineGoto 2<CR>")
-map("n", "<Leader>3", "<Cmd>BufferLineGoto 3<CR>")
-map("n", "<Leader>4", "<Cmd>BufferLineGoto 4<CR>")
-map("n", "<Leader>5", "<Cmd>BufferLineGoto 5<CR>")
-map("n", "<Leader>6", "<Cmd>BufferLineGoto 6<CR>")
-map("n", "<Leader>7", "<Cmd>BufferLineGoto 7<CR>")
-map("n", "<Leader>8", "<Cmd>BufferLineGoto 8<CR>")
-map("n", "<Leader>9", "<Cmd>BufferLineGoto 9<CR>")
-map("n", "<Leader>0", "<Cmd>BufferLineGoto -1<CR>")
+map("n", "<Leader>1", "<Cmd>BufferLineGoToBuffer 1<CR>")
+map("n", "<Leader>2", "<Cmd>BufferLineGoToBuffer 2<CR>")
+map("n", "<Leader>3", "<Cmd>BufferLineGoToBuffer 3<CR>")
+map("n", "<Leader>4", "<Cmd>BufferLineGoToBuffer 4<CR>")
+map("n", "<Leader>5", "<Cmd>BufferLineGoToBuffer 5<CR>")
+map("n", "<Leader>6", "<Cmd>BufferLineGoToBuffer 6<CR>")
+map("n", "<Leader>7", "<Cmd>BufferLineGoToBuffer 7<CR>")
+map("n", "<Leader>8", "<Cmd>BufferLineGoToBuffer 8<CR>")
+map("n", "<Leader>9", "<Cmd>BufferLineGoToBuffer 9<CR>")
+map("n", "<Leader>0", "<Cmd>BufferLineGoToBuffer -1<CR>")
 -- Pin/Unpin Buffer
 map("n", "<leader>bb", "<Cmd>BufferLineTogglePin<CR>")
 -- Close buffer
-map("n", "<leader>dq", "<Cmd>BufferLineClose<CR>")
+local function closecurrentbuffer()
+  local bufels = require('bufferline').get_elements()
+  local curbuf = vim.api.nvim_get_current_buf()
+  local curbufname = vim.api.nvim_buf_get_name(curbuf)
+  P({ curbuf, curbufname, bufels })
+end
+
+vim.keymap.set("n", "<leader>dq", closecurrentbuffer)
 -- Wipeout buffer
 --                 <Cmd>BufferWipeout<CR>
 -- Close commands

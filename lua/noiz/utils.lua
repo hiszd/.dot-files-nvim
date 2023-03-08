@@ -1,3 +1,7 @@
+-- @param mode           nvim mode(n,v,i, etc.)
+-- @param mapping        lhs(e.g. '<leader>y')
+-- @param command        command to be executed
+-- @param options        options for mapping
 _G.map = function(mode, mapping, command, options)
   if options == nil then
     options = { silent = true }
@@ -5,7 +9,7 @@ _G.map = function(mode, mapping, command, options)
   if options then
     options = vim.tbl_extend("force", options, options)
   end
-  vim.api.nvim_set_keymap(mode, mapping, command, options)
+  vim.keymap.set(mode, mapping, command, options)
 end
 
 -- @param mode           nvim mode(n,v,i, etc.)
