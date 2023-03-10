@@ -8,6 +8,15 @@ require("bufferline").setup {
     },
     -- tab_size = 18,
     diagnostics = "nvim_lsp",
+    custom_filter = function(buf_number)
+      -- filter out filetypes you don't want to see
+      local nam = vim.api.nvim_buf_get_name(buf_number)
+      local typ = vim.bo[buf_number].filetype
+      if nam == "" or typ == "" then
+        return false
+      end
+      return true
+    end,
     offsets = {
       {
         filetype = "neo-tree",

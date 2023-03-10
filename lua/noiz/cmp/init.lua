@@ -80,42 +80,12 @@ cmp.setup({
   },
   formatting = {
     fields = { "kind", "abbr", "menu" },
-    format = function(_, vim_item)
-      vim_item.menu = vim_item.kind
+    format = function(entry, vim_item)
+      vim_item.menu = entry.source.name .. ' ' .. vim_item.kind
       vim_item.kind = icons[vim_item.kind]
 
       return vim_item
     end,
-  },
-  sorting = {
-    comparators = {
-      cmp.config.compare.offset,
-      cmp.config.compare.exact,
-      cmp.config.compare.score,
-      function(entry1, entry2)
-        local kind1 = entry1:get_kind()
-        kind1 = kind1 == types.lsp.CompletionItemKind.Text and 100 or kind1
-        local kind2 = entry2:get_kind()
-        kind2 = kind2 == types.lsp.CompletionItemKind.Text and 100 or kind2
-        if kind1 ~= kind2 then
-          if kind1 == types.lsp.CompletionItemKind.Snippet then
-            return false
-          end
-          if kind2 == types.lsp.CompletionItemKind.Snippet then
-            return true
-          end
-          local diff = kind1 - kind2
-          if diff < 0 then
-            return true
-          elseif diff > 0 then
-            return false
-          end
-        end
-      end,
-      cmp.config.compare.sort_text,
-      cmp.config.compare.length,
-      cmp.config.compare.order,
-    },
   },
   snippet = {
     -- REQUIRED - you must specify a snippet engine
@@ -131,12 +101,12 @@ cmp.setup({
     -- documentation = cmp.config.window.bordered(),
   },
   mapping = cmp.mapping.preset.insert({
-    ['<C-b>'] = cmp.mapping.scroll_docs( -4),
-    ['<C-f>'] = cmp.mapping.scroll_docs(4),
-    ['<C-p>'] = cmp.mapping.complete(),
-    ['<C-e>'] = cmp.mapping.abort(),
-    ['<CR>'] = cmp.mapping.confirm({ select = false }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
-    ["<Tab>"] = cmp.mapping(function(fallback)
+        ['<C-b>'] = cmp.mapping.scroll_docs(-4),
+        ['<C-f>'] = cmp.mapping.scroll_docs(4),
+        ['<C-p>'] = cmp.mapping.complete(),
+        ['<C-e>'] = cmp.mapping.abort(),
+        ['<CR>'] = cmp.mapping.confirm({ select = false }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+        ["<Tab>"] = cmp.mapping(function(fallback)
       if cmp.visible() and not luasnip.expand_or_jumpable() then
         cmp.select_next_item()
       elseif luasnip and luasnip.expand_or_jumpable() then
@@ -151,10 +121,10 @@ cmp.setup({
         fallback() -- The fallback function sends a already mapped key. In this case, it's probably `<Tab>`.
       end
     end, { "i", "s" }),
-    ["<S-Tab>"] = cmp.mapping(function()
-      if cmp.visible() and not luasnip.jumpable( -1) then
+        ["<S-Tab>"] = cmp.mapping(function()
+      if cmp.visible() and not luasnip.jumpable(-1) then
         cmp.select_prev_item()
-      elseif luasnip and luasnip.jumpable( -1) then
+      elseif luasnip and luasnip.jumpable(-1) then
         feedkey("<Plug>luasnip-jump-prev", "")
       else
         feedkey("<S-Tab>", "")
@@ -165,15 +135,12 @@ cmp.setup({
   }),
   sources = cmp.config.sources({
     { name = 'orgmode' },
-    { name = 'nvim_lsp' },
-    { name = 'treesitter' },
+    { name = 'nvim_lsp',               priority = 90 },
+    { name = 'treesitter',             priority = 8 },
     { name = 'path' },
-    -- { name = 'vsnip' }, -- For vsnip users.
-    { name = 'luasnip',   max_item_count = 4 }, -- For luasnip users.
-    -- { name = 'ultisnips' }, -- For ultisnips users.
-    -- { name = 'snippy' }, -- For snippy users.
-  }, {
-    { name = 'buffer', max_item_count = 4 },
+    { name = 'luasnip',                keyword_length = 2, max_item_count = 4, priority = 10 },
+    { name = 'buffer',                 max_item_count = 4, priority = 5 },
+    { name = 'nvim_lsp_signature_help' },
   }),
   preselect = cmp.PreselectMode.None,
 })
@@ -198,7 +165,7 @@ cmp.setup.cmdline('/', {
 -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
 cmp.setup.cmdline(':', {
   mapping = cmp.mapping.preset.cmdline({
-    ["<esc>"] = cmp.mapping(function(fallback)
+        ["<esc>"] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.abort()
       else
@@ -207,7 +174,7 @@ cmp.setup.cmdline(':', {
       end
     end, { 'i', 'c' }),
     -- ['<CR>'] = cmp.mapping.confirm({ select = true }),
-    ['<CR>'] = cmp.mapping({
+        ['<CR>'] = cmp.mapping({
       i = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true }),
       c = function(fallback)
         if cmp.visible() then

@@ -1,7 +1,7 @@
 local formatting = require('null-ls').builtins.formatting
 local diagnostics = require('null-ls').builtins.diagnostics
 local code_actions = require('null-ls').builtins.code_actions
-local completion = require('null-ls').builtins.completion
+-- local completion = require('null-ls').builtins.completion
 
 require('null-ls')
 local config = require('noiz.lsp.config')
@@ -16,7 +16,6 @@ require('null-ls').setup({
     diagnostics.cppcheck.with {
       extra_args = { "--force" },
     },
-    completion.luasnip,
     formatting.eslint_d,
     formatting.clang_format,
     formatting.prettier.with {
