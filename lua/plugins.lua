@@ -11,6 +11,18 @@ return require('packer').startup(function()
   use 'hrsh7th/cmp-path'
   use 'hrsh7th/cmp-cmdline'
   use 'hrsh7th/nvim-cmp'
+  use {
+    "jcdickinson/codeium.nvim",
+    requires = {
+      "nvim-lua/plenary.nvim",
+      "hrsh7th/nvim-cmp",
+    },
+    config = function()
+      require("codeium").setup({
+        config_path = "~/.config/nvim/codeium.cfg",
+      })
+    end
+  }
 
   use 'williamboman/mason.nvim'
   use 'williamboman/mason-lspconfig.nvim'
@@ -50,10 +62,11 @@ return require('packer').startup(function()
   }
   use 'kyazdani42/nvim-web-devicons'
 
-  use "rcarriga/nvim-notify" -- Notifications Popup (Optional)
+  use "rcarriga/nvim-notify"   -- Notifications Popup (Optional)
   use "stevearc/dressing.nvim" -- Improved UI (Optional)
 
-  use 'hiszd/clrtheme.nvim'
+  use '~/programming/nvim/clrtheme.nvim'
+  -- use 'hiszd/clrtheme.nvim'
   use 'tjdevries/colorbuddy.nvim'
   use 'norcalli/nvim-colorizer.lua'
 
@@ -120,7 +133,9 @@ return require('packer').startup(function()
     requires = {
       'kyazdani42/nvim-web-devicons',
       'lewis6991/gitsigns.nvim'
-      , opt = true }
+      ,
+      opt = true
+    }
   }
 
   use 'doums/lsp_spinner.nvim'

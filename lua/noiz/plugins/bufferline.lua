@@ -12,7 +12,9 @@ require("bufferline").setup {
       -- filter out filetypes you don't want to see
       local nam = vim.api.nvim_buf_get_name(buf_number)
       local typ = vim.bo[buf_number].filetype
-      if nam == "" or typ == "" then
+      if string.match(nam, "term") then
+        return false
+      elseif nam == "" and typ == "" then
         return false
       end
       return true
