@@ -1,5 +1,9 @@
 -- local map = vim.api.nvim_set_keymap
 
+local feedkey = function(key, mode)
+  vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(key, true, true, true), mode, true)
+end
+
 map('n', '<leader>ds', '$a', { noremap = true })
 -- map('n', '<leader>dq', '<Cmd>q<cr>', { noremap = true })
 map('n', '<leader>dq', '<Cmd>BufferClose<cr>', { noremap = true })
@@ -8,6 +12,12 @@ map('n', '<leader>n', '<Cmd>Neotree reveal toggle<cr>', { noremap = true })
 map('n', '<leader>gn', '<Cmd>Neotree float git_status<cr>', { noremap = true })
 -- map('n', '<leader>n', '<Cmd>NvimTreeFindFile<cr>', { noremap = true })
 map('n', '<leader>df', '<Cmd>lua vim.lsp.buf.formatting()<cr>', { noremap = true })
+map('i', '<C-l>', function()
+  local luasnip = require('luasnip')
+  if luasnip and luasnip.expand_or_jumpable() then
+    feedkey("<Plug>luasnip-expand-or-jump", "")
+  end
+end, { desc = "luasnip expand or jump if in snippet", silent = true, noremap = true })
 map('n', '<leader>dp', '<Cmd>Prettier<cr>', { noremap = true })
 map('n', '<leader>du', 'gUiw`]a', { noremap = true })
 map('n', '<leader>dt', 'guiwgUl', { noremap = true })

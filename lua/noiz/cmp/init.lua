@@ -145,31 +145,27 @@ cmp.setup({
         ['<C-f>'] = cmp.mapping.scroll_docs(4),
         ['<C-p>'] = cmp.mapping.complete(),
         ['<C-e>'] = cmp.mapping.abort(),
-        ['<CR>'] = cmp.mapping.confirm({ select = false }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
-        ["<Tab>"] = cmp.mapping(function(fallback)
+        ['<CR>'] = cmp.mapping(function(fallback)
       if cmp.visible() and not luasnip.expand_or_jumpable() then
-        cmp.select_next_item()
+        cmp.confirm({ select = false })
       elseif luasnip and luasnip.expand_or_jumpable() then
         feedkey("<Plug>luasnip-expand-or-jump", "")
-        -- elseif vim.fn["vsnip#available"](1) == 1 then
-        -- feedkey("<Plug>(vsnip-expand-or-jump)", "")
-      elseif check_back_space() then
-        feedkey("<Tab>", "")
-      elseif has_words_before() then
-        cmp.complete()
       else
-        fallback() -- The fallback function sends a already mapped key. In this case, it's probably `<Tab>`.
+        fallback()
+      end
+    end, { "i", "s" }),
+        ["<Tab>"] = cmp.mapping(function(fallback)
+      if cmp.visible() then
+        cmp.select_next_item()
+      else
+        fallback()
       end
     end, { "i", "s" }),
         ["<S-Tab>"] = cmp.mapping(function()
-      if cmp.visible() and not luasnip.jumpable(-1) then
+      if cmp.visible() then
         cmp.select_prev_item()
-      elseif luasnip and luasnip.jumpable(-1) then
-        feedkey("<Plug>luasnip-jump-prev", "")
       else
         feedkey("<S-Tab>", "")
-        -- elseif vim.fn["vsnip#jumpable"](-1) == 1 then
-        -- feedkey("<Plug>(vsnip-jump-prev)", "")
       end
     end, { "i", "s" }),
   }),

@@ -43,7 +43,7 @@ local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
 local custom_attach = function(client, bufnr)
   local filetype = vim.api.nvim_buf_get_option(bufnr, "filetype")
 
-  buf_inoremap { bufnr, "<c-s>", "<cmd>lua vim.lsp.buf.signature_help()<CR>" }
+  buf_inoremap { bufnr, "<c-h>", "<cmd>lua vim.lsp.buf.signature_help()<CR>" }
 
   buf_nnoremap { bufnr, "<leader>rn", "<cmd>lua vim.lsp.buf.rename()<CR>" }
   buf_nnoremap { bufnr, "<space>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>" }
@@ -71,10 +71,6 @@ local custom_attach = function(client, bufnr)
       end,
     })
     -- vim.cmd("autocmd BufWritePost <buffer> lua vim.lsp.buf.formatting() | <buffer> :w")
-  end
-
-  if filetype ~= "lua" then
-    buf_nnoremap { bufnr, "K", "<cmd>lua vim.lsp.buf.hover()<CR>", { desc = "lsp:hover" } }
   end
 
   vim.bo.omnifunc = "v:lua.vim.lsp.omnifunc"
