@@ -19,7 +19,7 @@ return require('packer').startup(function()
     },
     config = function()
       require("codeium").setup({
-        config_path = "~/.config/nvim/codeium.cfg",
+        config_path = "codeium.cfg",
       })
     end
   }
@@ -62,7 +62,7 @@ return require('packer').startup(function()
   }
   use 'kyazdani42/nvim-web-devicons'
 
-  use "rcarriga/nvim-notify"   -- Notifications Popup (Optional)
+  use "rcarriga/nvim-notify" -- Notifications Popup (Optional)
   use "stevearc/dressing.nvim" -- Improved UI (Optional)
 
   -- use '~/programming/nvim/clrtheme.nvim'
