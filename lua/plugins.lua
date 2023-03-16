@@ -62,7 +62,7 @@ return require('packer').startup(function()
   }
   use 'kyazdani42/nvim-web-devicons'
 
-  use "rcarriga/nvim-notify" -- Notifications Popup (Optional)
+  use "rcarriga/nvim-notify"   -- Notifications Popup (Optional)
   use "stevearc/dressing.nvim" -- Improved UI (Optional)
 
   -- use '~/programming/nvim/clrtheme.nvim'
@@ -139,7 +139,7 @@ return require('packer').startup(function()
   }
 
   use 'doums/lsp_spinner.nvim'
-  use { 'akinsho/bufferline.nvim', tag = "v3.*", requires = 'nvim-tree/nvim-web-devicons' }
+  use { 'akinsho/bufferline.nvim', requires = 'nvim-tree/nvim-web-devicons' }
   -- use({
   --   "romgrk/barbar.nvim",
   --   requires = { "kyazdani42/nvim-web-devicons" },

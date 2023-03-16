@@ -1,3 +1,4 @@
 .runtime/
 plugin/
 .luarc.json
+codeium.cfg

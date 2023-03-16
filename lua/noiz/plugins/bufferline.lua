@@ -1,5 +1,277 @@
+---@diagnostic disable: unused-local
+local norm_col = vim.api.nvim_get_hl_by_name("Normal", true)
+local norm_bg = "#" .. string.format("%06x", norm_col.background)
+local norm_fg = "#" .. string.format("%06x", norm_col.foreground)
+local pmenu_col = vim.api.nvim_get_hl_by_name("Pmenu", true)
+local pmenu_bg = "#" .. string.format("%06x", pmenu_col.background)
+local pmenu_fg = "#" .. string.format("%06x", pmenu_col.foreground)
+local comment_col = vim.api.nvim_get_hl_by_name("Comment", true)
+local comment_fg = "#" .. string.format("%06x", comment_col.foreground)
+
 require("bufferline").setup {
+  highlights = {
+    fill = {
+      fg = norm_bg,
+      bg = norm_bg,
+    },
+    background = {
+      fg = norm_bg,
+      bg = norm_bg,
+    },
+    tab = {
+      fg = comment_fg,
+      bg = norm_bg,
+    },
+    tab_selected = {
+      fg = norm_fg,
+      bg = norm_bg,
+    },
+    tab_close = {
+      fg = comment_fg,
+      bg = norm_bg,
+    },
+    close_button = {
+      fg = norm_fg,
+      bg = norm_bg,
+    },
+    --   close_button_visible = {
+    --     fg = '<colour-value-here>',
+    --     bg = '<colour-value-here>'
+    --   },
+    --   close_button_selected = {
+    --     fg = '<colour-value-here>',
+    --     bg = '<colour-value-here>'
+    --   },
+    -- buffer_visible = {
+    --   fg = comment_fg,
+    --   bg = norm_bg,
+    -- },
+    -- buffer_selected = {
+    --   fg = comment_fg,
+    --   bg = norm_bg,
+    -- },
+    numbers = {
+      fg = comment_fg,
+      bg = norm_bg,
+    },
+    numbers_visible = {
+      fg = comment_fg,
+      bg = norm_bg,
+    },
+    numbers_selected = {
+      fg = norm_fg,
+      bg = norm_bg,
+      bold = true,
+      italic = true,
+    },
+    -- diagnostic = {
+    --   fg = comment_fg,
+    --   bg = comment_fg,
+    -- },
+    --   diagnostic_visible = {
+    --     fg = '<colour-value-here>',
+    --     bg = '<colour-value-here>',
+    --   },
+    --   diagnostic_selected = {
+    --     fg = '<colour-value-here>',
+    --     bg = '<colour-value-here>',
+    --     bold = true,
+    --     italic = true,
+    --   },
+    -- hint = {
+    --   fg = comment_fg,
+    --   sp = comment_fg,
+    --   bg = comment_fg,
+    -- },
+    --   hint_visible = {
+    --     fg = '<colour-value-here>',
+    --     bg = '<colour-value-here>'
+    --   },
+    --   hint_selected = {
+    --     fg = '<colour-value-here>',
+    --     bg = '<colour-value-here>',
+    --     sp = '<colour-value-here>',
+    --     bold = true,
+    --     italic = true,
+    --   },
+    --   hint_diagnostic = {
+    --     fg = '<colour-value-here>',
+    --     sp = '<colour-value-here>',
+    --     bg = '<colour-value-here>'
+    --   },
+    --   hint_diagnostic_visible = {
+    --     fg = '<colour-value-here>',
+    --     bg = '<colour-value-here>'
+    --   },
+    --   hint_diagnostic_selected = {
+    --     fg = '<colour-value-here>',
+    --     bg = '<colour-value-here>',
+    --     sp = '<colour-value-here>',
+    --     bold = true,
+    --     italic = true,
+    --   },
+    -- info = {
+    --   fg = comment_fg,
+    --   sp = comment_fg,
+    --   bg = comment_fg,
+    -- },
+    --   info_visible = {
+    --     fg = '<colour-value-here>',
+    --     bg = '<colour-value-here>'
+    --   },
+    --   info_selected = {
+    --     fg = '<colour-value-here>',
+    --     bg = '<colour-value-here>',
+    --     sp = '<colour-value-here>',
+    --     bold = true,
+    --     italic = true,
+    --   },
+    --   info_diagnostic = {
+    --     fg = '<colour-value-here>',
+    --     sp = '<colour-value-here>',
+    --     bg = '<colour-value-here>'
+    --   },
+    --   info_diagnostic_visible = {
+    --     fg = '<colour-value-here>',
+    --     bg = '<colour-value-here>'
+    --   },
+    --   info_diagnostic_selected = {
+    --     fg = '<colour-value-here>',
+    --     bg = '<colour-value-here>',
+    --     sp = '<colour-value-here>',
+    --     bold = true,
+    --     italic = true,
+    --   },
+    --   warning = {
+    --     fg = '<colour-value-here>',
+    --     sp = '<colour-value-here>',
+    --     bg = '<colour-value-here>'
+    --   },
+    --   warning_visible = {
+    --     fg = '<colour-value-here>',
+    --     bg = '<colour-value-here>'
+    --   },
+    --   warning_selected = {
+    --     fg = '<colour-value-here>',
+    --     bg = '<colour-value-here>',
+    --     sp = '<colour-value-here>',
+    --     bold = true,
+    --     italic = true,
+    --   },
+    --   warning_diagnostic = {
+    --     fg = '<colour-value-here>',
+    --     sp = '<colour-value-here>',
+    --     bg = '<colour-value-here>'
+    --   },
+    --   warning_diagnostic_visible = {
+    --     fg = '<colour-value-here>',
+    --     bg = '<colour-value-here>'
+    --   },
+    --   warning_diagnostic_selected = {
+    --     fg = '<colour-value-here>',
+    --     bg = '<colour-value-here>',
+    --     -- sp = warning_diagnostic_fg,
+    --     bold = true,
+    --     italic = true,
+    --   },
+    --   error = {
+    --     fg = '<colour-value-here>',
+    --     bg = '<colour-value-here>',
+    --     sp = '<colour-value-here>'
+    --   },
+    --   error_visible = {
+    --     fg = '<colour-value-here>',
+    --     bg = '<colour-value-here>'
+    --   },
+    --   error_selected = {
+    --     fg = '<colour-value-here>',
+    --     bg = '<colour-value-here>',
+    --     sp = '<colour-value-here>',
+    --     bold = true,
+    --     italic = true,
+    --   },
+    --   error_diagnostic = {
+    --     fg = '<colour-value-here>',
+    --     bg = '<colour-value-here>',
+    --     sp = '<colour-value-here>'
+    --   },
+    --   error_diagnostic_visible = {
+    --     fg = '<colour-value-here>',
+    --     bg = '<colour-value-here>'
+    --   },
+    --   error_diagnostic_selected = {
+    --     fg = '<colour-value-here>',
+    --     bg = '<colour-value-here>',
+    --     sp = '<colour-value-here>',
+    --     bold = true,
+    --     italic = true,
+    --   },
+    -- modified = {
+    --   fg = comment_fg,
+    --   bg = comment_fg,
+    -- },
+    --   modified_visible = {
+    --     fg = '<colour-value-here>',
+    --     bg = '<colour-value-here>'
+    --   },
+    --   modified_selected = {
+    --     fg = '<colour-value-here>',
+    --     bg = '<colour-value-here>'
+    --   },
+    -- duplicate_selected = {
+    --   fg = norm_bg,
+    --   bg = norm_bg,
+    --   italic = true,
+    -- },
+    -- duplicate_visible = {
+    --   fg = norm_bg,
+    --   bg = norm_bg,
+    --   italic = true
+    -- },
+    -- duplicate = {
+    --   fg = norm_bg,
+    --   bg = norm_bg,
+    --   italic = true
+    -- },
+    separator_selected = {
+      fg = norm_bg,
+      bg = norm_bg,
+    },
+    separator_visible = {
+      fg = norm_bg,
+      bg = norm_bg,
+    },
+    separator = {
+      fg = norm_bg,
+      bg = norm_bg,
+    },
+    -- indicator_selected = {
+    --   fg = comment_fg,
+    --   bg = comment_fg,
+    -- },
+    --   pick_selected = {
+    --     fg = '<colour-value-here>',
+    --     bg = '<colour-value-here>',
+    --     bold = true,
+    --     italic = true,
+    --   },
+    --   pick_visible = {
+    --     fg = '<colour-value-here>',
+    --     bg = '<colour-value-here>',
+    --     bold = true,
+    --     italic = true,
+    --   },
+    pick = {
+      bg = norm_bg,
+      bold = true,
+      italic = true,
+    },
+    offset_separator = {
+      bg = norm_bg,
+    },
+  },
   options = {
+    mode = 'tabs',
     numbers = function(opts)
       return string.format('(%s)', opts.ordinal)
     end,
@@ -19,20 +291,8 @@ require("bufferline").setup {
       end
       return true
     end,
-    offsets = {
-      {
-        filetype = "neo-tree",
-        text = function()
-          return vim.fn.getcwd()
-        end,
-        highlight = "Directory",
-        text_align = "left",
-        separator = false,
-      }
-    },
-    color_icons = true, -- whether or not to add the filetype icon highlights
+    color_icons = false, -- whether or not to add the filetype icon highlights
     separator_style = "slant",
-    show_tab_indicators = true,
   }
 }
 
@@ -64,10 +324,8 @@ map("n", "<Leader>0", "<Cmd>BufferLineGoToBuffer -1<CR>")
 map("n", "<leader>bb", "<Cmd>BufferLineTogglePin<CR>")
 -- Close buffer
 local function closecurrentbuffer()
-  local bufels = require('bufferline').get_elements()
   local curbuf = vim.api.nvim_get_current_buf()
-  local curbufname = vim.api.nvim_buf_get_name(curbuf)
-  P({ curbuf, curbufname, bufels })
+  vim.api.nvim_buf_delete(curbuf, {})
 end
 
 vim.keymap.set("n", "<leader>dq", closecurrentbuffer)

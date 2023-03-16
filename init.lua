@@ -115,11 +115,11 @@ vim.opt.hlsearch = false
 
 vim.cmd('set termguicolors')
 
+require('clrtheme')
 require('noiz.keybind')
 require('noiz.cmp')
 require('noiz.lsp')
 require('noiz.plugins')
--- require('clrtheme')
 -- require('clrtheme').load_feline()
 -- require('colorbuddy').colorscheme('clrtheme')
 -- vim.cmd('colorscheme clrtheme')
