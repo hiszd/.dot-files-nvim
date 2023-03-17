@@ -15,7 +15,7 @@ require("bufferline").setup {
       bg = norm_bg,
     },
     background = {
-      fg = norm_bg,
+      fg = comment_fg,
       bg = norm_bg,
     },
     tab = {
@@ -23,7 +23,7 @@ require("bufferline").setup {
       bg = norm_bg,
     },
     tab_selected = {
-      fg = norm_fg,
+      fg = comment_fg,
       bg = norm_bg,
     },
     tab_close = {
@@ -292,10 +292,23 @@ require("bufferline").setup {
       return true
     end,
     color_icons = false, -- whether or not to add the filetype icon highlights
+    -- get_element_icon = function(element)
+    --   -- element consists of {filetype: string, path: string, extension: string, directory: string}
+    --   -- This can be used to change how bufferline fetches the icon
+    --   -- for an element e.g. a buffer or a tab.
+    --   -- e.g.
+    --   local icon, hl = require('nvim-web-devicons').get_icon_by_filetype(element.filetype, { default = false })
+    --   P(hl)
+    --   return icon, "Pmenu"
+    -- end,
+
     separator_style = "slant",
   }
 }
 
+vim.api.nvim_set_hl(0, "BufferLineDevIconLuaSelected", { fg = norm_fg, bg = norm_bg, underline = true })
+vim.api.nvim_set_hl(0, "BufferLineDevIconLua", { fg = comment_fg, bg = norm_bg, underline = true })
+vim.api.nvim_set_hl(0, "BufferLineDevIconDefaultSelected", { fg = norm_bg, bg = comment_fg, underline = true })
 
 -- Moving around buffers
 map("n", "<leader>b]", "<Cmd>BufferLineCycleNext<CR>")
