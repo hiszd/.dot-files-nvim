@@ -1,13 +1,13 @@
-require('ztab').setup({
-  highlight = {
-    ["title"] = {
-      fg = "#000000",
-      bg = "#ffffff",
-    }
-  }
+local ztab = require('ztab')
+ztab.setup({
+  sep_name = "slant",
+  right_sep = true,
+  devicon_colors = "selected",
 })
 
 map('n', '<C-Tab>', '<Cmd>:tabnext #<cr>', { noremap = true })
+
+map("n", "<leader>br", "<Cmd>:lua R('ztab')<CR><Cmd>:so %<CR>")
 
 -- Goto buffer in position
 map("n", "<Leader>1", "<Cmd>:tabnext 1<CR>")
@@ -22,9 +22,9 @@ map("n", "<Leader>9", "<Cmd>:tabnext 9<CR>")
 map("n", "<Leader>0", "<Cmd>:tabnext 10<CR>")
 
 -- Changing buffers positions
-map("n", "<leader>bb]", "<Cmd>:+tabmove<CR>")
-map("n", "<leader>bb[", "<Cmd>:-tabmove<CR>")
-map("n", "<leader>bb[", "<Cmd>:0tabmove<CR>")
+map("n", "<leader>b]", "<Cmd>:+tabmove<CR>")
+map("n", "<leader>b[", "<Cmd>:-tabmove<CR>")
+map("n", "<leader>b0", "<Cmd>:0tabmove<CR>")
 
 
 -- Close buffer
@@ -34,3 +34,4 @@ local function closecurrentbuffer()
 end
 
 vim.keymap.set("n", "<leader>dq", closecurrentbuffer)
+vim.keymap.set("n", "<leader>bq", "<Cmd>:tabclose<CR>")
