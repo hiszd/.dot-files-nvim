@@ -1,5 +1,6 @@
 -- require('noiz.plugins.barbar')
-require('noiz.plugins.bufferline')
+-- require('noiz.plugins.bufferline')
+require('noiz.plugins.ztab')
 require('noiz.plugins.orgmode')
 require('noiz.plugins.prettier')
 -- require('noiz.plugins.feline')
