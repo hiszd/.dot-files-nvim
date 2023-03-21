@@ -1,13 +1,33 @@
 local ztab = require('ztab')
+
+require('ztab.types')
+
+---@type HighlightOpts
+local highlights = {
+  title_sel = {
+    sp = "#aa5500",
+    underline = true,
+  },
+  icon_sel = {
+    sp = "#aa5500",
+    underline = true,
+  },
+  modified_sel = {
+    sp = "#aa5500",
+    underline = true,
+  },
+}
+
 ztab.setup({
   sep_name = "slant",
   right_sep = true,
   devicon_colors = "selected",
+  highlight = highlights,
 })
 
 map('n', '<C-Tab>', '<Cmd>:tabnext #<cr>', { noremap = true })
 
-map("n", "<leader>br", "<Cmd>:lua R('ztab')<CR><Cmd>:so %<CR>")
+map("n", "<leader>br", "<Cmd>:lua R('ztab')<CR><Cmd>:so ~/.config/nvim/lua/noiz/plugins/ztab.lua<CR>")
 
 -- Goto buffer in position
 map("n", "<Leader>1", "<Cmd>:tabnext 1<CR>")

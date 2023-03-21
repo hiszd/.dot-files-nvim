@@ -1,7 +1,7 @@
 ---@param mode string               #nvim mode(n,v,i, etc.)
 ---@param mapping string            #lhs(e.g. '<leader>y')
 ---@param command string | function #command to be executed
----@param options table             #options for mapping
+---@param options table?            #options for mapping
 ---@return nil
 _G.map = function(mode, mapping, command, options)
   if options == nil then
@@ -15,7 +15,7 @@ end
 
 ---@param mode string    #nvim mode(n,v,i, etc.)
 ---@param mapping string #lhs(e.g. '<leader>y')
----@return table         #returns all mapping if mapping is omitted, or specific mapping if it exists.
+---@return table | nil   #returns all mapping if mapping is omitted, or specific mapping if it exists.
 _G.get_map = function(mode, mapping)
   local mappings = vim.api.nvim_get_keymap(mode)
 
@@ -28,14 +28,15 @@ _G.get_map = function(mode, mapping)
   else
     return mappings
   end
+end
 
-  return
-
+_G.switch = function(cases, arg)
+  return assert(loadstring('return ' .. cases[arg]))()
 end
 
 vim.cmd([[
-function! SynGroup()                                                            
-    let l:s = synID(line('.'), col('.'), 1)                                       
+function! SynGroup()
+    let l:s = synID(line('.'), col('.'), 1)
     echo synIDattr(l:s, 'name') . ' -> ' . synIDattr(synIDtrans(l:s), 'name')
 endfun
 ]])
