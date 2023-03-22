@@ -16,6 +16,10 @@ local highlights = {
     sp = "#aa5500",
     underline = true,
   },
+  separator_sel = {
+    sp = "#aa5500",
+    underline = true,
+  }
 }
 
 ztab.setup({
@@ -25,9 +29,9 @@ ztab.setup({
   highlight = highlights,
 })
 
-map('n', '<C-Tab>', '<Cmd>:tabnext #<cr>', { noremap = true })
+map('n', '<C-L>', '<Cmd>:tabnext #<cr>', { noremap = true })
 
-map("n", "<leader>br", "<Cmd>:lua R('ztab')<CR><Cmd>:so ~/.config/nvim/lua/noiz/plugins/ztab.lua<CR>")
+map("n", "<leader>br", "<Cmd>:lua R('ztab')<CR><Cmd>:so ~/.config/nvimelue/noiz/plugins/ztab.lua<CR>")
 
 -- Goto buffer in position
 map("n", "<Leader>1", "<Cmd>:tabnext 1<CR>")
