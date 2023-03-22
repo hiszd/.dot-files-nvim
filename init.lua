@@ -48,6 +48,7 @@ vim.opt.showmatch = true
 vim.opt.autoindent = true
 vim.opt.smartindent = true
 vim.o.completeopt = "menuone,noselect"
+vim.o.undofile = true
 
 vim.opt.gfn = 'Delugia Mono'
 
