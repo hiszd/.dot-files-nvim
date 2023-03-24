@@ -1,7 +1,7 @@
 local prettier = require("prettier")
 
 prettier.setup({
-  bin = 'prettier', -- or `prettierd`
+  bin = "prettier", -- or `prettierd`
   filetypes = {
     "css",
     "graphql",
@@ -14,7 +14,6 @@ prettier.setup({
     "scss",
     "yaml",
   },
-
   -- prettier format options (you can use config files too. ex: `.prettierrc`)
   arrow_parens = "always",
   bracket_spacing = true,

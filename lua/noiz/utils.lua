@@ -31,7 +31,7 @@ _G.get_map = function(mode, mapping)
 end
 
 _G.switch = function(cases, arg)
-  return assert(loadstring('return ' .. cases[arg]))()
+  return assert(loadstring("return " .. cases[arg]))()
 end
 
 vim.cmd([[
@@ -113,7 +113,7 @@ util.rgb_to_hsl = function(r, g, b)
 end
 
 util.log = function()
-  feedkey('viwy<esc>A<enter><esc>Aconsole.log(`${}<esc>hpA;<esc>', '')
+  feedkey("viwy<esc>A<enter><esc>Aconsole.log(`${}<esc>hpA;<esc>", "")
 end
 
 return util

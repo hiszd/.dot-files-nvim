@@ -1,6 +1,6 @@
-local ztab = require('ztab')
+local ztab = require("ztab")
 
-require('ztab.types')
+require("ztab.types")
 
 ---@type HighlightOpts
 local highlights = {
@@ -19,7 +19,7 @@ local highlights = {
   separator_sel = {
     sp = "#aa5500",
     underline = true,
-  }
+  },
 }
 
 ztab.setup({
@@ -29,7 +29,7 @@ ztab.setup({
   highlight = highlights,
 })
 
-map('n', '<C-L>', '<Cmd>:tabnext #<cr>', { noremap = true })
+map("n", "<C-L>", "<Cmd>:tabnext #<cr>", { noremap = true })
 
 map("n", "<leader>br", "<Cmd>:lua R('ztab')<CR><Cmd>:so ~/.config/nvimelue/noiz/plugins/ztab.lua<CR>")
 
@@ -49,7 +49,6 @@ map("n", "<Leader>0", "<Cmd>:tabnext 10<CR>")
 map("n", "<leader>b]", "<Cmd>:+tabmove<CR>")
 map("n", "<leader>b[", "<Cmd>:-tabmove<CR>")
 map("n", "<leader>b0", "<Cmd>:0tabmove<CR>")
-
 
 -- Close buffer
 local function closecurrentbuffer()

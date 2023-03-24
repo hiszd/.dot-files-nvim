@@ -10,10 +10,10 @@ local icons = {
   Interface = "",
   Module = "",
   Property = "ﰠ",
-  Unit = '',
+  Unit = "",
   Value = "",
   Enum = "",
-  Keyword = '',
+  Keyword = "",
   Snippet = "",
   Color = "",
   File = "",
@@ -24,7 +24,7 @@ local icons = {
   Struct = "פּ",
   Event = "",
   Operator = "",
-  TypeParameter = '',
+  TypeParameter = "",
 }
 
 local sources = {
@@ -40,15 +40,15 @@ local sources = {
 
 vim.opt.completeopt = { "menu", "menuone", "noselect" }
 
-local luasnip = require('luasnip')
+local luasnip = require("luasnip")
 
-local lsp_spinner = require('lsp_spinner')
+local lsp_spinner = require("lsp_spinner")
 
 lsp_spinner.setup()
 
 local check_back_space = function()
-  local col = vim.fn.col('.') - 1
-  if col == 0 or vim.fn.getline('.'):sub(col, col):match('%s') then
+  local col = vim.fn.col(".") - 1
+  if col == 0 or vim.fn.getline("."):sub(col, col):match("%s") then
     return true
   else
     return false
@@ -66,14 +66,11 @@ end
 
 -- Setup autopairs
 -- If you want insert `(` after select function or method item
-local cmp_autopairs = require('nvim-autopairs.completion.cmp')
-local cmp = require('cmp')
-cmp.event:on(
-  'confirm_done',
-  cmp_autopairs.on_confirm_done()
-)
+local cmp_autopairs = require("nvim-autopairs.completion.cmp")
+local cmp = require("cmp")
+cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
 
-local types = require('cmp.types')
+local types = require("cmp.types")
 
 cmp.setup({
   experimental = {
@@ -126,7 +123,7 @@ cmp.setup({
   },
   snippet = {
     expand = function(args)
-      require('luasnip').lsp_expand(args.body)
+      require("luasnip").lsp_expand(args.body)
     end,
   },
   window = {
@@ -141,11 +138,11 @@ cmp.setup({
   --   -- documentation = cmp.config.window.bordered(),
   -- },
   mapping = cmp.mapping.preset.insert({
-        ['<C-b>'] = cmp.mapping.scroll_docs(-4),
-        ['<C-f>'] = cmp.mapping.scroll_docs(4),
-        ['<C-p>'] = cmp.mapping.complete(),
-        ['<C-e>'] = cmp.mapping.abort(),
-        ['<CR>'] = cmp.mapping(function(fallback)
+    ["<C-b>"] = cmp.mapping.scroll_docs(-4),
+    ["<C-f>"] = cmp.mapping.scroll_docs(4),
+    ["<C-p>"] = cmp.mapping.complete(),
+    ["<C-e>"] = cmp.mapping.abort(),
+    ["<CR>"] = cmp.mapping(function(fallback)
       if cmp.visible() and not luasnip.expand_or_jumpable() then
         cmp.confirm({ select = false })
       elseif luasnip and luasnip.expand_or_jumpable() then
@@ -154,14 +151,14 @@ cmp.setup({
         fallback()
       end
     end, { "i", "s" }),
-        ["<Tab>"] = cmp.mapping(function(fallback)
+    ["<Tab>"] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.select_next_item()
       else
         fallback()
       end
     end, { "i", "s" }),
-        ["<S-Tab>"] = cmp.mapping(function()
+    ["<S-Tab>"] = cmp.mapping(function()
       if cmp.visible() then
         cmp.select_prev_item()
       else
@@ -170,48 +167,48 @@ cmp.setup({
     end, { "i", "s" }),
   }),
   sources = cmp.config.sources({
-    { name = 'orgmode' },
-    { name = 'nvim_lsp',                priority = 90 },
-    { name = 'treesitter',              priority = 45 },
-    { name = 'path',                    priority = 85 },
-    { name = 'luasnip',                 keyword_length = 2, max_item_count = 4, priority = 10 },
-    { name = 'buffer',                  max_item_count = 4, priority = 40 },
-    { name = 'nvim_lsp_signature_help', priority = 2 },
-    { name = 'codeium',                 keyword_length = 3, max_item_count = 4, priority = 86 },
+    { name = "orgmode" },
+    { name = "nvim_lsp",                priority = 90 },
+    { name = "treesitter",              priority = 45 },
+    { name = "path",                    priority = 85 },
+    { name = "luasnip",                 keyword_length = 2, max_item_count = 4, priority = 10 },
+    { name = "buffer",                  max_item_count = 4, priority = 40 },
+    { name = "nvim_lsp_signature_help", priority = 2 },
+    { name = "codeium",                 keyword_length = 3, max_item_count = 4, priority = 86 },
   }),
   preselect = cmp.PreselectMode.None,
 })
 
 -- Set configuration for specific filetype.
-cmp.setup.filetype('gitcommit', {
+cmp.setup.filetype("gitcommit", {
   sources = cmp.config.sources({
-    { name = 'cmp_git' }, -- You can specify the `cmp_git` source if you were installed it.
+    { name = "cmp_git" }, -- You can specify the `cmp_git` source if you were installed it.
   }, {
-    { name = 'buffer' },
-  })
+    { name = "buffer" },
+  }),
 })
 
 -- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
-cmp.setup.cmdline('/', {
+cmp.setup.cmdline("/", {
   mapping = cmp.mapping.preset.cmdline(),
   sources = {
-    { name = 'buffer' }
-  }
+    { name = "buffer" },
+  },
 })
 
 -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
-cmp.setup.cmdline(':', {
+cmp.setup.cmdline(":", {
   mapping = cmp.mapping.preset.cmdline({
-        ["<esc>"] = cmp.mapping(function(fallback)
+    ["<esc>"] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.abort()
       else
         -- fallback()
-        feedkey('<C-c>', '')
+        feedkey("<C-c>", "")
       end
-    end, { 'i', 'c' }),
+    end, { "i", "c" }),
     -- ['<CR>'] = cmp.mapping.confirm({ select = true }),
-        ['<CR>'] = cmp.mapping({
+    ["<CR>"] = cmp.mapping({
       i = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true }),
       c = function(fallback)
         if cmp.visible() then
@@ -219,7 +216,7 @@ cmp.setup.cmdline(':', {
         else
           fallback()
         end
-      end
+      end,
     }),
     -- ['<Tab>'] = cmp.mapping({
     --   i = cmp.select_next_item({ behavior = cmp.SelectBehavior.Select }),
@@ -244,9 +241,9 @@ cmp.setup.cmdline(':', {
     -- }),
   }),
   sources = cmp.config.sources({
-    { name = 'path' }
+    { name = "path" },
   }, {
-    { name = 'cmdline' }
+    { name = "cmdline" },
   }),
   -- preselect = cmp.PreselectMode.Insert,
 })

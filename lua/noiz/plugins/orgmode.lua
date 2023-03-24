@@ -1,13 +1,13 @@
 -- Load custom tree-sitter grammar for org filetype
-require('orgmode').setup_ts_grammar()
+require("orgmode").setup_ts_grammar()
 
-require('orgmode').setup({
-  org_agenda_files = { '~/org/*', '~/my-orgs/**/*' },
-  org_default_notes_file = '~/org/refile.org',
+require("orgmode").setup({
+  org_agenda_files = { "~/org/*", "~/my-orgs/**/*" },
+  org_default_notes_file = "~/org/refile.org",
   org_hide_leading_stars = true,
   mappings = {
     org = {
-      org_toggle_checkbox = '<C-c>',
-    }
-  }
+      org_toggle_checkbox = "<C-c>",
+    },
+  },
 })

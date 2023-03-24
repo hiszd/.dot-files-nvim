@@ -1,6 +1,6 @@
 local M = {}
 
-local __Job = require 'plenary.job'
+local __Job = require("plenary.job")
 local __isrunning = false
 local __waittime = 0
 local __exectimer = vim.loop.new_timer()
@@ -8,9 +8,9 @@ local __execdelay = 80
 local __hasexecd = false
 
 local __job = __Job:new({
-  command = 'node',
-  args = { '/home/zion/programming/node/qmkhid/dist/app.js', 'cli' },
-  cwd = '/usr/bin',
+  command = "node",
+  args = { "/home/zion/programming/node/qmkhid/dist/app.js", "cli" },
+  cwd = "/usr/bin",
   on_stderr = function(val)
     P(val)
   end,
@@ -29,12 +29,16 @@ M.startjob = function()
 end
 
 local hidwrite = function(msg)
-  print('message: ' .. msg)
+  print("message: " .. msg)
   if __isrunning == true then
-    vim.defer_fn(function() __job:send(msg .. "\n") end, __waittime)
+    vim.defer_fn(function()
+      __job:send(msg .. "\n")
+    end, __waittime)
     __waittime = __execdelay
     __exectimer:stop()
-    __exectimer:start(__execdelay, 0, function() __waittime = 0 end, __execdelay)
+    __exectimer:start(__execdelay, 0, function()
+      __waittime = 0
+    end, __execdelay)
     __hasexecd = true
   end
 end
@@ -116,7 +120,6 @@ vim.api.nvim_create_autocmd("TermLeave", {
 vim.api.nvim_create_autocmd("VimLeavePre", {
   group = vim.api.nvim_create_augroup("HIDVimAutoLeave", { clear = true }),
   callback = function()
-
   end,
 })
 

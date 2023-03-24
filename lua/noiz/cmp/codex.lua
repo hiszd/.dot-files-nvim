@@ -1,4 +1,4 @@
-local Job = require "plenary.job"
+local Job = require("plenary.job")
 
 local M = {}
 
@@ -11,7 +11,7 @@ local function get_api_key()
   if not file then
     return nil
   end
-  local content = file:read "*a"
+  local content = file:read("*a")
   content = string.gsub(content, "^%s*(.-)%s*$", "%1") -- strip off any space or newline
   file:close()
   return content
@@ -28,7 +28,7 @@ function M.complete(v)
 
   local api_key = get_api_key()
   if api_key == nil then
-    vim.notify "OpenAI API key not found"
+    vim.notify("OpenAI API key not found")
     return
   end
 
@@ -61,11 +61,11 @@ function M.complete(v)
     command = "curl",
     args = {
       OPENAI_URL,
-      '-H \"Content-Type: application/json\"',
+      '-H "Content-Type: application/json"',
       "-H",
-      string.format('\"Authorization: Bearer %s\"', api_key),
+      string.format('"Authorization: Bearer %s"', api_key),
       "-d",
-      ('\"' .. body .. '\"'),
+      ('"' .. body .. '"'),
     },
     on_exit = function(j, return_val)
       local result = j:result()
@@ -73,7 +73,7 @@ function M.complete(v)
       P(return_val)
       local ok, parsed = pcall(vim.json.decode, table.concat(result, ""))
       if not ok then
-        vim.notify "Failed to parse OpenAI result"
+        vim.notify("Failed to parse OpenAI result")
         return
       end
 
@@ -89,9 +89,14 @@ function M.complete(v)
       end
     end,
   }):sync(60000)
-  print("curl " ..
-    OPENAI_URL ..
-    ' -H "Content-Type: application/json" -H ' .. string.format('"Authorization: Bearer %s"', api_key) .. " -d " .. body)
+  print(
+    "curl "
+    .. OPENAI_URL
+    .. ' -H "Content-Type: application/json" -H '
+    .. string.format('"Authorization: Bearer %s"', api_key)
+    .. " -d "
+    .. body
+  )
 end
 
 return M
