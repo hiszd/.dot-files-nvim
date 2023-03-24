@@ -19,7 +19,7 @@ P = function(v)
 end
 
 RSTLNE = function()
-  map("n", "l", "A<CR>", { silent = true, nowait = true, desc = "Insert newline" })
+  map("n", "t", "A<CR>", { desc = "Insert newline" })
   map("n", "k", "<Insert>", { silent = true, desc = "Enter insert mode" })
   map("v", "k", "<Insert>", { silent = true, desc = "Enter insert mode" })
   map("n", "n", "<Down>", { silent = true, desc = "Move down" })
@@ -40,6 +40,7 @@ QWERTY = function()
   map("v", "o", "o")
   map("n", "k", "k")
   map("v", "k", "k")
+  map("n", "t", "t")
   print("QWERTY")
 end
 

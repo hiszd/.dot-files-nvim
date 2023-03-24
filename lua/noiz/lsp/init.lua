@@ -30,12 +30,11 @@ require("mason-lspconfig").setup_handlers({
   end,
   -- Next, you can provide a dedicated handler for specific servers.
   -- For example, a handler override for the `rust_analyzer`:
-  ["rust_analyzer"] = function()
+      ["rust_analyzer"] = function()
     require("rust-tools").setup({
       -- rust-tools options
       tools = {
         autoSetHints = true,
-        hover_with_actions = true,
         inlay_hints = {
           show_parameter_hints = true,
           parameter_hints_prefix = "",
@@ -50,7 +49,7 @@ require("mason-lspconfig").setup_handlers({
         on_attach = config.custom_attach,
         capabilities = config.updated_capabilities,
         settings = {
-          ["rust-analyzer"] = {
+              ["rust-analyzer"] = {
             assist = {
               importEnforceGranularity = true,
               importPrefix = "crate",

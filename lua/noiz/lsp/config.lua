@@ -100,6 +100,10 @@ local custom_attach = function(client, bufnr)
       ]])
     end
   end
+
+  if client.name == "rust_analyzer" then
+    buf_nnoremap({ bufnr, "K", "<cmd>:RustHoverActions<CR>" })
+  end
 end
 
 M.custom_attach = custom_attach
