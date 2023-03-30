@@ -103,13 +103,14 @@ return require("packer").startup(function()
   })
   use("kyazdani42/nvim-web-devicons")
   use({
-    "hiszd/clrtheme.nvim",
+    -- "hiszd/clrtheme.nvim",
+    "~/programming/nvim/clrtheme.nvim",
     requires = {
       "tjdevries/colorbuddy.nvim",
     },
   })
   -- UI
-  use("rcarriga/nvim-notify")  -- Notifications Popup (Optional)
+  use("rcarriga/nvim-notify")   -- Notifications Popup (Optional)
   use("stevearc/dressing.nvim") -- Improved UI (Optional)
   -- use("doums/lsp_spinner.nvim")
   use({ "hiszd/ztab.nvim", requires = "nvim-tree/nvim-web-devicons" })

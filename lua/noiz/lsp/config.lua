@@ -2,6 +2,13 @@ local M = {}
 
 local tbl = require("teej.tbl")
 
+vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
+  -- Use a sharp border with `FloatBorder` highlights
+  border = "rounded",
+  -- add the title in hover float window
+  title = "hover",
+})
+
 local updated_capabilities = vim.lsp.protocol.make_client_capabilities()
 updated_capabilities = tbl.tbl_deep_extend(
   "keep",

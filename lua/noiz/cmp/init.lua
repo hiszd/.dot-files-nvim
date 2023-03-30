@@ -88,7 +88,8 @@ cmp.setup({
   },
   window = {
     completion = {
-      winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,Search:PmenuSel,CursorLine:CmpItemSel",
+      winhighlight = "Normal:Pmenu,FloatBorder:FloatBorder,Search:PmenuSel,CursorLine:CmpItemSel",
+      border = "single",
       col_offset = -3,
       side_padding = 0,
     },
