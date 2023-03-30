@@ -3,13 +3,6 @@ require("noiz.globals")
 
 vim.api.nvim_command('set runtimepath+="~/.config/nvim/.runtime"')
 
--- vim.cmd('source ~/dot-files/vim/.vim_runtime/vimrcs/plugins_config.vim')
--- vim.cmd('source ~/dot-files/vim/.vim_runtime/vimrcs/extended.vim')
--- vim.cmd('source ~/dot-files/vim/.vim_runtime/my_plugins.vim')
--- vim.cmd('source ~/dot-files/vim/.vim_runtime/coc.vim')
--- vim.cmd('source ~/dot-files/vim/.vim_runtime/vimrcs/filetypes.vim')
--- vim.cmd('source ~/dot-files/vim/.vim_runtime/vimrcs/basic.vim')
-
 if vim.fn.has("win32") == 1 then
   vim.api.nvim_command('let $PLUGDIR = "~/vimfiles/plugged"')
   vim.api.nvim_command('let $VIMDIR = "~/vimfiles/"')
@@ -21,8 +14,6 @@ else
 end
 
 vim.cmd(":noh")
-
--- vim.api.nvim_command("source '~/dot-files/nvim/.vim_runtime/my_configs.nvim'")
 
 vim.api.nvim_command("set viminfo='100,n$HOME/.config/nvim/.runtime/files/info/viminfo")
 
@@ -49,9 +40,7 @@ vim.opt.smartindent = true
 vim.o.completeopt = "menuone,noselect"
 vim.o.undofile = true
 
-vim.opt.gfn = "Delugia Mono"
-
---vim.cmd('let base16colorspace=256')
+-- vim.opt.gfn = "Delugia Mono"
 
 vim.cmd("colorscheme base16-classic-dark")
 --vim.cmd('colorscheme base16-material-darker')
@@ -89,9 +78,6 @@ vim.cmd([[
 
 ]])
 
--- vim.opt.laststatus = 2
--- vim.g.Powerline_symbols = 'fancy'
-
 map("", "<Space>", "<Nop>", { noremap = true })
 vim.g.mapleader = " "
 
@@ -120,6 +106,3 @@ require("noiz.keybind")
 require("noiz.cmp")
 require("noiz.lsp")
 require("noiz.plugins")
--- require('clrtheme').load_feline()
--- require('colorbuddy').colorscheme('clrtheme')
--- vim.cmd('colorscheme clrtheme')

@@ -8,7 +8,7 @@ map("n", "<leader>ds", "$a", { noremap = true })
 map("n", "<leader>da", "<Cmd>wq<cr>", { noremap = true })
 map("n", "<leader>n", "<Cmd>Neotree reveal toggle<cr>", { noremap = true })
 map("n", "<leader>gn", "<Cmd>Neotree float git_status<cr>", { noremap = true })
-map("n", "<leader>df", "<Cmd>lua vim.lsp.buf.formatting()<cr>", { noremap = true })
+map("n", "<leader>df", "<Cmd>lua vim.lsp.buf.format()<cr>", { noremap = true })
 map("i", "<C-l>", function()
   local luasnip = require("luasnip")
   if luasnip and luasnip.expand_or_jumpable() then
@@ -56,5 +56,5 @@ map("v", "<leader>y", '"+y', { noremap = true })
 
 map("v", "gz", '<Cmd>lua require("noiz.cmp.codex").complete()<cr>', { noremap = true })
 
-local hid = require("noiz.keybind.hid")
-hid.startjob()
+-- local hid = require("noiz.keybind.hid")
+-- hid.startjob()

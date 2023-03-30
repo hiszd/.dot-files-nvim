@@ -30,6 +30,19 @@ _G.get_map = function(mode, mapping)
   end
 end
 
+---EXAMPLE:
+---local case = 3
+---
+---local result = switch({
+---  [0] = "0",
+---  [1] = "2^1+" .. case,
+---  [2] = "2^2+" .. case,
+---  [3] = "2^3+" .. case
+---},
+---case
+---)
+---@param cases table<number, string> #possible cases
+---@param arg number #arg to switch based on
 _G.switch = function(cases, arg)
   return assert(loadstring("return " .. cases[arg]))()
 end
@@ -41,6 +54,8 @@ function! SynGroup()
 endfun
 ]])
 
+---@param key string #key to feed
+---@param mode string #mode to feed the key in
 local feedkey = function(key, mode)
   vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(key, true, true, true), mode, true)
 end
@@ -58,10 +73,10 @@ end
 --- Converts an RGB triplet to HSL.
 -- (see http://easyrgb.com)
 --
--- @param r              red (0.0-1.0)
--- @param g              green (0.0-1.0)
--- @param b              blue (0.0-1.0)
--- @return               corresponding H, S and L components
+---@param r number               #red (0.0-1.0)
+---@param g number               #green (0.0-1.0)
+---@param b number               #blue (0.0-1.0)
+---@return number,number,number  #corresponding H, S and L components
 util.rgb_to_hsl = function(r, g, b)
   r = r or 0
   g = g or 0

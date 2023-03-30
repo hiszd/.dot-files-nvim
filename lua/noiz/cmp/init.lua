@@ -1,50 +1,10 @@
-local icons = {
-  Codeium = "☢",
-  Text = "",
-  Method = "",
-  Function = "",
-  Constructor = "⌘",
-  Field = "ﰠ",
-  Variable = "",
-  Class = "ﴯ",
-  Interface = "",
-  Module = "",
-  Property = "ﰠ",
-  Unit = "",
-  Value = "",
-  Enum = "",
-  Keyword = "",
-  Snippet = "",
-  Color = "",
-  File = "",
-  Reference = "",
-  Folder = "",
-  EnumMember = "",
-  Constant = "",
-  Struct = "פּ",
-  Event = "",
-  Operator = "",
-  TypeParameter = "",
-}
-
-local sources = {
-  nvim_lsp = "LSP",
-  luasnip = "SNP",
-  treesitter = "TSI",
-  path = "PTH",
-  buffer = "BUF",
-  nvim_lsp_signature_help = "SIG",
-  codeium = "CDE",
-  orgmode = "ORG",
-}
+local lib = require("noiz.cmp.lib")
+local icons = lib.icons
+local sources = lib.sources
 
 vim.opt.completeopt = { "menu", "menuone", "noselect" }
 
 local luasnip = require("luasnip")
-
-local lsp_spinner = require("lsp_spinner")
-
-lsp_spinner.setup()
 
 local check_back_space = function()
   local col = vim.fn.col(".") - 1
@@ -138,11 +98,11 @@ cmp.setup({
   --   -- documentation = cmp.config.window.bordered(),
   -- },
   mapping = cmp.mapping.preset.insert({
-    ["<C-b>"] = cmp.mapping.scroll_docs(-4),
-    ["<C-f>"] = cmp.mapping.scroll_docs(4),
-    ["<C-p>"] = cmp.mapping.complete(),
-    ["<C-e>"] = cmp.mapping.abort(),
-    ["<CR>"] = cmp.mapping(function(fallback)
+        ["<C-b>"] = cmp.mapping.scroll_docs(-4),
+        ["<C-f>"] = cmp.mapping.scroll_docs(4),
+        ["<C-e>"] = cmp.mapping.complete(),
+        ["<C-a>"] = cmp.mapping.abort(),
+        ["<CR>"] = cmp.mapping(function(fallback)
       if cmp.visible() and not luasnip.expand_or_jumpable() then
         cmp.confirm({ select = false })
       elseif luasnip and luasnip.expand_or_jumpable() then
@@ -151,14 +111,14 @@ cmp.setup({
         fallback()
       end
     end, { "i", "s" }),
-    ["<Tab>"] = cmp.mapping(function(fallback)
+        ["<Tab>"] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.select_next_item()
       else
         fallback()
       end
     end, { "i", "s" }),
-    ["<S-Tab>"] = cmp.mapping(function()
+        ["<S-Tab>"] = cmp.mapping(function()
       if cmp.visible() then
         cmp.select_prev_item()
       else
@@ -199,7 +159,7 @@ cmp.setup.cmdline("/", {
 -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
 cmp.setup.cmdline(":", {
   mapping = cmp.mapping.preset.cmdline({
-    ["<esc>"] = cmp.mapping(function(fallback)
+        ["<esc>"] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.abort()
       else
@@ -208,7 +168,7 @@ cmp.setup.cmdline(":", {
       end
     end, { "i", "c" }),
     -- ['<CR>'] = cmp.mapping.confirm({ select = true }),
-    ["<CR>"] = cmp.mapping({
+        ["<CR>"] = cmp.mapping({
       i = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true }),
       c = function(fallback)
         if cmp.visible() then
@@ -245,5 +205,5 @@ cmp.setup.cmdline(":", {
   }, {
     { name = "cmdline" },
   }),
-  -- preselect = cmp.PreselectMode.Insert,
+  preselect = cmp.PreselectMode.Item,
 })

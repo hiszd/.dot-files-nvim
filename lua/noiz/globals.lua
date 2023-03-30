@@ -19,7 +19,7 @@ P = function(v)
 end
 
 RSTLNE = function()
-  map("n", "<leader>o", "A<CR>", { desc = "Insert newline" })
+  map("n", "<leader>o", "A<CR>", { silent = true, nowait = true, desc = "Insert newline" })
   map("", "i", "k", { silent = true, desc = "Move up" })
   map("", "k", "i", { silent = true, desc = "Enter insert mode" })
   map("", "n", "j", { silent = true, desc = "Move down" })
@@ -40,13 +40,15 @@ RELOAD = function(...)
   return require("plenary.reload").reload_module(...)
 end
 
+---Reload specified plugin
+---@param name string #Name of plugin to reload
 R = function(name)
   RELOAD(name)
   return require(name)
 end
 
 function Printf(...)
-  print(string.format(...))
+  print(FMT(...))
 end
 
 function FMT(...)

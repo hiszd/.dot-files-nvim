@@ -1,21 +1,37 @@
 return require("packer").startup(function()
   use("wbthomason/packer.nvim")
 
-  use("neovim/nvim-lspconfig")
-  use("jose-elias-alvarez/nvim-lsp-ts-utils")
+  -- Mason.nvim and all requirements
+  use({
+    "williamboman/mason-lspconfig.nvim",
+    requires = {
+      "neovim/nvim-lspconfig",
+      "williamboman/mason.nvim",
+      "jose-elias-alvarez/nvim-lsp-ts-utils",
+    },
+  })
   use({
     "jay-babu/mason-null-ls.nvim",
     requires = {
       "jose-elias-alvarez/null-ls.nvim",
+      "MunifTanjim/prettier.nvim",
     },
   })
-  use("jose-elias-alvarez/null-ls.nvim")
-  use("MunifTanjim/prettier.nvim")
-  use("hrsh7th/cmp-nvim-lsp")
-  use("hrsh7th/cmp-buffer")
-  use("hrsh7th/cmp-path")
-  use("hrsh7th/cmp-cmdline")
-  use("hrsh7th/nvim-cmp")
+  -- Rust LSP stuff
+  use("simrat39/rust-tools.nvim")
+
+  -- nvim-cmp and all its requirements
+  use({
+    "hrsh7th/nvim-cmp",
+    requires = {
+      "hrsh7th/cmp-cmdline",
+      "hrsh7th/cmp-path",
+      "hrsh7th/cmp-buffer",
+      "hrsh7th/cmp-nvim-lsp",
+      "saadparwaiz1/cmp_luasnip",
+      "ray-x/cmp-treesitter",
+    },
+  })
   use({
     "jcdickinson/codeium.nvim",
     requires = {
@@ -24,14 +40,12 @@ return require("packer").startup(function()
     },
     config = function()
       require("codeium").setup({
-        config_path = "codeium.cfg",
+        config_path = "~/.config/nvim/codeium.cfg",
       })
     end,
   })
 
-  use("williamboman/mason.nvim")
-  use("williamboman/mason-lspconfig.nvim")
-
+  -- Utilities
   use({
     "windwp/nvim-autopairs",
     config = function()
@@ -44,13 +58,27 @@ return require("packer").startup(function()
       require("surround").setup({ mappings_style = "sandwich" })
     end,
   })
-
   use({
     "tpope/vim-commentary",
     requires = {
       "kyazdani42/nvim-web-devicons",
     },
   })
+  use({
+    "nvim-treesitter/nvim-treesitter",
+    run = function()
+      local ts_update = require("nvim-treesitter.install").update({ with_sync = true })
+      ts_update()
+    end,
+  })
+  use("nvim-treesitter/playground")
+  use({
+    "nvim-orgmode/orgmode",
+    config = function()
+      require("orgmode").setup({})
+    end,
+  })
+  use("famiu/nvim-reload")
 
   -- Markdown Preview
   use({
@@ -63,6 +91,10 @@ return require("packer").startup(function()
   })
 
   -- Theming and color
+  use("chriskempson/base16-vim")
+  use("xolox/vim-colorscheme-switcher")
+  use("xolox/vim-misc")
+  use("norcalli/nvim-colorizer.lua")
   use({
     "numToStr/Comment.nvim",
     config = function()
@@ -70,13 +102,25 @@ return require("packer").startup(function()
     end,
   })
   use("kyazdani42/nvim-web-devicons")
-
+  use({
+    "hiszd/clrtheme.nvim",
+    requires = {
+      "tjdevries/colorbuddy.nvim",
+    },
+  })
+  -- UI
   use("rcarriga/nvim-notify")  -- Notifications Popup (Optional)
   use("stevearc/dressing.nvim") -- Improved UI (Optional)
-
-  use("hiszd/clrtheme.nvim")
-  use("tjdevries/colorbuddy.nvim")
-  use("norcalli/nvim-colorizer.lua")
+  -- use("doums/lsp_spinner.nvim")
+  use({ "hiszd/ztab.nvim", requires = "nvim-tree/nvim-web-devicons" })
+  use({
+    "nvim-lualine/lualine.nvim",
+    requires = {
+      "kyazdani42/nvim-web-devicons",
+      "lewis6991/gitsigns.nvim",
+      opt = true,
+    },
+  })
 
   -- File managers
   use({
@@ -97,6 +141,7 @@ return require("packer").startup(function()
   })
   use("miversen33/netman.nvim")
 
+  -- Snippet manager
   use({
     "l3mon4d3/luasnip",
     -- tag = "v<CurrentMajor>.*",
@@ -110,50 +155,6 @@ return require("packer").startup(function()
     },
   })
 
-  use("saadparwaiz1/cmp_luasnip")
-  use("ray-x/cmp-treesitter")
-
-  use("nvim-lua/plenary.nvim")
-  use({
-    "nvim-treesitter/nvim-treesitter",
-    run = function()
-      local ts_update = require("nvim-treesitter.install").update({ with_sync = true })
-      ts_update()
-    end,
-  })
-  use("nvim-treesitter/playground")
-  use({
-    "nvim-orgmode/orgmode",
-    config = function()
-      require("orgmode").setup({})
-    end,
-  })
-
-  use("famiu/nvim-reload")
-
-  use("chriskempson/base16-vim")
-  use("xolox/vim-colorscheme-switcher")
-  use("xolox/vim-misc")
-
-  use({
-    "nvim-lualine/lualine.nvim",
-    requires = {
-      "kyazdani42/nvim-web-devicons",
-      "lewis6991/gitsigns.nvim",
-      opt = true,
-    },
-  })
-
-  use("doums/lsp_spinner.nvim")
-  use({ "hiszd/ztab.nvim", requires = "nvim-tree/nvim-web-devicons" })
-  -- use { 'akinsho/bufferline.nvim', requires = 'nvim-tree/nvim-web-devicons' }
-  -- use({
-  --   "romgrk/barbar.nvim",
-  --   requires = { "kyazdani42/nvim-web-devicons" },
-  --   config = function()
-  --   end,
-  -- })
-
   -- Terminal stuff
   use({
     "s1n7ax/nvim-terminal",
@@ -163,7 +164,4 @@ return require("packer").startup(function()
       })
     end,
   })
-
-  -- Rust stuff
-  use("simrat39/rust-tools.nvim")
 end)
