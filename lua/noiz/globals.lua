@@ -24,7 +24,7 @@ RSTLNE = function()
   map("", "k", "i", { silent = true, desc = "Enter insert mode" })
   map("", "n", "j", { silent = true, desc = "Move down" })
   map("", "o", "l", { silent = true, desc = "Move right" })
-  map("", "l", "y", { silent = true, desc = "Move right" })
+  -- map("", "l", "y", { silent = true, desc = "Move right" })
   print("RSTLNE")
 end
 

@@ -46,6 +46,7 @@ return require("packer").startup(function()
   })
 
   -- Utilities
+  use("tpope/vim-fugitive")
   use({
     "theprimeagen/harpoon",
     requires = {
@@ -80,6 +81,7 @@ return require("packer").startup(function()
   use("nvim-treesitter/playground")
   use({
     "nvim-orgmode/orgmode",
+    ft = { "org" },
     config = function()
       require("orgmode").setup({})
     end,
