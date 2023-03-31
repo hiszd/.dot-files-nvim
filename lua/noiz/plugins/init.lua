@@ -7,4 +7,6 @@ require("colorizer").setup()
 
 require("noiz.plugins.neotree")
 
+require("noiz.plugins.harpoon")
+
 -- require('netman')

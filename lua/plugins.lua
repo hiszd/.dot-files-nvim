@@ -40,12 +40,18 @@ return require("packer").startup(function()
     },
     config = function()
       require("codeium").setup({
-        config_path = "~/.config/nvim/codeium.cfg",
+        config_path = "/home/zion/.config/nvim/codeium.cfg",
       })
     end,
   })
 
   -- Utilities
+  use({
+    "theprimeagen/harpoon",
+    requires = {
+      "nvim-lua/plenary.nvim",
+    },
+  })
   use({
     "windwp/nvim-autopairs",
     config = function()
@@ -103,14 +109,14 @@ return require("packer").startup(function()
   })
   use("kyazdani42/nvim-web-devicons")
   use({
-    -- "hiszd/clrtheme.nvim",
-    "~/programming/nvim/clrtheme.nvim",
+    "hiszd/clrtheme.nvim",
+    -- "~/programming/nvim/clrtheme.nvim",
     requires = {
       "tjdevries/colorbuddy.nvim",
     },
   })
   -- UI
-  use("rcarriga/nvim-notify")   -- Notifications Popup (Optional)
+  use("rcarriga/nvim-notify")  -- Notifications Popup (Optional)
   use("stevearc/dressing.nvim") -- Improved UI (Optional)
   -- use("doums/lsp_spinner.nvim")
   use({ "hiszd/ztab.nvim", requires = "nvim-tree/nvim-web-devicons" })
@@ -121,6 +127,13 @@ return require("packer").startup(function()
       "lewis6991/gitsigns.nvim",
       opt = true,
     },
+  })
+  use({
+    "goolord/alpha-nvim",
+    requires = { "nvim-tree/nvim-web-devicons" },
+    config = function()
+      require("alpha").setup(require("alpha.themes.startify").config)
+    end,
   })
 
   -- File managers
