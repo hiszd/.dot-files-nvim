@@ -1,29 +1,29 @@
-return require("packer").startup(function()
-  use("wbthomason/packer.nvim")
+local conf = require("lazyconf")
 
+return require("lazy").setup({
   -- Mason.nvim and all requirements
-  use({
+  {
     "williamboman/mason-lspconfig.nvim",
-    requires = {
+    dependencies = {
       "neovim/nvim-lspconfig",
       "williamboman/mason.nvim",
       "jose-elias-alvarez/nvim-lsp-ts-utils",
     },
-  })
-  use({
+  },
+  {
     "jay-babu/mason-null-ls.nvim",
-    requires = {
+    dependencies = {
       "jose-elias-alvarez/null-ls.nvim",
       "MunifTanjim/prettier.nvim",
     },
-  })
+  },
   -- Rust LSP stuff
-  use("simrat39/rust-tools.nvim")
+  "simrat39/rust-tools.nvim",
 
   -- nvim-cmp and all its requirements
-  use({
+  {
     "hrsh7th/nvim-cmp",
-    requires = {
+    dependencies = {
       "hrsh7th/cmp-cmdline",
       "hrsh7th/cmp-path",
       "hrsh7th/cmp-buffer",
@@ -31,10 +31,10 @@ return require("packer").startup(function()
       "saadparwaiz1/cmp_luasnip",
       "ray-x/cmp-treesitter",
     },
-  })
-  use({
+  },
+  {
     "jcdickinson/codeium.nvim",
-    requires = {
+    dependencies = {
       "nvim-lua/plenary.nvim",
       "hrsh7th/nvim-cmp",
     },
@@ -43,122 +43,154 @@ return require("packer").startup(function()
         config_path = "/home/zion/.config/nvim/codeium.cfg",
       })
     end,
-  })
+  },
 
   -- Utilities
-  use("tpope/vim-fugitive")
-  use({
+  "tpope/vim-fugitive",
+  {
     "theprimeagen/harpoon",
-    requires = {
+    dependencies = {
       "nvim-lua/plenary.nvim",
     },
-  })
-  use({
+    config = function()
+      require("harpoon").setup({
+        -- sets the marks upon calling `toggle` on the ui, instead of require `:w`.
+        save_on_toggle = false,
+        -- saves the harpoon file upon every change. disabling is unrecommended.
+        save_on_change = true,
+        -- sets harpoon to run the command immediately as it's passed to the terminal when calling `sendCommand`.
+        enter_on_sendcmd = false,
+        -- closes any tmux windows harpoon that harpoon creates when you close Neovim.
+        tmux_autoclose_windows = false,
+        -- filetypes that you want to prevent from adding to the harpoon list menu.
+        excluded_filetypes = { "harpoon" },
+        -- set marks specific to each git branch inside git repository
+        mark_branch = false,
+      })
+    end,
+  },
+  {
     "windwp/nvim-autopairs",
     config = function()
       require("nvim-autopairs").setup({})
     end,
-  })
-  use({
+  },
+  {
     "ur4ltz/surround.nvim",
     config = function()
       require("surround").setup({ mappings_style = "sandwich" })
     end,
-  })
-  use({
+  },
+  {
     "tpope/vim-commentary",
-    requires = {
+    dependencies = {
       "kyazdani42/nvim-web-devicons",
     },
-  })
-  use({
+  },
+  {
     "nvim-treesitter/nvim-treesitter",
     run = function()
       local ts_update = require("nvim-treesitter.install").update({ with_sync = true })
       ts_update()
     end,
-  })
-  use("nvim-treesitter/playground")
-  use({
+    config = conf.treesitter,
+  },
+  "nvim-treesitter/playground",
+  {
     "nvim-orgmode/orgmode",
     ft = { "org" },
     config = function()
       require("orgmode").setup({})
     end,
-  })
-  use("famiu/nvim-reload")
+  },
+  "famiu/nvim-reload",
 
   -- Markdown Preview
-  use({
+  {
     "iamcco/markdown-preview.nvim",
     run = "cd app && npm install",
     setup = function()
       vim.g.mkdp_filetypes = { "markdown" }
     end,
     ft = { "markdown" },
-  })
+  },
 
   -- Theming and color
-  use("chriskempson/base16-vim")
-  use("xolox/vim-colorscheme-switcher")
-  use("xolox/vim-misc")
-  use("norcalli/nvim-colorizer.lua")
-  use({
+  "chriskempson/base16-vim",
+  -- "xolox/vim-colorscheme-switcher",
+  "xolox/vim-misc",
+  {
+    "norcalli/nvim-colorizer.lua",
+    config = function()
+      require("colorizer").setup()
+    end,
+  },
+  {
     "numToStr/Comment.nvim",
     config = function()
       require("Comment").setup()
     end,
-  })
-  use("kyazdani42/nvim-web-devicons")
-  use({
+  },
+  "kyazdani42/nvim-web-devicons",
+  {
     "hiszd/clrtheme.nvim",
-    -- "~/programming/nvim/clrtheme.nvim",
-    requires = {
+    dir = "~/programming/nvim/clrtheme.nvim",
+    dev = true,
+    dependencies = {
       "tjdevries/colorbuddy.nvim",
     },
-  })
+  },
   -- UI
-  use("rcarriga/nvim-notify")  -- Notifications Popup (Optional)
-  use("stevearc/dressing.nvim") -- Improved UI (Optional)
-  -- use("doums/lsp_spinner.nvim")
-  use({ "hiszd/ztab.nvim", requires = "nvim-tree/nvim-web-devicons" })
-  use({
+  "rcarriga/nvim-notify", -- Notifications Popup (Optional)
+  "stevearc/dressing.nvim", -- Improved UI (Optional)
+  -- "doums/lsp_spinner.nvim,
+  {
+    "hiszd/ztab.nvim",
+    lazy = false,
+    dev = true,
+    dir = "~/programming/nvim/ztab.nvim",
+    dependencies = { "kyazdani42/nvim-web-devicons" },
+    opts = conf.ztab.opts,
+    init = conf.ztab.init,
+  },
+  {
     "nvim-lualine/lualine.nvim",
-    requires = {
+    dependencies = {
       "kyazdani42/nvim-web-devicons",
       "lewis6991/gitsigns.nvim",
-      opt = true,
     },
-  })
-  use({
+    config = conf.lualine,
+  },
+  {
     "goolord/alpha-nvim",
-    requires = { "nvim-tree/nvim-web-devicons" },
+    dependencies = { "kyazdani42/nvim-web-devicons" },
     config = function()
       require("alpha").setup(require("alpha.themes.startify").config)
     end,
-  })
+  },
 
   -- File managers
-  use({
+  {
     "nvim-neo-tree/neo-tree.nvim",
     branch = "v2.x",
-    requires = {
+    dependencies = {
       "nvim-lua/plenary.nvim",
       "kyazdani42/nvim-web-devicons",
       "MunifTanjim/nui.nvim",
     },
-  })
-  use({
+    config = conf.neotree,
+  },
+  {
     "nvim-telescope/telescope.nvim",
-    requires = {
+    dependencies = {
       "nvim-lua/plenary.nvim",
       "nvim-lua/popup.nvim",
     },
-  })
-  use("miversen33/netman.nvim")
+  },
+  "miversen33/netman.nvim",
 
   -- Snippet manager
-  use({
+  {
     "l3mon4d3/luasnip",
     -- tag = "v<CurrentMajor>.*",
     -- event = "BufReadPre",
@@ -166,18 +198,18 @@ return require("packer").startup(function()
     config = function()
       require("luasnip.loaders.from_vscode").lazy_load()
     end,
-    requires = {
+    dependencies = {
       "rafamadriz/friendly-snippets",
     },
-  })
+  },
 
   -- Terminal stuff
-  use({
-    "s1n7ax/nvim-terminal",
-    config = function()
-      require("nvim-terminal").setup({
-        disable_default_keymaps = true,
-      })
-    end,
-  })
-end)
+  -- {
+  --   "s1n7ax/nvim-terminal",
+  --   config = function()
+  --     require("nvim-terminal").setup({
+  --       disable_default_keymaps = true,
+  --     })
+  --   end,
+  -- },
+})

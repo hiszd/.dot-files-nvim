@@ -38,10 +38,6 @@ map("n", "<leader>eh", "<Cmd>execute 'hi' synIDattr(synID(line('.'), col('.'), 1
 map("n", "<leader>rt", '<Cmd>lua require("clrtheme").reload()<cr>', { noremap = true })
 map("n", "<leader>ht", "<Cmd>TSHighlightCapturesUnderCursor<cr>", { noremap = true })
 
-map("t", "<C-e>", '<C-\\><C-n><Cmd>lua NTGlobal["terminal"]:toggle()<cr>', { silent = true })
-map("i", "<C-e>", '<Cmd>lua NTGlobal["terminal"]:toggle()<cr>', { silent = true })
-map("n", "<C-e>", '<Cmd>lua NTGlobal["terminal"]:toggle()<cr>', { silent = true })
-
 map("n", "<leader>l", '<Cmd>lua require("noiz.utils").log()<cr>', { noremap = true })
 
 map("n", "<leader><leader>x", "<Cmd>so %<cr>", { noremap = true })

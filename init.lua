@@ -17,7 +17,7 @@ vim.cmd(":noh")
 
 vim.api.nvim_command("set viminfo='100,n$HOME/.config/nvim/.runtime/files/info/viminfo")
 
-require("plugins")
+-- require("plugins")
 
 vim.opt.encoding = "utf-8"
 vim.opt.langmenu = "en_US"
@@ -42,7 +42,6 @@ vim.o.undofile = true
 
 -- vim.opt.gfn = "Delugia Mono"
 
-vim.cmd("colorscheme base16-classic-dark")
 --vim.cmd('colorscheme base16-material-darker')
 --vim.cmd('colorscheme base16-seti')
 --vim.cmd('colorscheme base16-woodland')
@@ -101,9 +100,23 @@ vim.opt.hlsearch = false
 
 vim.cmd("set termguicolors")
 
-require("clrtheme")
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not vim.loop.fs_stat(lazypath) then
+  vim.fn.system({
+    "git",
+    "clone",
+    "--filter=blob:none",
+    "https://github.com/folke/lazy.nvim.git",
+    "--branch=stable", -- latest stable release
+    lazypath,
+  })
+end
+vim.opt.rtp:prepend(lazypath)
+
+-- require("clrtheme")
 require("noiz.keybind")
 require("noiz.cmp")
 require("noiz.lsp")
-require("noiz.plugins")
+vim.cmd("colorscheme base16-classic-dark")
+require("lazyplug")
 RSTLNE()
