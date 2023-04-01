@@ -113,10 +113,10 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
--- require("clrtheme")
+require("clrtheme")
+-- vim.cmd("colorscheme base16-harmonic-light")
+require("lazyplug")
 require("noiz.keybind")
 require("noiz.cmp")
 require("noiz.lsp")
-vim.cmd("colorscheme base16-classic-dark")
-require("lazyplug")
 RSTLNE()

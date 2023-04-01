@@ -16,18 +16,9 @@ M.highlights = {
     sp = "#aa5500",
     underline = true,
   },
-  seperator = {
-    fg = "#1a1a1a",
-    bg = "#1a1a1a",
-  },
   separator_sel = {
-    fg = "#1a1a1a",
     sp = "#aa5500",
     underline = true,
-  },
-  fill = {
-    bg = "#1a1a1a",
-    fg = "#1a1a1a",
   },
 }
 
