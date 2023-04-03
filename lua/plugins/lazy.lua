@@ -137,6 +137,12 @@ return require("lazy").setup({
   },
   "kyazdani42/nvim-web-devicons",
   {
+    "hiszd/fleet.nvim",
+    lazy = false,
+    dir = "~/programming/nvim/fleet.nvim",
+    dev = true,
+  },
+  {
     "hiszd/clrtheme.nvim",
     lazy = false,
     dir = "~/programming/nvim/clrtheme.nvim",
@@ -147,7 +153,7 @@ return require("lazy").setup({
     priority = 99,
   },
   -- UI
-  "rcarriga/nvim-notify", -- Notifications Popup (Optional)
+  "rcarriga/nvim-notify",  -- Notifications Popup (Optional)
   "stevearc/dressing.nvim", -- Improved UI (Optional)
   -- "doums/lsp_spinner.nvim,
   {
@@ -157,7 +163,6 @@ return require("lazy").setup({
     dependencies = { "kyazdani42/nvim-web-devicons" },
     opts = require("plugins.ztab").opts,
     init = require("plugins.ztab").init(),
-    priority = 2,
   },
   {
     "nvim-lualine/lualine.nvim",

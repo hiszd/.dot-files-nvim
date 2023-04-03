@@ -1,8 +1,8 @@
 local M = {}
 
---require("ztab.types")
+-- local hl = require("ztab").helpers.typed_highlights()
 
---@type HighlightOpts
+-- M.highlights = hl({
 M.highlights = {
   title_sel = {
     sp = "#aa5500",
@@ -26,7 +26,7 @@ M.opts = {
   sep_name = "slant",
   right_sep = true,
   devicon_colors = "selected",
-  highlight = M.highlights,
+  -- highlight = M.highlights,
 }
 
 M.init = function()
