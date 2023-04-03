@@ -1,6 +1,6 @@
 return function()
-  -- local lualine_thm = require("clrtheme").load_lualine()
-  -- local get_color = require("clrtheme").get_color
+  local lualine_thm = require("clrtheme").load_lualine()
+  local get_color = require("clrtheme").get_color
 
   -- Eviline config for lualine
   -- Author: shadmansaleh
@@ -8,29 +8,28 @@ return function()
   local lualine = require("lualine")
 
   local mode_color = function()
-    -- local mode_color = {
-    --   n = get_color("normal"),
-    --   i = get_color("insert"),
-    --   v = get_color("visual"),
-    --   [""] = get_color("blue"),
-    --   V = get_color("visual"),
-    --   c = get_color("command"),
-    --   no = get_color("normal"),
-    --   s = get_color("visual"),
-    --   S = get_color("visual"),
-    --   ic = get_color("insert"),
-    --   R = get_color("insert"),
-    --   Rv = get_color("insert"),
-    --   cv = get_color("visual"),
-    --   ce = get_color("insert"),
-    --   r = get_color("insert"),
-    --   rm = get_color("insert"),
-    --   ["r?"] = get_color("insert"),
-    --   ["!"] = get_color("red"),
-    --   t = get_color("red"),
-    -- }
-    -- return { fg = mode_color[vim.fn.mode()] }
-    return { fg = "gray" }
+    local mode_color = {
+      n = get_color("normal"),
+      i = get_color("insert"),
+      v = get_color("visual"),
+      [""] = get_color("blue"),
+      V = get_color("visual"),
+      c = get_color("command"),
+      no = get_color("normal"),
+      s = get_color("visual"),
+      S = get_color("visual"),
+      ic = get_color("insert"),
+      R = get_color("insert"),
+      Rv = get_color("insert"),
+      cv = get_color("visual"),
+      ce = get_color("insert"),
+      r = get_color("insert"),
+      rm = get_color("insert"),
+      ["r?"] = get_color("insert"),
+      ["!"] = get_color("red"),
+      t = get_color("red"),
+    }
+    return mode_color and { fg = mode_color[vim.fn.mode()] } or { fg = "gray" }
   end
 
   local conditions = {

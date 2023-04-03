@@ -1,8 +1,8 @@
 local M = {}
 
-require("ztab.types")
+--require("ztab.types")
 
----@type HighlightOpts
+--@type HighlightOpts
 M.highlights = {
   title_sel = {
     sp = "#aa5500",
@@ -60,6 +60,8 @@ M.init = function()
 
   vim.keymap.set("n", "<leader>dq", closecurrentbuffer)
   vim.keymap.set("n", "<leader>bq", "<Cmd>:tabclose<CR>")
+
+  --require("ztab").helpers.create_hl_groups()
 end
 
 return M

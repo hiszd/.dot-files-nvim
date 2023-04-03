@@ -1,5 +1,3 @@
-local conf = require("lazyconf")
-
 return require("lazy").setup({
   -- Mason.nvim and all requirements
   {
@@ -68,6 +66,9 @@ return require("lazy").setup({
         mark_branch = false,
       })
     end,
+    init = function()
+      require("plugins.harpoon")
+    end,
   },
   {
     "windwp/nvim-autopairs",
@@ -93,7 +94,7 @@ return require("lazy").setup({
       local ts_update = require("nvim-treesitter.install").update({ with_sync = true })
       ts_update()
     end,
-    config = conf.treesitter,
+    config = require("plugins.treesitter"),
   },
   "nvim-treesitter/playground",
   {
@@ -101,6 +102,9 @@ return require("lazy").setup({
     ft = { "org" },
     config = function()
       require("orgmode").setup({})
+    end,
+    init = function()
+      require("plugins.orgmode")
     end,
   },
   "famiu/nvim-reload",
@@ -134,11 +138,13 @@ return require("lazy").setup({
   "kyazdani42/nvim-web-devicons",
   {
     "hiszd/clrtheme.nvim",
+    lazy = false,
     dir = "~/programming/nvim/clrtheme.nvim",
     dev = true,
-    dependencies = {
-      "tjdevries/colorbuddy.nvim",
-    },
+    config = function()
+      vim.cmd("colorscheme clrtheme")
+    end,
+    priority = 99,
   },
   -- UI
   "rcarriga/nvim-notify", -- Notifications Popup (Optional)
@@ -146,20 +152,21 @@ return require("lazy").setup({
   -- "doums/lsp_spinner.nvim,
   {
     "hiszd/ztab.nvim",
-    lazy = false,
     dev = true,
     dir = "~/programming/nvim/ztab.nvim",
     dependencies = { "kyazdani42/nvim-web-devicons" },
-    opts = conf.ztab.opts,
-    init = conf.ztab.init,
+    opts = require("plugins.ztab").opts,
+    init = require("plugins.ztab").init(),
+    priority = 2,
   },
   {
     "nvim-lualine/lualine.nvim",
     dependencies = {
       "kyazdani42/nvim-web-devicons",
       "lewis6991/gitsigns.nvim",
+      -- "hiszd/clrtheme.nvim",
     },
-    config = conf.lualine,
+    config = require("plugins.lualine"),
   },
   {
     "goolord/alpha-nvim",
@@ -178,7 +185,7 @@ return require("lazy").setup({
       "kyazdani42/nvim-web-devicons",
       "MunifTanjim/nui.nvim",
     },
-    config = conf.neotree,
+    config = require("plugins.neotree"),
   },
   {
     "nvim-telescope/telescope.nvim",
