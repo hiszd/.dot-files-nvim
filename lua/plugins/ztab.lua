@@ -1,9 +1,7 @@
-local M = {}
-
 -- local hl = require("ztab").helpers.typed_highlights()
 
 -- M.highlights = hl({
-M.highlights = {
+local highlights = {
   title_sel = {
     sp = "#aa5500",
     underline = true,
@@ -22,14 +20,14 @@ M.highlights = {
   },
 }
 
-M.opts = {
+local opts = {
   sep_name = "slant",
   right_sep = true,
   devicon_colors = "selected",
-  -- highlight = M.highlights,
+  highlight = highlights,
 }
 
-M.init = function()
+local init = function()
   map("n", "<C-L>", "<Cmd>:tabnext #<cr>", { noremap = true })
 
   map("n", "<leader>br", "<Cmd>:lua R('ztab')<CR><Cmd>lua require('ztab').setup(require('plugins/ztab').opts)<CR>")
@@ -63,4 +61,13 @@ M.init = function()
   --require("ztab").helpers.create_hl_groups()
 end
 
-return M
+return {
+  {
+    "hiszd/ztab.nvim",
+    dev = true,
+    dir = "~/programming/nvim/ztab.nvim",
+    dependencies = { "kyazdani42/nvim-web-devicons" },
+    opts = opts,
+    init = init,
+  },
+}

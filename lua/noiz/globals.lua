@@ -40,6 +40,11 @@ RELOAD = function(...)
   return require("plenary.reload").reload_module(...)
 end
 
+SynGroup = function()
+  local s = vim.fn.synID(vim.fn.line("."), vim.fn.col("."), 1)
+  print(vim.fn.synIDattr(s, "name") .. " -> " .. vim.fn.synIDattr(vim.fn.synIDtrans(s), "name"))
+end
+
 ---Reload specified plugin
 ---@param name string #Name of plugin to reload
 R = function(name)

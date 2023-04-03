@@ -113,7 +113,7 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
-require("plugins/lazy")
+require("lazy").setup("plugins")
 require("noiz.keybind")
 require("noiz.cmp")
 require("noiz.lsp")

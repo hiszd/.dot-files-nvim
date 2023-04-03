@@ -1,6 +1,6 @@
-return function()
-  local lualine_thm = require("clrtheme").load_lualine()
-  local get_color = require("clrtheme").get_color
+local config = function()
+  local lualine_thm = require("fleet").load_lualine()
+  local get_color = require("fleet").get_color
 
   -- Eviline config for lualine
   -- Author: shadmansaleh
@@ -12,7 +12,7 @@ return function()
       n = get_color("normal"),
       i = get_color("insert"),
       v = get_color("visual"),
-      [""] = get_color("blue"),
+          [""] = get_color("blue"),
       V = get_color("visual"),
       c = get_color("command"),
       no = get_color("normal"),
@@ -25,8 +25,8 @@ return function()
       ce = get_color("insert"),
       r = get_color("insert"),
       rm = get_color("insert"),
-      ["r?"] = get_color("insert"),
-      ["!"] = get_color("red"),
+          ["r?"] = get_color("insert"),
+          ["!"] = get_color("red"),
       t = get_color("red"),
     }
     return mode_color and { fg = mode_color[vim.fn.mode()] } or { fg = "gray" }
@@ -212,3 +212,13 @@ return function()
   -- Now don't forget to initialize lualine
   lualine.setup(config)
 end
+
+return {
+  "nvim-lualine/lualine.nvim",
+  dependencies = {
+    "kyazdani42/nvim-web-devicons",
+    "lewis6991/gitsigns.nvim",
+    -- "hiszd/clrtheme.nvim",
+  },
+  config = config,
+}

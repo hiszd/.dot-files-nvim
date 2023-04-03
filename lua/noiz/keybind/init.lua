@@ -4,6 +4,7 @@ local feedkey = function(key, mode)
   vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(key, true, true, true), mode, true)
 end
 
+map("n", "<leader>hg", "<Cmd>lua SynGroup()<CR>", { noremap = true })
 map("n", "<leader>ds", "$a", { noremap = true })
 map("n", "<leader>da", "<Cmd>wq<cr>", { noremap = true })
 map("n", "<leader>n", "<Cmd>Neotree reveal toggle<cr>", { noremap = true })
