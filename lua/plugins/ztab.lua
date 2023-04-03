@@ -32,8 +32,7 @@ M.opts = {
 M.init = function()
   map("n", "<C-L>", "<Cmd>:tabnext #<cr>", { noremap = true })
 
-  map("n", "<leader>br", "<Cmd>:lua R('ztab')<CR><Cmd>:so ~/.config/nvim/lua/noiz/plugins/ztab.lua<CR>")
-  map("n", "<leader>zh", "<Cmd>:lua require('ztab').helpers.create_hl_groups()<CR>")
+  map("n", "<leader>br", "<Cmd>:lua R('ztab')<CR><Cmd>lua require('ztab').setup(require('plugins/ztab').opts)<CR>")
 
   -- Goto buffer in position
   map("n", "<Leader>1", "<Cmd>:tabnext 1<CR>")
