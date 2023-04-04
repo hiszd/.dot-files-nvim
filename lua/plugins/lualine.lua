@@ -1,6 +1,6 @@
 local config = function()
-  local lualine_thm = require("fleet").load_lualine()
-  local get_color = require("fleet").get_color
+  local lualine_thm = require("clrtheme").load_lualine()
+  local get_color = require("clrtheme").get_color
 
   -- Eviline config for lualine
   -- Author: shadmansaleh
