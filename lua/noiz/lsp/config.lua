@@ -71,7 +71,6 @@ local custom_attach = function(client, bufnr)
 
   -- Set some keybinds conditional on server capabilities
   if client.supports_method("textDocument/formatting") and client.name ~= "tsserver" then
-    buf_nnoremap({ bufnr, "<space>f", "<cmd>lua vim.lsp.buf.format()<CR>" })
     vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
     vim.api.nvim_create_autocmd("BufWritePre", {
       group = augroup,

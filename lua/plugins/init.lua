@@ -46,18 +46,6 @@ return {
   -- Utilities
   "tpope/vim-fugitive",
   {
-    "windwp/nvim-autopairs",
-    config = function()
-      require("nvim-autopairs").setup({})
-    end,
-  },
-  {
-    "ur4ltz/surround.nvim",
-    config = function()
-      require("surround").setup({ mappings_style = "sandwich" })
-    end,
-  },
-  {
     "tpope/vim-commentary",
     dependencies = {
       "kyazdani42/nvim-web-devicons",
@@ -113,22 +101,8 @@ return {
   "rcarriga/nvim-notify",  -- Notifications Popup (Optional)
   "stevearc/dressing.nvim", -- Improved UI (Optional)
   -- "doums/lsp_spinner.nvim,
-  {
-    "goolord/alpha-nvim",
-    dependencies = { "kyazdani42/nvim-web-devicons" },
-    config = function()
-      require("alpha").setup(require("alpha.themes.startify").config)
-    end,
-  },
 
   -- File managers
-  {
-    "nvim-telescope/telescope.nvim",
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-      "nvim-lua/popup.nvim",
-    },
-  },
   "miversen33/netman.nvim",
 
   -- Snippet manager
