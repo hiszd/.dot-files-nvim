@@ -36,6 +36,20 @@ QWERTY = function()
   print("QWERTY")
 end
 
+---@param m table<string,table> #Table of modules to require e.g.
+---{
+---  ["mini.surround"] = {
+---    mappings = {
+---      add = "<leader>sa",
+---    }
+---  }
+---}
+_G.reqs = function(m)
+  for k, v in pairs(m) do
+    require(k).setup(v)
+  end
+end
+
 RELOAD = function(...)
   return require("plenary.reload").reload_module(...)
 end
