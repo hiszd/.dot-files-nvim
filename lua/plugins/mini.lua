@@ -3,6 +3,7 @@ local init = function()
         ["mini.pairs"] = {},
         ["mini.sessions"] = {},
         ["mini.indentscope"] = {},
+        ["mini.doc"] = {},
         ["mini.surround"] = {
       mappings = {
         add = "<leader>sa",        -- Add surrounding in Normal and Visual modes

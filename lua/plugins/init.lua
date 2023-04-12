@@ -98,7 +98,7 @@ return {
     priority = 99,
   },
   -- UI
-  "rcarriga/nvim-notify",  -- Notifications Popup (Optional)
+  "rcarriga/nvim-notify",   -- Notifications Popup (Optional)
   "stevearc/dressing.nvim", -- Improved UI (Optional)
   -- "doums/lsp_spinner.nvim,
 
