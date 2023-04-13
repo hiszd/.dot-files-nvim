@@ -1,35 +1,33 @@
 local config = function()
-  local lualine_thm = require("clrtheme").load_lualine()
-  local get_color = require("clrtheme").get_color
-
-  -- Eviline config for lualine
-  -- Author: shadmansaleh
-  -- Credit: glepnir
-  local lualine = require("lualine")
+  local lualine_thm = require("clrtheme").lualine_theme()
+  local color = require("clrtheme").color
+  local get_color = color.gcol
 
   local mode_color = function()
-    local mode_color = {
-      n = get_color("normal"),
-      i = get_color("insert"),
-      v = get_color("visual"),
-          [""] = get_color("blue"),
-      V = get_color("visual"),
-      c = get_color("command"),
-      no = get_color("normal"),
-      s = get_color("visual"),
-      S = get_color("visual"),
-      ic = get_color("insert"),
-      R = get_color("insert"),
-      Rv = get_color("insert"),
-      cv = get_color("visual"),
-      ce = get_color("insert"),
-      r = get_color("insert"),
-      rm = get_color("insert"),
-          ["r?"] = get_color("insert"),
-          ["!"] = get_color("red"),
-      t = get_color("red"),
+    ---@type table
+    local mode_col = {
+      ["n"] = get_color("normal"),
+      ["i"] = get_color("insert"),
+      ["v"] = get_color("visual"),
+      [""] = get_color("blue"),
+      ["V"] = get_color("visual"),
+      ["c"] = get_color("command"),
+      ["no"] = get_color("normal"),
+      ["s"] = get_color("visual"),
+      ["S"] = get_color("visual"),
+      ["ic"] = get_color("insert"),
+      ["R"] = get_color("insert"),
+      ["Rv"] = get_color("insert"),
+      ["cv"] = get_color("visual"),
+      ["ce"] = get_color("insert"),
+      ["r"] = get_color("insert"),
+      ["rm"] = get_color("insert"),
+      ["r?"] = get_color("insert"),
+      ["!"] = get_color("red"),
+      ["t"] = get_color("red"),
     }
-    return mode_color and { fg = mode_color[vim.fn.mode()] } or { fg = "gray" }
+
+    return mode_col and { fg = mode_col[vim.api.nvim_get_mode().mode] } or { fg = "gray" }
   end
 
   local conditions = {
@@ -204,13 +202,14 @@ local config = function()
       return "▊"
     end,
     color = function()
-      return mode_color()
+      local color = mode_color()
+      return color
     end,
     padding = { left = 1 },
   })
 
   -- Now don't forget to initialize lualine
-  lualine.setup(config)
+  require("lualine").setup(config)
 end
 
 return {
