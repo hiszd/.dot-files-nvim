@@ -3,7 +3,7 @@ local opts = {
     find_files = {
       mappings = {
         i = {
-              ["<cr>"] = require("telescope.actions").select_tab_drop,
+          ["<cr>"] = "select_tab_drop",
         },
       },
     },

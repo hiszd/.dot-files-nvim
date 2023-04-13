@@ -10,9 +10,9 @@ require("mason-null-ls").setup({
   ensure_installed = { "eslint_d", "stylua", "cppcheck", "clang-format", "prettier" },
   automatic_installation = true,
   automatic_setup = true,
+  handlers = {},
 })
 require("null-ls").setup()
-require("mason-null-ls").setup_handlers()
 
 require("mason-lspconfig").setup_handlers({
   -- The first entry (without a key) will be the default handler
