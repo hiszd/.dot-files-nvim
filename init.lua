@@ -42,7 +42,7 @@ vim.o.undofile = true
 
 -- vim.opt.gfn = "Delugia Mono"
 
-vim.cmd("colorscheme base16-classic-dark")
+--vim.cmd("colorscheme base16-classic-dark")
 --vim.cmd('colorscheme base16-material-darker')
 --vim.cmd('colorscheme base16-seti')
 --vim.cmd('colorscheme base16-woodland')
