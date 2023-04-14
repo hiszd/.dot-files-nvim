@@ -6,25 +6,25 @@ local config = function()
   local mode_color = function()
     ---@type table
     local mode_col = {
-      ["n"] = get_color("normal"),
-      ["i"] = get_color("insert"),
-      ["v"] = get_color("visual"),
-      [""] = get_color("blue"),
-      ["V"] = get_color("visual"),
-      ["c"] = get_color("command"),
-      ["no"] = get_color("normal"),
-      ["s"] = get_color("visual"),
-      ["S"] = get_color("visual"),
-      ["ic"] = get_color("insert"),
-      ["R"] = get_color("insert"),
-      ["Rv"] = get_color("insert"),
-      ["cv"] = get_color("visual"),
-      ["ce"] = get_color("insert"),
-      ["r"] = get_color("insert"),
-      ["rm"] = get_color("insert"),
-      ["r?"] = get_color("insert"),
-      ["!"] = get_color("red"),
-      ["t"] = get_color("red"),
+          ["n"] = get_color("normal"),
+          ["i"] = get_color("insert"),
+          ["v"] = get_color("visual"),
+          [""] = get_color("blue"),
+          ["V"] = get_color("visual"),
+          ["c"] = get_color("command"),
+          ["no"] = get_color("normal"),
+          ["s"] = get_color("visual"),
+          ["S"] = get_color("visual"),
+          ["ic"] = get_color("insert"),
+          ["R"] = get_color("replace"),
+          ["Rv"] = get_color("replace"),
+          ["cv"] = get_color("visual"),
+          ["ce"] = get_color("insert"),
+          ["r"] = get_color("insert"),
+          ["rm"] = get_color("insert"),
+          ["r?"] = get_color("insert"),
+          ["!"] = get_color("red"),
+          ["t"] = get_color("red"),
     }
 
     return mode_col and { fg = mode_col[vim.api.nvim_get_mode().mode] } or { fg = "gray" }
@@ -83,6 +83,11 @@ local config = function()
   end
 
   -- Inserts a component in lualine_c at left section
+  local function ins_mode(component)
+    table.insert(config.sections.lualine_a, component)
+  end
+
+  -- Inserts a component in lualine_c at left section
   local function ins_left(component)
     table.insert(config.sections.lualine_c, component)
   end
@@ -98,9 +103,9 @@ local config = function()
   -- ************                                     ************
   -- *************************************************************
 
-  ins_left({
+  ins_mode({
     function()
-      return "▊"
+      return require("noiz.utils.const").syms["37"]
     end,
     color = function()
       return mode_color()
@@ -108,7 +113,7 @@ local config = function()
     padding = { left = 0, right = 1 }, -- We don't need space before this
   })
 
-  ins_left({
+  ins_mode({
     -- mode component
     function()
       local str = get_mode()
@@ -199,13 +204,13 @@ local config = function()
 
   ins_right({
     function()
-      return "▊"
+      return require("noiz.utils.const").syms["38"]
     end,
     color = function()
       local color = mode_color()
       return color
     end,
-    padding = { left = 1 },
+    padding = { left = 0, right = 0 },
   })
 
   -- Now don't forget to initialize lualine

@@ -28,7 +28,8 @@ local init = function()
         require("mini.starter").sections.builtin_actions(),
       },
       content_hooks = {
-        require("mini.starter").gen_hook.adding_bullet(),
+        -- require("mini.starter").gen_hook.adding_bullet("▓"),
+        require("mini.starter").gen_hook.adding_bullet(require("noiz.utils.const").syms["47"] .. " "),
         require("mini.starter").gen_hook.indexing("section", { "Builtin actions" }),
         require("mini.starter").gen_hook.aligning("center", "center"),
       },
