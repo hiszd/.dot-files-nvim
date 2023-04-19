@@ -25,6 +25,8 @@ local opts = {
   right_sep = true,
   devicon_colors = "selected",
   highlight = highlights,
+  tabline = true,
+  bufline = true,
 }
 
 local init = function()
@@ -33,16 +35,27 @@ local init = function()
   map("n", "<leader>br", "<Cmd>:lua R('ztab')<CR><Cmd>lua require('ztab').setup(require('plugins/ztab').opts)<CR>")
 
   -- Goto buffer in position
-  map("n", "<Leader>1", "<Cmd>:tabnext 1<CR>")
-  map("n", "<Leader>2", "<Cmd>:tabnext 2<CR>")
-  map("n", "<Leader>3", "<Cmd>:tabnext 3<CR>")
-  map("n", "<Leader>4", "<Cmd>:tabnext 4<CR>")
-  map("n", "<Leader>5", "<Cmd>:tabnext 5<CR>")
-  map("n", "<Leader>6", "<Cmd>:tabnext 6<CR>")
-  map("n", "<Leader>7", "<Cmd>:tabnext 7<CR>")
-  map("n", "<Leader>8", "<Cmd>:tabnext 8<CR>")
-  map("n", "<Leader>9", "<Cmd>:tabnext 9<CR>")
-  map("n", "<Leader>0", "<Cmd>:tabnext 10<CR>")
+  map("n", "<Leader>1", "<Cmd>:lua require('ztab.bufline').zbufgoto('1')<CR>")
+  map("n", "<Leader>2", "<Cmd>:lua require('ztab.bufline').zbufgoto('2')<CR>")
+  map("n", "<Leader>3", "<Cmd>:lua require('ztab.bufline').zbufgoto('3')<CR>")
+  map("n", "<Leader>4", "<Cmd>:lua require('ztab.bufline').zbufgoto('4')<CR>")
+  map("n", "<Leader>5", "<Cmd>:lua require('ztab.bufline').zbufgoto('5')<CR>")
+  map("n", "<Leader>6", "<Cmd>:lua require('ztab.bufline').zbufgoto('6')<CR>")
+  map("n", "<Leader>7", "<Cmd>:lua require('ztab.bufline').zbufgoto('7')<CR>")
+  map("n", "<Leader>8", "<Cmd>:lua require('ztab.bufline').zbufgoto('8')<CR>")
+  map("n", "<Leader>9", "<Cmd>:lua require('ztab.bufline').zbufgoto('9')<CR>")
+  map("n", "<Leader>0", "<Cmd>:lua require('ztab.bufline').zbufgoto('10')<CR>")
+  -- Goto tab in position
+  map("n", "<Leader><Leader>1", "<Cmd>:tabnext 1<CR>")
+  map("n", "<Leader><Leader>2", "<Cmd>:tabnext 2<CR>")
+  map("n", "<Leader><Leader>3", "<Cmd>:tabnext 3<CR>")
+  map("n", "<Leader><Leader>4", "<Cmd>:tabnext 4<CR>")
+  map("n", "<Leader><Leader>5", "<Cmd>:tabnext 5<CR>")
+  map("n", "<Leader><Leader>6", "<Cmd>:tabnext 6<CR>")
+  map("n", "<Leader><Leader>7", "<Cmd>:tabnext 7<CR>")
+  map("n", "<Leader><Leader>8", "<Cmd>:tabnext 8<CR>")
+  map("n", "<Leader><Leader>9", "<Cmd>:tabnext 9<CR>")
+  map("n", "<Leader><Leader>0", "<Cmd>:tabnext 10<CR>")
 
   -- Changing buffers positions
   map("n", "<leader>b]", "<Cmd>:+tabmove<CR>")

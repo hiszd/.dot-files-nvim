@@ -92,7 +92,7 @@ vim.opt.wrap = false
 vim.opt.incsearch = true
 vim.opt.scrolloff = 8
 vim.opt.signcolumn = "yes"
-vim.opt.colorcolumn:append({ 80 })
+vim.opt.colorcolumn = "80"
 vim.opt.cmdheight = 4
 vim.opt.updatetime = 1000
 vim.opt.cursorline = true

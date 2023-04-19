@@ -3,7 +3,7 @@ local opts = {
     find_files = {
       mappings = {
         i = {
-          ["<cr>"] = "select_tab_drop",
+          -- ["<cr>"] = "select_tab_drop",
         },
       },
     },
