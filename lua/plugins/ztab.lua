@@ -21,12 +21,16 @@ local highlights = {
 }
 
 local opts = {
-  sep_name = "slant",
-  right_sep = true,
-  devicon_colors = "selected",
-  highlight = highlights,
-  tabline = true,
-  bufline = true,
+  tabline = {
+    enabled = true,
+    sep_name = "slant",
+    right_sep = true,
+    devicon_colors = "selected",
+    highlight = highlights,
+  },
+  bufline = {
+    enabled = true,
+  },
 }
 
 local init = function()

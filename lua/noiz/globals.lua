@@ -18,6 +18,25 @@ P = function(v)
   return v
 end
 
+Test = function()
+  local bufs = vim.api.nvim_list_bufs()
+  ---@type table
+  local abufs
+  -- iterate over all buffers
+  for _, buf in ipairs(bufs) do
+    local hidden = vim.fn.getbufinfo(buf)[1].hidden == 1
+    if vim.api.nvim_buf_is_loaded(buf) and not hidden then
+      if abufs == nil then
+        abufs = { buf }
+      else
+        table.insert(abufs, buf)
+      end
+    end
+  end
+
+  P(abufs)
+end
+
 RSTLNE = function()
   map("n", "<leader>o", "A<CR>", { silent = true, nowait = true, desc = "Insert newline" })
   map("", "i", "k", { silent = true, desc = "Move up" })
