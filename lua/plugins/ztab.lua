@@ -1,6 +1,3 @@
--- local hl = require("ztab").helpers.typed_highlights()
-
--- M.highlights = hl({
 local highlights = {
   title_sel = {
     sp = "#aa5500",
@@ -30,6 +27,20 @@ local opts = {
   },
   bufline = {
     enabled = true,
+    left_sep = false,
+    wtabhighlight = {
+      fill = {
+        bg = "#550000",
+      },
+    },
+    highlight = {
+      separator_sel = {
+        fg = "#aa5500",
+      },
+      separator = {
+        fg = "fg",
+      },
+    },
   },
 }
 
