@@ -1,50 +1,63 @@
-local highlights = {
-  title_sel = {
-    sp = "#aa5500",
-    underline = true,
-  },
-  icon_sel = {
-    sp = "#aa5500",
-    underline = true,
-  },
-  modified_sel = {
-    sp = "#aa5500",
-    underline = true,
-  },
-  separator_sel = {
-    sp = "#aa5500",
-    underline = true,
-  },
-}
-
-local opts = {
-  tabline = {
-    enabled = true,
-    sep_name = "slant",
-    right_sep = true,
-    devicon_colors = "selected",
-    highlight = highlights,
-  },
-  bufline = {
-    enabled = true,
-    left_sep = false,
-    wtabhighlight = {
-      fill = {
-        bg = "#550000",
-      },
-    },
-    highlight = {
-      separator_sel = {
-        fg = "#aa5500",
-      },
-      separator = {
-        fg = "fg",
-      },
-    },
-  },
-}
-
 local init = function()
+  local highlights = {
+    title_sel = {
+      sp = "#aa5500",
+    },
+    icon_sel = {
+      sp = "#aa5500",
+    },
+    modified_sel = {
+      sp = "#aa5500",
+    },
+    separator_sel = {
+      sp = "#aa5500",
+    },
+  }
+
+  local opts = {
+    tabline = {
+      enabled = true,
+      sep_name = "slant",
+      right_sep = true,
+      devicon_colors = "selected",
+      highlight = highlights,
+    },
+    bufline = {
+      enabled = true,
+      left_sep = false,
+      devicon_colors = "true",
+      wtabhighlight = {
+        fill = {
+          bg = "bg",
+        },
+        separator_sel = {
+          fg = "#aa5500",
+        },
+        separator = {
+          fg = "",
+          bg = "bg",
+        },
+        title = {
+          bg = "bg",
+        },
+        icon = {
+          fg = require("ztab").helpers.extract_highlight_colors("TabLine").fg,
+          bg = "bg",
+        },
+      },
+      highlight = {
+        separator_sel = {
+          fg = "#aa5500",
+        },
+        separator = {
+          fg = "fg",
+        },
+      },
+    },
+  }
+
+  require("ztab").setup(opts)
+
   map("n", "<C-L>", "<Cmd>:tabnext #<cr>", { noremap = true })
 
   map("n", "<leader>br", "<Cmd>:lua R('ztab')<CR><Cmd>lua require('ztab').setup(require('plugins/ztab').opts)<CR>")
@@ -95,7 +108,8 @@ return {
     dev = true,
     dir = "~/programming/nvim/ztab.nvim",
     dependencies = { "kyazdani42/nvim-web-devicons" },
-    opts = opts,
-    init = init,
+    priority = 0,
+    -- opts = opts,
+    config = init,
   },
 }
