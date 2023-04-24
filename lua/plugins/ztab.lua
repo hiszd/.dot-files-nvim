@@ -25,7 +25,7 @@ local init = function()
     bufline = {
       enabled = true,
       left_sep = false,
-      devicon_colors = "true",
+      devicon_colors = "selected",
       wtabhighlight = {
         fill = {
           bg = "bg",
@@ -55,6 +55,8 @@ local init = function()
       },
     },
   }
+
+  require("nvim-web-devicons").setup()
 
   require("ztab").setup(opts)
 
@@ -107,7 +109,7 @@ return {
     "hiszd/ztab.nvim",
     dev = true,
     dir = "~/programming/nvim/ztab.nvim",
-    dependencies = { "kyazdani42/nvim-web-devicons" },
+    dependencies = { "nvim-tree/nvim-web-devicons" },
     priority = 0,
     -- opts = opts,
     config = init,

@@ -9,6 +9,6 @@ map("n", "<leader>td", '<Cmd>lua require("telescope.builtin").diagnostics({bufnr
 map("n", "<leader>tr", "<Cmd>Telescope lsp_references<cr>", { noremap = true })
 map("n", "<leader>tb", "<Cmd>Telescope buffers<cr>", { noremap = true })
 map("n", "<leader>tk", "<Cmd>Telescope keymaps<cr>", { noremap = true })
-map("n", "<leader>tg", "<Cmd>Telescope grep_string<cr>", { noremap = true })
+map("n", "<leader>tg", "<Cmd>Telescope live_grep<cr>", { noremap = true })
 map("v", "<leader>tg", '"zy<Cmd>Telescope grep_string default_text=<C-r>z<cr>', { noremap = true })
 map("n", "<leader>tt", "<Cmd>Telescope highlights<cr>", { noremap = true })

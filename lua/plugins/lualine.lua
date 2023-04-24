@@ -220,7 +220,7 @@ end
 return {
   "nvim-lualine/lualine.nvim",
   dependencies = {
-    "kyazdani42/nvim-web-devicons",
+    "nvim-tree/nvim-web-devicons",
     "lewis6991/gitsigns.nvim",
     -- "hiszd/clrtheme.nvim",
   },

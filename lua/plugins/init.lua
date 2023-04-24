@@ -48,7 +48,7 @@ return {
   {
     "tpope/vim-commentary",
     dependencies = {
-      "kyazdani42/nvim-web-devicons",
+      "nvim-tree/nvim-web-devicons",
     },
   },
   "famiu/nvim-reload",
@@ -79,7 +79,7 @@ return {
       require("Comment").setup()
     end,
   },
-  "kyazdani42/nvim-web-devicons",
+  "nvim-tree/nvim-web-devicons",
   {
     "hiszd/fleet.nvim",
     dir = "~/programming/nvim/fleet.nvim",
@@ -98,7 +98,7 @@ return {
     priority = 99,
   },
   -- UI
-  "rcarriga/nvim-notify",   -- Notifications Popup (Optional)
+  "rcarriga/nvim-notify",  -- Notifications Popup (Optional)
   "stevearc/dressing.nvim", -- Improved UI (Optional)
   -- "doums/lsp_spinner.nvim,
 
