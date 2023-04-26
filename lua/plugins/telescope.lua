@@ -1,15 +1,3 @@
-local opts = {
-  pickers = {
-    find_files = {
-      mappings = {
-        i = {
-          -- ["<cr>"] = "select_tab_drop",
-        },
-      },
-    },
-  },
-}
-
 return {
   {
     "nvim-telescope/telescope.nvim",
@@ -17,7 +5,6 @@ return {
       "nvim-lua/plenary.nvim",
       "nvim-lua/popup.nvim",
     },
-    opts = opts,
   },
   {
     "nvim-telescope/telescope-frecency.nvim",
