@@ -207,8 +207,8 @@ local config = function()
       return require("noiz.utils.const").syms["38"]
     end,
     color = function()
-      local color = mode_color()
-      return color
+      local col = mode_color()
+      return col
     end,
     padding = { left = 0, right = 0 },
   })

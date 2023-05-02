@@ -2,15 +2,19 @@ local init = function()
   local highlights = {
     title_sel = {
       sp = "#aa5500",
+      -- underline = true,
     },
     icon_sel = {
       sp = "#aa5500",
+      -- underline = true,
     },
     modified_sel = {
       sp = "#aa5500",
+      -- underline = true,
     },
     separator_sel = {
       sp = "#aa5500",
+      -- underline = true,
     },
   }
 
@@ -26,33 +30,26 @@ local init = function()
       enabled = true,
       left_sep = false,
       devicon_colors = "selected",
-      wtabhighlight = {
-        fill = {
-          bg = "bg",
-        },
-        separator_sel = {
-          fg = "#aa5500",
-        },
-        separator = {
-          fg = "",
-          bg = "bg",
-        },
-        title = {
-          bg = "bg",
-        },
-        icon = {
-          fg = require("ztab").helpers.extract_highlight_colors("TabLine").fg,
-          bg = "bg",
-        },
-      },
-      highlight = {
-        separator_sel = {
-          fg = "#aa5500",
-        },
-        separator = {
-          fg = "fg",
-        },
-      },
+      -- wtabhighlight = {
+      --   fill = {
+      --     bg = "bg",
+      --   },
+      --   separator_sel = {
+      --     fg = "#aa5500",
+      --   },
+      --   separator = {
+      --     fg = "",
+      --     bg = "bg",
+      --   },
+      --   title = {
+      --     bg = "bg",
+      --   },
+      --   icon = {
+      --     fg = require("ztab").helpers.extract_highlight_colors("TabLine").fg,
+      --     bg = "bg",
+      --   },
+      -- },
+      highlight = highlights,
     },
   }
 
