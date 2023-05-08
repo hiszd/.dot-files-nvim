@@ -1,6 +1,6 @@
 local config = function()
   local lualine_thm = require("clrtheme").lualine_theme()
-  local color = require("clrtheme").color
+  local color = require("clrtheme.color")
   local get_color = color.gcol
 
   local mode_color = function()
@@ -193,7 +193,7 @@ local config = function()
   ins_right({
     "diff",
     -- Is it me or the symbol for modified us really weird
-    symbols = { added = " ", modified = "柳 ", removed = " " },
+    symbols = { added = " ", modified = " ", removed = " " },
     diff_color = {
       added = { fg = "green" },
       modified = { fg = "orange" },

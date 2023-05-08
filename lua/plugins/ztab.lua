@@ -95,7 +95,8 @@ local init = function()
     vim.api.nvim_buf_delete(curbuf, {})
   end
 
-  vim.keymap.set("n", "<leader>dq", closecurrentbuffer)
+  -- vim.keymap.set("n", "<leader>dq", closecurrentbuffer)
+  vim.keymap.set("n", "<leader>dq", "<Cmd>:bwipeout<CR>")
   vim.keymap.set("n", "<leader>bq", "<Cmd>:tabclose<CR>")
 
   --require("ztab").helpers.create_hl_groups()
