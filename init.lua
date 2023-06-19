@@ -80,6 +80,7 @@ vim.cmd([[
 
 map("", "<Space>", "<Nop>", { noremap = true })
 vim.g.mapleader = " "
+vim.g.maplocalleader = ","
 
 vim.opt_local.conceallevel = 2
 
@@ -116,6 +117,6 @@ vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup("plugins")
 require("noiz.keybind")
-require("noiz.cmp")
-require("noiz.lsp")
+-- require("noiz.cmp")
+-- require("noiz.lsp")
 RSTLNE()

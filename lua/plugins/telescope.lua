@@ -6,11 +6,11 @@ return {
       "nvim-lua/popup.nvim",
     },
   },
-  {
-    "nvim-telescope/telescope-frecency.nvim",
-    init = function()
-      require("telescope").load_extension("frecency")
-    end,
-    requires = { "kkharji/sqlite.lua" },
-  },
+  -- {
+  --   "nvim-telescope/telescope-frecency.nvim",
+  --   config = function()
+  --     require("telescope").load_extension("frecency")
+  --   end,
+  --   requires = { "kkharji/sqlite.lua" },
+  -- },
 }

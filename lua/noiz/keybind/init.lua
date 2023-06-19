@@ -8,19 +8,20 @@ map("n", "<leader>hg", "<Cmd>:Inspect<CR>", { noremap = true })
 map("n", "<leader>da", "<Cmd>wq<cr>", { noremap = true, desc = "Save and quit" })
 map(
   "n",
-  "<leader>df",
+  "<leader>f",
   "<Cmd>lua vim.lsp.buf.format()<cr>",
   { noremap = true, desc = "Use LSP to format current buffer" }
 )
-map("i", "<C-l>", function()
-  local luasnip = require("luasnip")
-  if luasnip and luasnip.expand_or_jumpable() then
-    feedkey("<Plug>luasnip-expand-or-jump", "")
-  end
-end, { desc = "luasnip expand or jump if in snippet", silent = true, noremap = true })
+-- map("i", "<C-l>", function()
+--   local luasnip = require("luasnip")
+--   if luasnip and luasnip.expand_or_jumpable() then
+--     feedkey("<Plug>luasnip-expand-or-jump", "")
+--   end
+-- end, { desc = "luasnip expand or jump if in snippet", silent = true, noremap = true })
 map("n", "<leader>du", "gUiw`]a", { noremap = true, desc = "UPPERCASE inner word(see I just used it there)" })
 map("n", "<leader>dt", "guiwgUl", { noremap = true, desc = "Title case inner word" })
 map("n", "<leader>w", "<Cmd>w<cr>", { noremap = true, desc = "Save current buffer" })
+map("n", "<leader><leader>w", "<Cmd>lua vim.lsp.buf.format()<cr><Cmd>w<cr>", { noremap = true, desc = "Save current buffer" })
 map("n", "<leader>cr", '<Cmd>lua require("nvim-reload").Reload()<cr>', { noremap = true, desc = "reload whole config" })
 map("n", "gl", "$", { noremap = true, desc = "go to end of line" })
 map("n", "gh", "^", { noremap = true, desc = "go to beginning of line" })
@@ -47,8 +48,6 @@ map(
 )
 map("n", "<leader>mq", "<Cmd>lua QWERTY()<cr>", { noremap = true, desc = "assign keys for QWERTY" })
 map("n", "<leader>mr", "<Cmd>lua RSTLNE()<cr>", { noremap = true, desc = "assign keys for RSTLNE" })
-
-map("v", "gz", '<Cmd>lua require("noiz.cmp.codex").complete()<cr>', { noremap = true })
 
 -- local hid = require("noiz.keybind.hid")
 -- hid.startjob()
