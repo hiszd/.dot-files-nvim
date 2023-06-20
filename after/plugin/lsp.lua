@@ -1,8 +1,19 @@
 local lsp = require('lsp-zero').preset({
+  float_border = 'rounded',
+  call_servers = 'local',
+  configure_diagnostics = true,
+  setup_servers_on_start = true,
+  set_lsp_keymaps = {
+    preserve_mappings = false,
+    omit = {},
+  },
   manage_nvim_cmp = {
-    set_sources = 'recommended',
-    set_basic_keymappings = true,
-    set_extra_keymappings = true,
+    set_sources = 'lsp, neorg',
+    set_basic_mappings = true,
+    set_extra_mappings = true,
+    use_luasnip = true,
+    set_format = true,
+    documentation_window = true,
   }
 })
 
@@ -87,10 +98,10 @@ end
 
 cmp.setup({
   formatting = {
-    fields = {'abbr', 'kind', 'menu'},
+    fields = { 'abbr', 'kind', 'menu' },
     format = require('lspkind').cmp_format({
-      mode = 'symbol', -- show only symbol annotations
-      maxwidth = 50, -- prevent the popup from showing more than provided characters
+      mode = 'symbol',       -- show only symbol annotations
+      maxwidth = 50,         -- prevent the popup from showing more than provided characters
       ellipsis_char = '...', -- when popup menu exceed maxwidth, the truncated part would show ellipsis_char instead
     })
   }

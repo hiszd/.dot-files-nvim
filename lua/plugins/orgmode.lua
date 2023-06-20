@@ -1,69 +1,57 @@
-local init = function()
-  -- Load custom treesitter grammar for org filetype
-  require('orgmode').setup_ts_grammar()
-
-  -- Treesitter configuration
-  require('nvim-treesitter.configs').setup {
-    -- If TS highlights are not enabled at all, or disabled via `disable` prop,
-    -- highlighting will fallback to default Vim syntax highlighting
-    highlight = {
-      enable = true,
-      -- Required for spellcheck, some LaTex highlights and
-      -- code block highlights that do not have ts grammar
-      additional_vim_regex_highlighting = { 'org' },
-    },
-    ensure_installed = { 'org' }, -- Or run :TSUpdate org
-  }
-end
-
-return {
-  -- {
-  -- 'nvim-orgmode/orgmode',
-  --   ft = { 'org' },
-  --   init = init,
-  -- }
-  {
-    "nvim-neorg/neorg",
-    ft = { "norg" },
-    build = ":Neorg sync-parsers",
-    opts = {
+local opts = {
       load = {
             ["core.itero"] = {},
             ["core.promo"] = {},
             ["core.autocommands"] = {},
             ["core.integrations.treesitter"] = {},
             ["core.esupports.indent"] = {},
-            ["core.defaults"] = {}, -- Loads default behaviour
+            ["core.esupports.metagen"] = {},
+            ["core.export.markdown"] = {},
+            ["core.defaults"] = {},
+            ["core.dirman"] = {},
+            ["core.looking-glass"] = {},
+            ["core.presenter"] = {
+              config = {
+                zen_mode = "zen-mode"
+              }
+            },
+            ["core.qol.toc"] = {
+              config = {
+                close_after_use = true,
+              }
+            },
+            ["core.completion"] = {
+              config = {
+                engine = "nvim-cmp",
+              }
+            },
             ["core.concealer"] = {
           config = {
-            icons = {
-              heading = {
-                icons = {
-                  "",
-                  "",
-                  "",
-                  "",
-                  "",
-                  "",
-                }
-              },
-            },
+            icon_preset = "diamond",
           },
-        },     -- Adds pretty icons to your documents
+        },
             ["core.keybinds"] = {
           config = {
             default_keybinds = true,
+            hook = function(keybinds)
+              keybinds.map("norg", "n",  "<LocalLeader>lg", "<Cmd>Neorg keybind all core.looking-glass.magnify-code-block<CR>")
+              keybinds.remap_key("traverse-heading", "n", "j", "n")
+              keybinds.remap_key("traverse-heading", "n", "k", "i")
+            end,
           }
         },
-            ["core.dirman"] = { -- Manages Neorg workspaces
-          config = {
-            workspaces = {
-              notes = "~/notes",
-            },
-          },
-        },
       },
+}
+
+return {
+  {
+    "nvim-neorg/neorg",
+    ft = { "norg" },
+    build = ":Neorg sync-parsers",
+    opts = opts,
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "folke/zen-mode.nvim"
     },
-    dependencies = { "nvim-lua/plenary.nvim" },
   },
 }
