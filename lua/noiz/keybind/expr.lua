@@ -1,13 +1,15 @@
 vim.g.counter = 0
 
-local ListItem = function()
-  vim.g.counter = vim.g.counter + 1
-  local rtrn = string.format("%q", vim.g.counter)
+ListItem = function()
+  local cnt = vim.g.counter + 1
+  print(cnt)
+  local rtrn = string.format("%q", cnt)
   print(rtrn)
+  vim.g.counter = cnt
   return rtrn
 end
 
-local ListReset = function()
+ListReset = function()
   vim.g.counter = 0
   return ""
 end

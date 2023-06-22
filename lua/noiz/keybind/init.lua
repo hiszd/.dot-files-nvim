@@ -51,3 +51,4 @@ map("n", "<leader>mr", "<Cmd>lua RSTLNE()<cr>", { noremap = true, desc = "assign
 
 -- local hid = require("noiz.keybind.hid")
 -- hid.startjob()
+require('noiz.keybind.expr')
