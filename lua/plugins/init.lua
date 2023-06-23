@@ -31,17 +31,28 @@ return {
     },
   },
   {
-    "jcdickinson/codeium.nvim",
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-      "hrsh7th/nvim-cmp",
-    },
-    config = function()
-      require("codeium").setup({
-        config_path = "/home/zion/.config/nvim/codeium.cfg",
-      })
+    "Exafunction/codeium.vim",
+    init = function()
+      vim.g.codeium_disable_bindings = 1
+      -- Change '<C-g>' here to any keycode you like.
+      vim.keymap.set('i', '<C-t>', function() return vim.fn['codeium#Accept']() end, { expr = true })
+      vim.keymap.set('i', '<C-]>', function() return vim.fn['codeium#CycleCompletions'](1) end, { expr = true })
+      -- vim.keymap.set('i', '<C-[>', function() return vim.fn['codeium#CycleCompletions'](-1) end, { expr = true })
+      vim.keymap.set('i', '<C-x>', function() return vim.fn['codeium#Clear']() end, { expr = true })
     end,
   },
+  -- {
+  --   "jcdickinson/codeium.nvim",
+  --   dependencies = {
+  --     "nvim-lua/plenary.nvim",
+  --     "hrsh7th/nvim-cmp",
+  --   },
+  --   config = function()
+  --     require("codeium").setup({
+  --       config_path = "/home/zion/.config/nvim/codeium.cfg",
+  --     })
+  --   end,
+  -- },
 
   -- Utilities
   "tpope/vim-fugitive",
@@ -98,7 +109,7 @@ return {
     priority = 99,
   },
   -- UI
-  "rcarriga/nvim-notify",  -- Notifications Popup (Optional)
+  "rcarriga/nvim-notify",   -- Notifications Popup (Optional)
   "stevearc/dressing.nvim", -- Improved UI (Optional)
   -- "doums/lsp_spinner.nvim,
 

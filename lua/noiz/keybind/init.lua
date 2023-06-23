@@ -12,12 +12,12 @@ map(
   "<Cmd>lua vim.lsp.buf.format()<cr>",
   { noremap = true, desc = "Use LSP to format current buffer" }
 )
--- map("i", "<C-l>", function()
---   local luasnip = require("luasnip")
---   if luasnip and luasnip.expand_or_jumpable() then
---     feedkey("<Plug>luasnip-expand-or-jump", "")
---   end
--- end, { desc = "luasnip expand or jump if in snippet", silent = true, noremap = true })
+map("i", "<C-l>", function()
+  local luasnip = require("luasnip")
+  if luasnip and luasnip.expand_or_jumpable() then
+    feedkey("<Plug>luasnip-expand-or-jump", "")
+  end
+end, { desc = "luasnip expand or jump if in snippet", silent = true, noremap = true })
 map("n", "<leader>du", "gUiw`]a", { noremap = true, desc = "UPPERCASE inner word(see I just used it there)" })
 map("n", "<leader>dt", "guiwgUl", { noremap = true, desc = "Title case inner word" })
 map("n", "<leader>w", "<Cmd>w<cr>", { noremap = true, desc = "Save current buffer" })

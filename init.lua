@@ -105,6 +105,8 @@ vim.opt.hlsearch = false
 
 vim.cmd("set termguicolors")
 
+vim.env.PATH = "~/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/bin" .. ":" .. vim.env.PATH
+
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
   vim.fn.system({

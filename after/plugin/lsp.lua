@@ -19,18 +19,33 @@ local lsp = require('lsp-zero').preset({
 
 lsp.preset("recommended")
 
-lsp.ensure_installed({ "prismals", "jsonls", "lua_ls", "cssls", "tsserver", "rust_analyzer" })
+lsp.ensure_installed({ "prismals", "jsonls", "lua_ls", "cssls", "tsserver" })
 
--- Fix Undefined global 'vim'
-lsp.configure("lua_ls", {
+local lspconfig = require("lspconfig")
+
+lspconfig.rust_analyzer.setup({
+  cmd = { vim.fn.expand("~/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/bin/rust-analyzer") },
   settings = {
-    Lua = {
-      diagnostics = {
-        globals = { "vim" },
+    ["rust-analyzer"] = {
+      imports = {
+        granularity = {
+          group = "module",
+        },
+        prefix = "self",
+      },
+      cargo = {
+        buildScripts = {
+          enable = true,
+        },
+      },
+      procMacro = {
+        enable = true,
       },
     },
   },
 })
+
+lspconfig.lua_ls.setup(lsp.nvim_lua_ls())
 
 local cmp = require("cmp")
 local cmp_select = { behavior = cmp.SelectBehavior.Select }
