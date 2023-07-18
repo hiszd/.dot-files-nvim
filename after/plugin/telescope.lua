@@ -1,5 +1,5 @@
 -- Telescope bindings
-map("n", "<leader>tt", "<Cmd>Telescope treesitter<cr>", { noremap = true })
+map("n", "<leader>tts", "<Cmd>Telescope treesitter<cr>", { noremap = true })
 map("n", "<leader>tf", "<Cmd>Telescope find_files<cr>", { noremap = true })
 map("n", "<leader>tz", "<Cmd>Telescope colorscheme<cr>", { noremap = true })
 map("n", "<leader>th", "<Cmd>Telescope help_tags<cr>", { noremap = true })
@@ -12,3 +12,5 @@ map("n", "<leader>tk", "<Cmd>Telescope keymaps<cr>", { noremap = true })
 map("n", "<leader>tg", "<Cmd>Telescope live_grep<cr>", { noremap = true })
 map("v", "<leader>tg", '"zy<Cmd>Telescope grep_string default_text=<C-r>z<cr>', { noremap = true })
 map("n", "<leader>tt", "<Cmd>Telescope highlights<cr>", { noremap = true })
+map("n", "<leader>tj", "<Cmd>Telescope jumplist<cr>", { noremap = true })
+map("n", "<leader>ts", "<Cmd>Telescope lsp_document_symbols<cr>", { noremap = true })
