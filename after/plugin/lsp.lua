@@ -8,7 +8,6 @@ local lsp = require('lsp-zero').preset({
     omit = {},
   },
   manage_nvim_cmp = {
-    set_sources = 'lsp, neorg',
     set_basic_mappings = true,
     set_extra_mappings = true,
     use_luasnip = true,
@@ -47,6 +46,7 @@ lspconfig.rust_analyzer.setup({
 
 lspconfig.lua_ls.setup(lsp.nvim_lua_ls())
 
+
 local cmp = require("cmp")
 local cmp_select = { behavior = cmp.SelectBehavior.Select }
 local cmp_mappings = lsp.defaults.cmp_mappings({
@@ -59,9 +59,17 @@ local cmp_mappings = lsp.defaults.cmp_mappings({
 cmp_mappings["<Tab>"] = nil
 cmp_mappings["<S-Tab>"] = nil
 
+local sss = {
+  {name = "nvim_lua"},
+}
+-- local srcs = vim.tbl_deep_extend("keep", lsp.defaults.cmp_sources(), sss)
+local srcs = lsp.defaults.cmp_sources(sss)
+P(srcs)
 lsp.setup_nvim_cmp({
+  sources = srcs,
   mapping = cmp_mappings,
 })
+
 
 lsp.set_preferences({
   suggest_lsp_servers = true,
