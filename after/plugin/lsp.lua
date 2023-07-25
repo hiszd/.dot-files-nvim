@@ -64,7 +64,7 @@ local sss = {
 }
 -- local srcs = vim.tbl_deep_extend("keep", lsp.defaults.cmp_sources(), sss)
 local srcs = lsp.defaults.cmp_sources(sss)
-P(srcs)
+
 lsp.setup_nvim_cmp({
   sources = srcs,
   mapping = cmp_mappings,

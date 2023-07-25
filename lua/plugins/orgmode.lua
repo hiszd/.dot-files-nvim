@@ -10,6 +10,7 @@ local opts = {
             ["core.defaults"] = {},
             ["core.dirman"] = {},
             ["core.looking-glass"] = {},
+            ["core.tangle"] = {},
             ["core.presenter"] = {
               config = {
                 zen_mode = "zen-mode"
@@ -35,6 +36,7 @@ local opts = {
             default_keybinds = true,
             hook = function(keybinds)
               keybinds.map("norg", "n",  "<LocalLeader>lg", "<Cmd>Neorg keybind all core.looking-glass.magnify-code-block<CR>")
+              keybinds.map("norg", "n",  "<LocalLeader>nt", "<Cmd>Neorg tangle current-file<CR>")
               keybinds.remap_key("traverse-heading", "n", "j", "n")
               keybinds.remap_key("traverse-heading", "n", "k", "i")
             end,
@@ -45,7 +47,9 @@ local opts = {
 
 return {
   {
-    "nvim-neorg/neorg",
+    -- "nvim-neorg/neorg",
+    dir = "~/programming/nvim/neorg",
+    dev = true,
     ft = { "norg" },
     build = ":Neorg sync-parsers",
     opts = opts,

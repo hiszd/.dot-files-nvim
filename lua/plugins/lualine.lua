@@ -1,30 +1,31 @@
 local config = function()
-  local lualine_thm = require("clrtheme").lualine_theme()
+  local lualine_thm = require("lualine.themes.neon")
+  -- local lualine_thm = require("clrtheme").lualine_theme()
   local color = require("clrtheme.color")
   local get_color = color.gcol
 
   local mode_color = function()
     ---@type table
     local mode_col = {
-          ["n"] = get_color("normal"),
-          ["i"] = get_color("insert"),
-          ["v"] = get_color("visual"),
-          [""] = get_color("blue"),
-          ["V"] = get_color("visual"),
-          ["c"] = get_color("command"),
-          ["no"] = get_color("normal"),
-          ["s"] = get_color("visual"),
-          ["S"] = get_color("visual"),
-          ["ic"] = get_color("insert"),
-          ["R"] = get_color("replace"),
-          ["Rv"] = get_color("replace"),
-          ["cv"] = get_color("visual"),
-          ["ce"] = get_color("insert"),
-          ["r"] = get_color("insert"),
-          ["rm"] = get_color("insert"),
-          ["r?"] = get_color("insert"),
-          ["!"] = get_color("red"),
-          ["t"] = get_color("red"),
+      ["n"] = lualine_thm.normal.b.fg,
+      ["i"] = lualine_thm.insert.b.fg,
+      ["v"] = lualine_thm.visual.b.fg,
+      [""] = get_color("blue"),
+      ["V"] = lualine_thm.visual.b.fg,
+      ["c"] = lualine_thm.command.b.fg,
+      ["no"] = lualine_thm.normal.b.fg,
+      ["s"] = lualine_thm.visual.b.fg,
+      ["S"] = lualine_thm.visual.b.fg,
+      ["ic"] = lualine_thm.insert.b.fg,
+      ["R"] = lualine_thm.replace.b.fg,
+      ["Rv"] = lualine_thm.replace.b.fg,
+      ["cv"] = lualine_thm.visual.b.fg,
+      ["ce"] = lualine_thm.insert.b.fg,
+      ["r"] = lualine_thm.insert.b.fg,
+      ["rm"] = lualine_thm.insert.b.fg,
+      ["r?"] = lualine_thm.insert.b.fg,
+      ["!"] = get_color("red"),
+      ["t"] = get_color("red"),
     }
 
     return mode_col and { fg = mode_col[vim.api.nvim_get_mode().mode] } or { fg = "gray" }
@@ -44,6 +45,8 @@ local config = function()
     end,
   }
 
+  P(require('lualine.themes.neon'))
+
   -- Config
   local config = {
     options = {
@@ -51,7 +54,7 @@ local config = function()
       -- Disable sections and component separators
       component_separators = "",
       section_separators = "",
-      theme = lualine_thm,
+      theme = "neon",
     },
     sections = {
       -- these are to remove the defaults
@@ -108,7 +111,7 @@ local config = function()
       return require("noiz.utils.const").syms["37"]
     end,
     color = function()
-      return mode_color()
+      return { fg = mode_color().fg, bg = lualine_thm.normal.b.bg }
     end,
     padding = { left = 0, right = 1 }, -- We don't need space before this
   })
@@ -122,7 +125,7 @@ local config = function()
       -- return ''
     end,
     color = function()
-      return mode_color()
+      return { fg = mode_color().fg, bg = lualine_thm.normal.b.bg }
     end,
     padding = { right = 1 },
   })

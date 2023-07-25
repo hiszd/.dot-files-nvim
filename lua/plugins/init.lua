@@ -92,6 +92,24 @@ return {
   },
   "nvim-tree/nvim-web-devicons",
   {
+    "rafamadriz/neon",
+    name = "neon",
+    config = function()
+      vim.g.neon_style = "dark"
+      vim.cmd("colorscheme neon")
+    end,
+    priority = 99,
+  },
+  -- {
+  --   "sainnhe/gruvbox-material",
+  --   name = "gruvbox-material",
+  --   config = function()
+  --     vim.g.gruvbox_material_background = "hard"
+  --     vim.cmd("colorscheme gruvbox-material")
+  --   end,
+  --   priority = 99,
+  -- },
+  {
     "hiszd/fleet.nvim",
     dir = "~/programming/nvim/fleet.nvim",
     dev = true,
@@ -99,14 +117,21 @@ return {
     -- priority = 99,
   },
   {
+    "hiszd/chillthm.nvim",
+    dir = "~/programming/nvim/chillthm.nvim",
+    dev = true,
+    name = "chillthm",
+    -- config = function()
+    --   vim.cmd("colorscheme chillthm")
+    -- end,
+    -- priority = 99,
+  },
+  {
     "hiszd/clrtheme.nvim",
     dir = "~/programming/nvim/clrtheme.nvim",
     dev = true,
     name = "clrtheme",
-    config = function()
-      vim.cmd("colorscheme clrtheme")
-    end,
-    priority = 99,
+    -- priority = 99,
   },
   -- UI
   "rcarriga/nvim-notify",   -- Notifications Popup (Optional)
