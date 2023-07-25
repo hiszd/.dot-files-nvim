@@ -91,15 +91,15 @@ return {
     end,
   },
   "nvim-tree/nvim-web-devicons",
-  {
-    "rafamadriz/neon",
-    name = "neon",
-    config = function()
-      vim.g.neon_style = "dark"
-      vim.cmd("colorscheme neon")
-    end,
-    priority = 99,
-  },
+  -- {
+  --   "rafamadriz/neon",
+  --   name = "neon",
+  --   config = function()
+  --     vim.g.neon_style = "dark"
+  --     vim.cmd("colorscheme neon")
+  --   end,
+  --   priority = 99,
+  -- },
   -- {
   --   "sainnhe/gruvbox-material",
   --   name = "gruvbox-material",
@@ -121,10 +121,10 @@ return {
     dir = "~/programming/nvim/chillthm.nvim",
     dev = true,
     name = "chillthm",
-    -- config = function()
-    --   vim.cmd("colorscheme chillthm")
-    -- end,
-    -- priority = 99,
+    config = function()
+      vim.cmd("colorscheme chillthm")
+    end,
+    priority = 99,
   },
   {
     "hiszd/clrtheme.nvim",

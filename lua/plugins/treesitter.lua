@@ -7,6 +7,7 @@ local config = function()
       additional_vim_regex_highlighting = { "org" }, -- Required since TS highlighter doesn't support all syntax features (conceal)
     },
     ensure_installed = {
+      "comment",
       "org",
       "lua",
       "tsx",

@@ -1,29 +1,29 @@
 local config = function()
-  local lualine_thm = require("lualine.themes.neon")
-  -- local lualine_thm = require("clrtheme").lualine_theme()
-  local color = require("clrtheme.color")
-  local get_color = color.gcol
+  local lualine_thm = require("lualine.themes.chillthm")
+  -- local lualine_thm = require("chillthm").lualine_theme()
+  -- local color = require("chilthm.color")
+  local get_color = require('chillthm').get_color
 
   local mode_color = function()
     ---@type table
     local mode_col = {
-      ["n"] = lualine_thm.normal.b.fg,
-      ["i"] = lualine_thm.insert.b.fg,
-      ["v"] = lualine_thm.visual.b.fg,
+      ["n"] = lualine_thm.normal.a.fg,
+      ["i"] = lualine_thm.insert.a.fg,
+      ["v"] = lualine_thm.visual.a.fg,
       [""] = get_color("blue"),
-      ["V"] = lualine_thm.visual.b.fg,
-      ["c"] = lualine_thm.command.b.fg,
-      ["no"] = lualine_thm.normal.b.fg,
-      ["s"] = lualine_thm.visual.b.fg,
-      ["S"] = lualine_thm.visual.b.fg,
-      ["ic"] = lualine_thm.insert.b.fg,
-      ["R"] = lualine_thm.replace.b.fg,
-      ["Rv"] = lualine_thm.replace.b.fg,
-      ["cv"] = lualine_thm.visual.b.fg,
-      ["ce"] = lualine_thm.insert.b.fg,
-      ["r"] = lualine_thm.insert.b.fg,
-      ["rm"] = lualine_thm.insert.b.fg,
-      ["r?"] = lualine_thm.insert.b.fg,
+      ["V"] = lualine_thm.visual.a.fg,
+      ["c"] = lualine_thm.command.a.fg,
+      ["no"] = lualine_thm.normal.a.fg,
+      ["s"] = lualine_thm.visual.a.fg,
+      ["S"] = lualine_thm.visual.a.fg,
+      ["ic"] = lualine_thm.insert.a.fg,
+      ["R"] = lualine_thm.replace.a.fg,
+      ["Rv"] = lualine_thm.replace.a.fg,
+      ["cv"] = lualine_thm.visual.a.fg,
+      ["ce"] = lualine_thm.insert.a.fg,
+      ["r"] = lualine_thm.insert.a.fg,
+      ["rm"] = lualine_thm.insert.a.fg,
+      ["r?"] = lualine_thm.insert.a.fg,
       ["!"] = get_color("red"),
       ["t"] = get_color("red"),
     }
@@ -45,8 +45,6 @@ local config = function()
     end,
   }
 
-  P(require('lualine.themes.neon'))
-
   -- Config
   local config = {
     options = {
@@ -54,7 +52,7 @@ local config = function()
       -- Disable sections and component separators
       component_separators = "",
       section_separators = "",
-      theme = "neon",
+      theme = "chillthm",
     },
     sections = {
       -- these are to remove the defaults
@@ -133,7 +131,7 @@ local config = function()
   ins_left({
     "filename",
     cond = conditions.buffer_not_empty,
-    color = { fg = "fg", gui = "bold" },
+    -- color = { fg = "fg", gui = "bold" },
   })
 
   ins_left({
@@ -178,7 +176,7 @@ local config = function()
       return msg
     end,
     icon = " LSP:",
-    color = { fg = "#ffffff", gui = "bold" },
+    -- color = { fg = "#ffffff", gui = "bold" },
   })
 
   -- **************************************************************
