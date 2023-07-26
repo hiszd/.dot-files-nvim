@@ -1,4 +1,5 @@
 local init = function()
+  ---@type ZTabHighlightOpts
   local highlights = {
     title_sel = {
       sp = "#aa5500",
@@ -18,6 +19,7 @@ local init = function()
     },
   }
 
+  ---@type ZTabSetupOpts
   local opts = {
     tabline = {
       enabled = true,
@@ -89,13 +91,6 @@ local init = function()
   map("n", "<leader>b[", "<Cmd>:-tabmove<CR>")
   map("n", "<leader>b0", "<Cmd>:0tabmove<CR>")
 
-  -- Close buffer
-  local function closecurrentbuffer()
-    local curbuf = vim.api.nvim_get_current_buf()
-    vim.api.nvim_buf_delete(curbuf, {})
-  end
-
-  -- vim.keymap.set("n", "<leader>dq", closecurrentbuffer)
   vim.keymap.set("n", "<leader>dq", "<Cmd>:bdelete<CR>")
   vim.keymap.set("n", "<leader>bq", "<Cmd>:tabclose<CR>")
 
