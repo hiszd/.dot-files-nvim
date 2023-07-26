@@ -5,7 +5,6 @@ local feedkey = function(key, mode)
 end
 
 map("n", "<leader>hg", "<Cmd>:Inspect<CR>", { noremap = true })
-map("n", "<leader>da", "<Cmd>wq<cr>", { noremap = true, desc = "Save and quit" })
 map(
   "n",
   "<leader>f",
@@ -18,15 +17,13 @@ map("i", "<C-l>", function()
     feedkey("<Plug>luasnip-expand-or-jump", "")
   end
 end, { desc = "luasnip expand or jump if in snippet", silent = true, noremap = true })
-map("n", "<leader>du", "gUiw`]a", { noremap = true, desc = "UPPERCASE inner word(see I just used it there)" })
-map("n", "<leader>dt", "guiwgUl", { noremap = true, desc = "Title case inner word" })
+map("n", "<leader>ui", "gUiw`]a", { noremap = true, desc = "UPPERCASE inner word(see I just used it there)" })
+map("n", "<leader>ti", "guiwgUl", { noremap = true, desc = "Title case inner word" })
 map("n", "<leader>w", "<Cmd>w<cr>", { noremap = true, desc = "Save current buffer" })
 map("n", "<leader><leader>w", "<Cmd>lua vim.lsp.buf.format()<cr><Cmd>w<cr>", { noremap = true, desc = "Save current buffer" })
 map("n", "<leader>cr", '<Cmd>lua require("nvim-reload").Reload()<cr>', { noremap = true, desc = "reload whole config" })
 map("n", "gl", "$", { noremap = true, desc = "go to end of line" })
 map("n", "gh", "^", { noremap = true, desc = "go to beginning of line" })
-
-map("n", "<leader>dl", "@<Cmd>", { noremap = true })
 
 map(
   "n",
@@ -52,3 +49,4 @@ map("n", "<leader>mr", "<Cmd>lua RSTLNE()<cr>", { noremap = true, desc = "assign
 -- local hid = require("noiz.keybind.hid")
 -- hid.startjob()
 require('noiz.keybind.expr')
+require('noiz.keybind.yank')
