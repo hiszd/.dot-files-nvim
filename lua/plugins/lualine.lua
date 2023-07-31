@@ -146,6 +146,22 @@ local config = function()
     },
   })
 
+  ins_left({
+    function()
+      if require("noice").api.statusline.mode.has() then
+        local mode = require("noice").api.statusline.mode.get()
+        if string.find(mode, "recording") then
+          return mode
+        else
+          return ""
+        end
+      else
+        return ""
+      end
+    end,
+    color = { fg = "green" }
+  })
+
   -- Insert mid section. You can make any number of sections in neovim :)
   -- for lualine it's any number greater then 2
   ins_left({
