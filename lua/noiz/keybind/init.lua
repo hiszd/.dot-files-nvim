@@ -20,7 +20,8 @@ end, { desc = "luasnip expand or jump if in snippet", silent = true, noremap = t
 map("n", "<leader>ui", "gUiw`]a", { noremap = true, desc = "UPPERCASE inner word(see I just used it there)" })
 map("n", "<leader>ti", "guiwgUl", { noremap = true, desc = "Title case inner word" })
 map("n", "<leader>w", "<Cmd>w<cr>", { noremap = true, desc = "Save current buffer" })
-map("n", "<leader><leader>w", "<Cmd>lua vim.lsp.buf.format()<cr><Cmd>w<cr>", { noremap = true, desc = "Save current buffer" })
+map("n", "<leader><leader>w", "<Cmd>lua vim.lsp.buf.format()<cr><Cmd>w<cr>",
+  { noremap = true, desc = "Save current buffer" })
 map("n", "<leader>cr", '<Cmd>lua require("nvim-reload").Reload()<cr>', { noremap = true, desc = "reload whole config" })
 map("n", "gl", "$", { noremap = true, desc = "go to end of line" })
 map("n", "gh", "^", { noremap = true, desc = "go to beginning of line" })
@@ -45,6 +46,8 @@ map(
 )
 map("n", "<leader>mq", "<Cmd>lua QWERTY()<cr>", { noremap = true, desc = "assign keys for QWERTY" })
 map("n", "<leader>mr", "<Cmd>lua RSTLNE()<cr>", { noremap = true, desc = "assign keys for RSTLNE" })
+
+local tscope = require('telescope.builtin')
 
 -- local hid = require("noiz.keybind.hid")
 -- hid.startjob()
