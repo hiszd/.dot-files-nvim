@@ -47,7 +47,7 @@ map(
 map("n", "<leader>mq", "<Cmd>lua QWERTY()<cr>", { noremap = true, desc = "assign keys for QWERTY" })
 map("n", "<leader>mr", "<Cmd>lua RSTLNE()<cr>", { noremap = true, desc = "assign keys for RSTLNE" })
 
-local tscope = require('telescope.builtin')
+-- local tscope = require('telescope.builtin')
 
 -- local hid = require("noiz.keybind.hid")
 -- hid.startjob()
