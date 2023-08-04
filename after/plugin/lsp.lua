@@ -18,7 +18,7 @@ local lsp = require('lsp-zero').preset({
 
 lsp.preset("recommended")
 
-lsp.ensure_installed({ "prismals", "jsonls", "lua_ls", "cssls", "tsserver" })
+lsp.ensure_installed({ "prismals", "jsonls", "lua_ls", "cssls", "tsserver", "ocamllsp" })
 
 local lspconfig = require("lspconfig")
 
@@ -46,21 +46,20 @@ lspconfig.rust_analyzer.setup({
 
 lspconfig.lua_ls.setup(lsp.nvim_lua_ls())
 
-
 local cmp = require("cmp")
 local cmp_select = { behavior = cmp.SelectBehavior.Select }
 local cmp_mappings = lsp.defaults.cmp_mappings({
-      ["<C-p>"] = cmp.mapping.select_prev_item(cmp_select),
-      ["<C-n>"] = cmp.mapping.select_next_item(cmp_select),
-      ["<C-y>"] = cmp.mapping.confirm({ select = true }),
-      ["<C-Space>"] = cmp.mapping.complete(),
+  ["<C-p>"] = cmp.mapping.select_prev_item(cmp_select),
+  ["<C-n>"] = cmp.mapping.select_next_item(cmp_select),
+  ["<C-y>"] = cmp.mapping.confirm({ select = true }),
+  ["<C-Space>"] = cmp.mapping.complete(),
 })
 
 cmp_mappings["<Tab>"] = nil
 cmp_mappings["<S-Tab>"] = nil
 
 local sss = {
-  {name = "nvim_lua"},
+  { name = "nvim_lua" },
 }
 -- local srcs = vim.tbl_deep_extend("keep", lsp.defaults.cmp_sources(), sss)
 local srcs = lsp.defaults.cmp_sources(sss)
@@ -81,7 +80,7 @@ lsp.set_preferences({
   },
 })
 
-lsp.on_attach(function(client, bufnr)
+local on_attach = function(client, bufnr)
   local opts = { buffer = bufnr, remap = false }
 
   vim.keymap.set("n", "gd", function()
@@ -112,7 +111,27 @@ lsp.on_attach(function(client, bufnr)
   vim.keymap.set("i", "<C-h>", function()
     vim.lsp.buf.signature_help()
   end, opts)
-end)
+end
+
+lsp.on_attach(on_attach)
+
+local c = vim.lsp.protocol.make_client_capabilities()
+c.textDocument.completion.completionItem.snippetSupport = true
+c.textDocument.completion.completionItem.resolveSupport = {
+  properties = {
+    'documentation',
+    'detail',
+    'additionalTextEdits',
+  },
+}
+
+lspconfig.ocamllsp.setup({
+  cmd = { "ocamllsp" },
+  filetypes = { "ocaml", "ocaml.menhir", "ocaml.interface", "ocaml.ocamllex", "reason", "dune" },
+  root_dir = lspconfig.util.root_pattern("*.opam", "esy.json", "package.json", ".git", "dune-project", "dune-workspace"),
+  on_attach = on_attach,
+  capabilities = require("cmp_nvim_lsp").default_capabilities(c)
+})
 
 lsp.setup()
 
@@ -142,14 +161,14 @@ cmp.setup.cmdline("/", {
 -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
 cmp.setup.cmdline(":", {
   mapping = cmp.mapping.preset.cmdline({
-        ["<esc>"] = cmp.mapping(function()
+    ["<esc>"] = cmp.mapping(function()
       if cmp.visible() then
         cmp.abort()
       else
         feedkey("<C-c>", "")
       end
     end, { "i", "c" }),
-        ["<CR>"] = cmp.mapping({
+    ["<CR>"] = cmp.mapping({
       i = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true }),
       c = function(fallback)
         if cmp.visible() then

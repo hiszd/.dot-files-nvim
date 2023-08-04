@@ -3,7 +3,7 @@ local config = function()
     -- If TS highlights are not enabled at all, or disabled via `disable` prop, highlighting will fallback to default Vim syntax highlighting
     highlight = {
       enable = true,
-      disable = { "org" },                        -- Remove this to use TS highlighter for some of the highlights (Experimental)
+      disable = { "org" },                           -- Remove this to use TS highlighter for some of the highlights (Experimental)
       additional_vim_regex_highlighting = { "org" }, -- Required since TS highlighter doesn't support all syntax features (conceal)
     },
     ensure_installed = {
@@ -17,11 +17,12 @@ local config = function()
       "css",
       "rust",
       "toml",
+      "ocaml",
     }, -- Or run :TSUpdate org
     playground = {
       enable = true,
       disable = {},
-      updatetime = 25,      -- Debounced time for highlighting nodes in the playground from source code
+      updatetime = 25,         -- Debounced time for highlighting nodes in the playground from source code
       persist_queries = false, -- Whether the query persists across vim sessions
       keybindings = {
         toggle_query_editor = "o",
