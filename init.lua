@@ -11,7 +11,7 @@ if vim.fn.has("win32") == 1 then
 else
   vim.api.nvim_command('let $PLUGDIR = "~/.config/nvim/.runtime/plugged"')
   vim.api.nvim_command('let $VIMDIR = "~/.config/nvim/.runtime/"')
-  vim.opt.shell = "/bin/fish"
+  vim.opt.shell = "fish"
 end
 
 vim.cmd(":noh")
