@@ -24,12 +24,7 @@ local feedkey = function(key, mode)
   vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(key, true, true, true), mode, true)
 end
 
--- Setup autopairs
--- If you want insert `(` after select function or method item
-local cmp_autopairs = require("nvim-autopairs.completion.cmp")
 local cmp = require("cmp")
-cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
-
 local types = require("cmp.types")
 
 cmp.setup({
@@ -98,46 +93,57 @@ cmp.setup({
   --   completion = cmp.config.window.bordered(),
   --   -- documentation = cmp.config.window.bordered(),
   -- },
+  -- mapping = cmp.mapping.preset.insert({
+  --       ["<C-b>"] = cmp.mapping.scroll_docs(-4),
+  --       ["<C-f>"] = cmp.mapping.scroll_docs(4),
+  --       ["<C-e>"] = cmp.mapping.confirm(),
+  --       ["<C-a>"] = cmp.mapping.abort(),
+  --       ["<C-l>"] = cmp.mapping(function(fallback)
+  --     if luasnip.expand_or_jumpable() then
+  --       feedkey("<Plug>luasnip-expand-or-jump", "")
+  --     else
+  --       fallback()
+  --     end
+  --   end, { "i", "s" }),
+  --       ["<CR>"] = cmp.mapping(function(fallback)
+  --     if cmp.visible() then
+  --       cmp.confirm({ select = false })
+  --     else
+  --       fallback()
+  --     end
+  --   end, { "i", "s" }),
+  --       ["<Tab>"] = cmp.mapping(function(fallback)
+  --     if cmp.visible() then
+  --       cmp.select_next_item()
+  --     else
+  --       fallback()
+  --     end
+  --   end, { "i", "s" }),
+  --       ["<S-Tab>"] = cmp.mapping(function()
+  --     if cmp.visible() then
+  --       cmp.select_prev_item()
+  --     else
+  --       feedkey("<S-Tab>", "")
+  --     end
+  --   end, { "i", "s" }),
+  -- }),
   mapping = cmp.mapping.preset.insert({
         ["<C-b>"] = cmp.mapping.scroll_docs(-4),
         ["<C-f>"] = cmp.mapping.scroll_docs(4),
-        ["<C-e>"] = cmp.mapping.complete(),
-        ["<C-a>"] = cmp.mapping.abort(),
-        ["<CR>"] = cmp.mapping(function(fallback)
-      if cmp.visible() and not luasnip.expand_or_jumpable() then
-        cmp.confirm({ select = false })
-      elseif luasnip and luasnip.expand_or_jumpable() then
-        feedkey("<Plug>luasnip-expand-or-jump", "")
-      else
-        fallback()
-      end
-    end, { "i", "s" }),
-        ["<Tab>"] = cmp.mapping(function(fallback)
-      if cmp.visible() then
-        cmp.select_next_item()
-      else
-        fallback()
-      end
-    end, { "i", "s" }),
-        ["<S-Tab>"] = cmp.mapping(function()
-      if cmp.visible() then
-        cmp.select_prev_item()
-      else
-        feedkey("<S-Tab>", "")
-      end
-    end, { "i", "s" }),
+        ["<C-Space>"] = cmp.mapping.complete(),
+        ["<C-e>"] = cmp.mapping.abort(),
+        ["<CR>"] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
   }),
   sources = cmp.config.sources({
-    { name = "orgmode" },
     { name = "nvim_lsp",                priority = 90 },
     { name = "treesitter",              priority = 45 },
     { name = "path",                    priority = 85 },
-    { name = "luasnip",                 keyword_length = 2, max_item_count = 4, priority = 10 },
+    { name = "luasnip",                 max_item_count = 4, priority = 10 },
     { name = "buffer",                  max_item_count = 4, priority = 40 },
     { name = "nvim_lsp_signature_help", priority = 2 },
-    { name = "codeium",                 keyword_length = 3, max_item_count = 4, priority = 86 },
+    { name = "codeium",                 max_item_count = 4, priority = 86 },
   }),
-  preselect = cmp.PreselectMode.None,
+  preselect = cmp.PreselectMode.Item,
 })
 
 -- Set configuration for specific filetype.

@@ -3,16 +3,16 @@ local config = require("noiz.lsp.config")
 
 require("mason").setup({})
 require("mason-lspconfig").setup({
-  ensure_installed = { "prismals", "jsonls", "lua_ls", "cssls", "tsserver", "rust_analyzer", "clangd" },
+  ensure_installed = { "prismals", "jsonls", "lua_ls", "cssls", "tsserver", "rust_analyzer" },
 })
 
 require("mason-null-ls").setup({
   ensure_installed = { "eslint_d", "stylua", "cppcheck", "clang-format", "prettier" },
   automatic_installation = true,
   automatic_setup = true,
+  handlers = {},
 })
 require("null-ls").setup()
-require("mason-null-ls").setup_handlers()
 
 require("mason-lspconfig").setup_handlers({
   -- The first entry (without a key) will be the default handler
@@ -30,7 +30,7 @@ require("mason-lspconfig").setup_handlers({
   end,
   -- Next, you can provide a dedicated handler for specific servers.
   -- For example, a handler override for the `rust_analyzer`:
-      ["rust_analyzer"] = function()
+  ["rust_analyzer"] = function()
     require("rust-tools").setup({
       -- rust-tools options
       tools = {
@@ -49,7 +49,7 @@ require("mason-lspconfig").setup_handlers({
         on_attach = config.custom_attach,
         capabilities = config.updated_capabilities,
         settings = {
-              ["rust-analyzer"] = {
+          ["rust-analyzer"] = {
             assist = {
               importEnforceGranularity = true,
               importPrefix = "crate",

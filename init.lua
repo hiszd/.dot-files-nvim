@@ -1,3 +1,4 @@
+--vim.loader.enable()
 require("noiz.utils")
 require("noiz.globals")
 
@@ -17,7 +18,7 @@ vim.cmd(":noh")
 
 vim.api.nvim_command("set viminfo='100,n$HOME/.config/nvim/.runtime/files/info/viminfo")
 
-require("plugins")
+-- require("plugins")
 
 vim.opt.encoding = "utf-8"
 vim.opt.langmenu = "en_US"
@@ -37,12 +38,14 @@ vim.opt.lazyredraw = false
 vim.opt.showmatch = true
 vim.opt.autoindent = true
 vim.opt.smartindent = true
+vim.opt.fillchars = {eob = " "}
+vim.opt.concealcursor = "nc"
+vim.opt.conceallevel = 2
 vim.o.completeopt = "menuone,noselect"
 vim.o.undofile = true
 
 -- vim.opt.gfn = "Delugia Mono"
 
---vim.cmd("colorscheme base16-classic-dark")
 --vim.cmd('colorscheme base16-material-darker')
 --vim.cmd('colorscheme base16-seti')
 --vim.cmd('colorscheme base16-woodland')
@@ -80,6 +83,7 @@ vim.cmd([[
 
 map("", "<Space>", "<Nop>", { noremap = true })
 vim.g.mapleader = " "
+vim.g.maplocalleader = ","
 
 vim.opt_local.conceallevel = 2
 
@@ -92,7 +96,7 @@ vim.opt.wrap = false
 vim.opt.incsearch = true
 vim.opt.scrolloff = 8
 vim.opt.signcolumn = "yes"
-vim.opt.colorcolumn:append({ 80 })
+vim.opt.colorcolumn = "80"
 vim.opt.cmdheight = 4
 vim.opt.updatetime = 1000
 vim.opt.cursorline = true
@@ -101,9 +105,23 @@ vim.opt.hlsearch = false
 
 vim.cmd("set termguicolors")
 
-require("clrtheme")
+vim.env.PATH = "~/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/bin" .. ":" .. vim.env.PATH
+
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not vim.loop.fs_stat(lazypath) then
+  vim.fn.system({
+    "git",
+    "clone",
+    "--filter=blob:none",
+    "https://github.com/folke/lazy.nvim.git",
+    "--branch=stable", -- latest stable release
+    lazypath,
+  })
+end
+vim.opt.rtp:prepend(lazypath)
+
+require("lazy").setup("plugins")
 require("noiz.keybind")
-require("noiz.cmp")
-require("noiz.lsp")
-require("noiz.plugins")
+-- require("noiz.cmp")
+-- require("noiz.lsp")
 RSTLNE()

@@ -128,7 +128,13 @@ util.rgb_to_hsl = function(r, g, b)
 end
 
 util.log = function()
-  feedkey("viwy<esc>A<enter><esc>Aconsole.log(`${}<esc>hpA;<esc>", "")
+  local curbuf = vim.api.nvim_get_current_buf()
+  local filetype = vim.api.nvim_buf_get_option(curbuf, "filetype")
+  if filetype == "lua" then
+    feedkey("vkwy<esc>A<enter><esc>Aprint(<esc>p<esc>", "")
+  elseif filetype == "jsx" or filetype == "tsx" or filetype == "javascript" or filetype == "typescript" then
+    feedkey("vkwy<esc>A<enter><esc>Aconsole.log(`${}<esc>hpA;<esc>", "")
+  end
 end
 
 return util
