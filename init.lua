@@ -1,4 +1,3 @@
---vim.loader.enable()
 require("noiz.utils")
 require("noiz.globals")
 

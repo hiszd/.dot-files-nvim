@@ -3,7 +3,7 @@ local config = require("noiz.lsp.config")
 
 require("mason").setup({})
 require("mason-lspconfig").setup({
-  ensure_installed = { "prismals", "jsonls", "lua_ls", "cssls", "tsserver", "rust_analyzer" },
+  ensure_installed = { "prismals", "jsonls", "cssls", "tsserver", "rust_analyzer@nightly" },
 })
 
 require("mason-null-ls").setup({
@@ -88,6 +88,6 @@ vim.diagnostic.config({
   update_in_insert = false,
 })
 
-require("noiz.lsp.null-ls")
+-- require("noiz.lsp.null-ls")
 
 return M

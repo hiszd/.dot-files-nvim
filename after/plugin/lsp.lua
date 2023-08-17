@@ -1,6 +1,7 @@
-local lsp = require('lsp-zero').preset({
+local lsp = require('lsp-zero')
+.preset({
   float_border = 'rounded',
-  call_servers = 'local',
+  call_servers = 'global',
   configure_diagnostics = true,
   setup_servers_on_start = true,
   set_lsp_keymaps = {
@@ -16,14 +17,12 @@ local lsp = require('lsp-zero').preset({
   }
 })
 
-lsp.preset("recommended")
-
-lsp.ensure_installed({ "prismals", "jsonls", "lua_ls", "cssls", "tsserver", "ocamllsp" })
+lsp.ensure_installed({ "prismals", "jsonls", "cssls", "tsserver", "rust_analyzer@nightly" })
 
 local lspconfig = require("lspconfig")
 
 lspconfig.rust_analyzer.setup({
-  cmd = { vim.fn.expand("~/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/bin/rust-analyzer") },
+  -- cmd = { vim.fn.expand("~/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/bin/rust-analyzer") },
   settings = {
     ["rust-analyzer"] = {
       imports = {
@@ -44,8 +43,6 @@ lspconfig.rust_analyzer.setup({
   },
 })
 
-lspconfig.lua_ls.setup(lsp.nvim_lua_ls())
-
 local cmp = require("cmp")
 local cmp_select = { behavior = cmp.SelectBehavior.Select }
 local cmp_mappings = lsp.defaults.cmp_mappings({
@@ -61,7 +58,6 @@ cmp_mappings["<S-Tab>"] = nil
 local sss = {
   { name = "nvim_lua" },
 }
--- local srcs = vim.tbl_deep_extend("keep", lsp.defaults.cmp_sources(), sss)
 local srcs = lsp.defaults.cmp_sources(sss)
 
 lsp.setup_nvim_cmp({
@@ -125,10 +121,36 @@ c.textDocument.completion.completionItem.resolveSupport = {
   },
 }
 
+local lua_ls_config = {
+    settings = {
+        Lua = {
+            diagnostics = {globals = {'vim'}},
+            runtime = {version = 'LuaJIT'},
+            telemetry = {enable = false},
+        },
+    },
+}
+
+lsp.configure('lua_ls', lua_ls_config)
+
+lsp.setup_servers(lsp_servers)
+
+lsp.on_attach(on_attach)
+
+-- local lua_lsp = lsp.nvim_lua_ls()
+-- lua_lsp.capabilities = require("cmp_nvim_lsp").default_capabilities(c)
+
+-- lspconfig.lua_ls.setup(lua_lsp)
+-- lspconfig.lua_ls.setup({
+--   cmd = "lua-language-server",
+--   on_attach = on_attach,
+--   capabilities = capabilities,
+-- })
+
 lspconfig.ocamllsp.setup({
-  cmd = { "ocamllsp" },
-  filetypes = { "ocaml", "ocaml.menhir", "ocaml.interface", "ocaml.ocamllex", "reason", "dune" },
-  root_dir = lspconfig.util.root_pattern("*.opam", "esy.json", "package.json", ".git", "dune-project", "dune-workspace"),
+  -- cmd = { "ocamllsp" },
+  -- filetypes = { "ocaml", "ocaml.menhir", "ocaml.interface", "ocaml.ocamllex", "reason", "dune" },
+  -- root_dir = lspconfig.util.root_pattern("*.opam", "esy.json", "package.json", ".git", "dune-project", "dune-workspace"),
   on_attach = on_attach,
   capabilities = require("cmp_nvim_lsp").default_capabilities(c)
 })
