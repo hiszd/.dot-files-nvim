@@ -131,11 +131,13 @@ local lua_ls_config = {
     },
 }
 
+lsp.on_attach(on_attach)
+
+lsp.configure("nil_ls", {})
+
 lsp.configure('lua_ls', lua_ls_config)
 
-lsp.setup_servers(lsp_servers)
-
-lsp.on_attach(on_attach)
+lsp.setup_servers()
 
 -- local lua_lsp = lsp.nvim_lua_ls()
 -- lua_lsp.capabilities = require("cmp_nvim_lsp").default_capabilities(c)
