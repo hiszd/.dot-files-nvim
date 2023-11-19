@@ -118,9 +118,7 @@ return {
   },
   {
     "hiszd/chillthm.nvim",
-    dir = "~/programming/nvim/chillthm.nvim",
     dev = true,
-    name = "chillthm",
     config = function()
       vim.cmd("colorscheme chillthm")
     end,

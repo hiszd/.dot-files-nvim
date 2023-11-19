@@ -1,6 +1,14 @@
 local init = function()
+  ---@type function
+  local defaulthl = require("ztab").hlcols
+
+  local tabcol = vim.api.nvim_get_hl(0, { name = "CursorLine" }).bg
+
   ---@type ZTabHighlightOpts
   local highlights = {
+    fill = {
+      bg = tabcol,
+    },
     title_sel = {
       sp = "#aa5500",
       -- underline = true,
@@ -13,14 +21,19 @@ local init = function()
       sp = "#aa5500",
       -- underline = true,
     },
-    separator_sel = {
-      sp = "#aa5500",
-      -- underline = true,
+    separator = {
+      fg = tabcol,
+      bg = defaulthl.inactivecol.bg
     },
+    separator_sel = {
+      fg = tabcol,
+      bg = defaulthl.activecol.bg,
+    }
   }
 
-  ---@type ZTabSetupOpts
+  ---@type ZSetupOpts
   local opts = {
+    debug = true,
     tabline = {
       enabled = true,
       sep_name = "slant",
@@ -31,6 +44,7 @@ local init = function()
     bufline = {
       enabled = true,
       left_sep = false,
+      sep_name = "slant",
       devicon_colors = "selected",
       -- wtabhighlight = {
       --   fill = {
@@ -101,10 +115,8 @@ return {
   {
     "hiszd/ztab.nvim",
     dev = true,
-    dir = "~/programming/nvim/ztab.nvim",
     dependencies = { "nvim-tree/nvim-web-devicons" },
     priority = 0,
-    -- opts = opts,
     config = init,
   },
 }

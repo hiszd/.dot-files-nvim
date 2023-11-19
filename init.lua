@@ -37,7 +37,7 @@ vim.opt.lazyredraw = false
 vim.opt.showmatch = true
 vim.opt.autoindent = true
 vim.opt.smartindent = true
-vim.opt.fillchars = {eob = " "}
+vim.opt.fillchars = { eob = " " }
 vim.opt.concealcursor = "nc"
 vim.opt.conceallevel = 2
 vim.o.completeopt = "menuone,noselect"
@@ -119,7 +119,9 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
-require("lazy").setup("plugins")
+require("lazy").setup("plugins",
+  { dev = { path = "~/programming/nvim/" } }
+)
 require("noiz.keybind")
 -- require("noiz.cmp")
 -- require("noiz.lsp")

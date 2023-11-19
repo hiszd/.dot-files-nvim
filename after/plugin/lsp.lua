@@ -1,23 +1,23 @@
 local lsp = require('lsp-zero')
-.preset({
-  float_border = 'rounded',
-  call_servers = 'global',
-  configure_diagnostics = true,
-  setup_servers_on_start = true,
-  set_lsp_keymaps = {
-    preserve_mappings = false,
-    omit = {},
-  },
-  manage_nvim_cmp = {
-    set_basic_mappings = true,
-    set_extra_mappings = true,
-    use_luasnip = true,
-    set_format = true,
-    documentation_window = true,
-  }
-})
+    .preset({
+      float_border = 'rounded',
+      call_servers = 'global',
+      configure_diagnostics = true,
+      setup_servers_on_start = true,
+      set_lsp_keymaps = {
+        preserve_mappings = false,
+        omit = {},
+      },
+      manage_nvim_cmp = {
+        set_basic_mappings = true,
+        set_extra_mappings = true,
+        use_luasnip = true,
+        set_format = true,
+        documentation_window = true,
+      }
+    })
 
-lsp.ensure_installed({ "prismals", "jsonls", "cssls", "tsserver", "rust_analyzer@nightly" })
+lsp.ensure_installed({ "lua_ls", "prismals", "jsonls", "cssls", "tsserver", "rust_analyzer@nightly" })
 
 local lspconfig = require("lspconfig")
 
@@ -122,13 +122,22 @@ c.textDocument.completion.completionItem.resolveSupport = {
 }
 
 local lua_ls_config = {
-    settings = {
-        Lua = {
-            diagnostics = {globals = {'vim'}},
-            runtime = {version = 'LuaJIT'},
-            telemetry = {enable = false},
-        },
+  settings = {
+    Lua = {
+      diagnostics = { globals = { 'vim' } },
+      runtime = { version = 'LuaJIT' },
+      telemetry = { enable = false },
+      -- workspace = {
+      --   checkThirdParty = true,
+      --   library = {
+      --     vim.env.VIMRUNTIME,
+      --     "/home/zion/programming/nvim/",
+      --     "${3rd}/luv/library",
+      --     "${3rd}/busted/library",
+      --   },
+      -- }
     },
+  },
 }
 
 lsp.on_attach(on_attach)
