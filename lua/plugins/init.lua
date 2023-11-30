@@ -30,17 +30,6 @@ return {
       "ray-x/cmp-treesitter",
     },
   },
-  {
-    "Exafunction/codeium.vim",
-    init = function()
-      vim.g.codeium_disable_bindings = 1
-      -- Change '<C-g>' here to any keycode you like.
-      vim.keymap.set('i', '<C-t>', function() return vim.fn['codeium#Accept']() end, { expr = true })
-      vim.keymap.set('i', '<C-]>', function() return vim.fn['codeium#CycleCompletions'](1) end, { expr = true })
-      -- vim.keymap.set('i', '<C-[>', function() return vim.fn['codeium#CycleCompletions'](-1) end, { expr = true })
-      vim.keymap.set('i', '<C-x>', function() return vim.fn['codeium#Clear']() end, { expr = true })
-    end,
-  },
   -- {
   --   "jcdickinson/codeium.nvim",
   --   dependencies = {
@@ -163,4 +152,21 @@ return {
   --   end,
   -- },
   "elkowar/yuck.vim",
+  {
+    "utilyre/barbecue.nvim",
+    name = "barbecue",
+    version = "*",
+    dependencies = {
+      "SmiteshP/nvim-navic",
+      "nvim-tree/nvim-web-devicons",
+    },
+    opts = {
+      show_dirname = false,
+      show_basename = false,
+    },
+    init = function()
+      map("n", "<C-a>", "<Cmd>:lua require('barbecue.ui').navigate(-2)<cr>",
+        { noremap = true, desc = "navigate up one level" })
+    end,
+  },
 }

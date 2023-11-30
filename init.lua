@@ -118,6 +118,10 @@ if not vim.loop.fs_stat(lazypath) then
   })
 end
 vim.opt.rtp:prepend(lazypath)
+local bin_path = vim.fn.system("which codeium_language_server")
+bin_path = string.sub(bin_path, 1, string.len(bin_path) - 1)
+
+vim.g.codeium_bin = bin_path
 
 require("lazy").setup("plugins",
   { dev = { path = "~/programming/nvim/" } }

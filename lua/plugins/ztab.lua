@@ -112,11 +112,11 @@ local init = function()
 end
 
 return {
-  {
-    "hiszd/ztab.nvim",
-    dev = true,
-    dependencies = { "nvim-tree/nvim-web-devicons" },
-    priority = 0,
-    config = init,
-  },
+  -- {
+  --   "hiszd/ztab.nvim",
+  --   dev = true,
+  --   dependencies = { "nvim-tree/nvim-web-devicons" },
+  --   priority = 0,
+  --   config = init,
+  -- },
 }
