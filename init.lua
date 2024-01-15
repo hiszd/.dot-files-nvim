@@ -124,9 +124,7 @@ bin_path = string.sub(bin_path, 1, string.len(bin_path) - 1)
 vim.g.codeium_bin = bin_path
 
 require("lazy").setup("plugins",
-  { dev = { path = "~/programming/nvim/" } }
+  { dev = { path = "~/programming/nvim/" }, change_detection = { notify = true } }
 )
 require("noiz.keybind")
--- require("noiz.cmp")
--- require("noiz.lsp")
 RSTLNE()

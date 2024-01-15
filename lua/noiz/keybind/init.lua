@@ -1,5 +1,3 @@
--- local map = vim.api.nvim_set_keymap
-
 local feedkey = function(key, mode)
   vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(key, true, true, true), mode, true)
 end
@@ -17,13 +15,13 @@ map("i", "<C-l>", function()
     feedkey("<Plug>luasnip-expand-or-jump", "")
   end
 end, { desc = "luasnip expand or jump if in snippet", silent = true, noremap = true })
-map("n", "<leader>ui", "gUiw`]a", { noremap = true, desc = "UPPERCASE inner word(see I just used it there)" })
-map("n", "<leader>ti", "guiwgUl", { noremap = true, desc = "Title case inner word" })
+map("n", "<leader>uiw", "gUiw`]a", { noremap = true, desc = "UPPERCASE inner word(see I just used it there)" })
+map("n", "<leader>tiw", "guiwgUl", { noremap = true, desc = "Title case inner word" })
 map("n", "<leader>w", "<Cmd>w<cr>", { noremap = true, desc = "Save current buffer" })
 map("n", "<leader><leader>w", "<Cmd>lua vim.lsp.buf.format()<cr><Cmd>w<cr>",
   { noremap = true, desc = "Save current buffer" })
 map("n", "<leader>cr", '<Cmd>lua require("nvim-reload").Reload()<cr>', { noremap = true, desc = "reload whole config" })
-map("n", "gl", "$", { noremap = true, desc = "go to end of line" })
+map("n", "ge", "$", { noremap = true, desc = "go to end of line" })
 map("n", "gh", "^", { noremap = true, desc = "go to beginning of line" })
 
 map(
@@ -32,11 +30,8 @@ map(
   '<Cmd>lua print(vim.fn.expand("%:p"))<cr>',
   { noremap = true, desc = "Print current filename" }
 )
-map("n", "<leader><leader>x", "<Cmd>so %<cr>", { noremap = true, desc = "source current file" })
-map("n", "<leader>y", '"+y', { noremap = true, desc = "yank to clipboard" })
-map("v", "<leader>y", '"+y', { noremap = true, desc = "yank to clipboard" })
 
-map("n", "<leader>rt", '<Cmd>lua require("clrtheme").reload()<cr>', { noremap = true, desc = "reload clrtheme" })
+map("n", "<leader><leader>x", "<Cmd>so %<cr>", { noremap = true, desc = "source current file" })
 
 map(
   "n",
@@ -44,6 +39,7 @@ map(
   '<Cmd>lua require("noiz.utils").log()<cr>',
   { noremap = true, desc = "log inner word under cursor" }
 )
+
 map("n", "<leader>mq", "<Cmd>lua QWERTY()<cr>", { noremap = true, desc = "assign keys for QWERTY" })
 map("n", "<leader>mr", "<Cmd>lua RSTLNE()<cr>", { noremap = true, desc = "assign keys for RSTLNE" })
 

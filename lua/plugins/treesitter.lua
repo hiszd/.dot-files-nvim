@@ -43,6 +43,9 @@ local config = function()
   vim.wo.foldmethod = "expr"
   vim.wo.foldexpr = "nvim_treesitter#foldexpr()"
   vim.cmd("set nofoldenable")
+
+
+  map("n", "<leader>ht", "<Cmd>TSHighlightCapturesUnderCursor<cr>", { noremap = true })
 end
 
 return {
