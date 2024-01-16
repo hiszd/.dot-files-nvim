@@ -5,22 +5,20 @@ return function()
 
   local cmp = require("cmp")
   local cmp_select = { behavior = cmp.SelectBehavior.Select }
-
   cmp.setup({
     snippet = {
       expand = function(args)
         require('luasnip').lsp_expand(args.body)
       end,
     },
-    mapping = cmp.mapping.preset.cmdline({
+    mapping = cmp.mapping.preset.insert({
       ["<C-p>"] = cmp.mapping.select_prev_item(cmp_select),
       ["<C-n>"] = cmp.mapping.select_next_item(cmp_select),
       ["<C-y>"] = cmp.mapping.confirm({ select = true }),
       ["<C-Space>"] = cmp.mapping.complete(),
-      ["<Tab>"] = nil,
-      ["<S-Tab>"] = nil,
     }),
     sources = cmp.config.sources({
+      { name = "nvim_lsp" },
       { name = "nvim_lua" },
       { name = 'luasnip' },
     }, {
@@ -46,14 +44,7 @@ return function()
 
   -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
   cmp.setup.cmdline(":", {
-    mapping = cmp.mapping.preset.cmdline({
-      ["<esc>"] = cmp.mapping(function()
-        if cmp.visible() then
-          cmp.abort()
-        else
-          feedkey("<C-c>", "")
-        end
-      end, { "i", "c" }),
+    mapping = cmp.mapping.preset.insert({
       ["<CR>"] = cmp.mapping({
         i = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true }),
         c = function(fallback)
@@ -66,7 +57,7 @@ return function()
       }),
     }),
     sources = cmp.config.sources({
-      { name = 'cmdline' }
+      { name = 'cmdline' },
     }, {
       { name = 'path' }
     }),

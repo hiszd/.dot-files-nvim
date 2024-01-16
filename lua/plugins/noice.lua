@@ -28,11 +28,6 @@ local opts = {
       },
       opts = { skip = true },
     },
-    {
-      view = "split",
-      filter = { event = "msg_show", min_height = 20 },
-      opts = { stop = true },
-    },
   },
 }
 
@@ -41,7 +36,12 @@ return {
   {
     "folke/noice.nvim",
     event = "VeryLazy",
-    opts = opts,
+    config = function()
+      require("notify").setup({
+        timeout = 1000,
+      })
+      require("noice").setup(opts)
+    end,
     init = function()
       map("n", "<leader>nd", "<Cmd>Noice dismiss<CR>", { noremap = true, desc = "Noice dismiss" })
     end,

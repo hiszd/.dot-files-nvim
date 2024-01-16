@@ -40,7 +40,7 @@ vim.opt.smartindent = true
 vim.opt.fillchars = { eob = " " }
 vim.opt.concealcursor = "nc"
 vim.opt.conceallevel = 2
-vim.o.completeopt = "menuone,noselect"
+vim.opt.completeopt = { "menu", "menuone", "noselect" }
 vim.o.undofile = true
 
 -- vim.opt.gfn = "Delugia Mono"
