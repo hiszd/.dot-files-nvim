@@ -24,7 +24,8 @@ end
 
 _G.reqs = function(m)
   for k, v in pairs(m) do
-    require(k).setup(v)
+    local x = require(k)
+    require(k).setup(v(x))
   end
 end
 

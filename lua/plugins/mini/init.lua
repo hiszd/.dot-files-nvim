@@ -1,12 +1,16 @@
-local surround = loadfile(".\\surround.lua") or {}
-local starter = loadfile(".\\starter.lua") or {}
+local relpath = "plugins.mini."
+
+local surround = require(relpath .. "surround")
+local starter = require(relpath .. "starter")
+
+local none = function() return {} end
 
 local config = function()
   reqs({
-    ["mini.pairs"] = {},
-    ["mini.sessions"] = {},
-    ["mini.doc"] = {},
-    ["mini.indentscope"] = {},
+    ["mini.pairs"] = none,
+    ["mini.sessions"] = none,
+    ["mini.doc"] = none,
+    ["mini.indentscope"] = none,
     ["mini.surround"] = surround,
     ["mini.starter"] = starter,
   })
