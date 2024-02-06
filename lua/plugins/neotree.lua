@@ -84,13 +84,13 @@ local config = function()
       },
       mappings = {
         ["e"] = function()
-          vim.api.nvim_exec("Neotree focus filesystem", true)
+          vim.api.nvim_exec2("Neotree focus filesystem", {})
         end,
         ["b"] = function()
-          vim.api.nvim_exec("Neotree focus buffers", true)
+          vim.api.nvim_exec2("Neotree focus buffers", {})
         end,
-        ["g"] = function()
-          vim.api.nvim_exec("Neotree focus git_status", true)
+        ["gg"] = function()
+          vim.api.nvim_exec2("Neotree focus git_status", {})
         end,
         ["<space>"] = {
           "toggle_node",

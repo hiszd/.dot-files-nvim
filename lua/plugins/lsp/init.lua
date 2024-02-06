@@ -67,7 +67,7 @@ return {
       require('mason').setup({})
       require('mason-lspconfig').setup({
         -- ensure_installed = { "prismals", "jsonls", "cssls", "tsserver", "rust_analyzer@nightly" },
-        ensure_installed = { "prismals", "jsonls", "cssls", "tsserver" },
+        ensure_installed = { "gopls", "prismals", "jsonls", "cssls", "tsserver" },
         handlers = {
           lsp_zero.default_setup,
         },
@@ -79,6 +79,10 @@ return {
       })
 
       lspconfig.lua_ls.setup(lua_opts)
+
+      lspconfig.html.setup({
+        filetypes = { 'html', 'tera' },
+      })
 
       lspconfig.rust_analyzer.setup({
         -- cmd = { vim.fn.expand("~/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/bin/rust-analyzer") },
@@ -103,7 +107,7 @@ return {
         },
       })
 
-      lsp_zero.setup_servers({ 'nil_ls', 'prismals', 'jsonls', 'cssls', 'tsserver' })
+      lsp_zero.setup_servers({ 'ocamllsp', 'gopls', 'nil_ls', 'prismals', 'jsonls', 'cssls', 'tsserver' })
 
       require(relpath .. "cmp")()
 

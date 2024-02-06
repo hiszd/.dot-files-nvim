@@ -2,12 +2,13 @@ local relpath = "plugins.mini."
 
 local surround = require(relpath .. "surround")
 local starter = require(relpath .. "starter")
+local pairs = require(relpath .. "pairs")
 
 local none = function() return {} end
 
 local config = function()
   reqs({
-    ["mini.pairs"] = none,
+    ["mini.pairs"] = pairs,
     ["mini.sessions"] = none,
     ["mini.doc"] = none,
     ["mini.indentscope"] = none,

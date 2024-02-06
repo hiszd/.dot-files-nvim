@@ -44,8 +44,10 @@ map("n", "<leader>mq", "<Cmd>lua QWERTY()<cr>", { noremap = true, desc = "assign
 map("n", "<leader>mr", "<Cmd>lua RSTLNE()<cr>", { noremap = true, desc = "assign keys for RSTLNE" })
 
 
+map("n", "<leader>br", "<Cmd>:bnext<CR>")
+map("n", "<leader>ba", "<Cmd>:bprevious<CR>")
 map("n", "<leader>dq", "<Cmd>:bdelete<CR>")
-map("n", "<leader>bq", "<Cmd>:tabclose<CR>")
+map("n", "<leader>tq", "<Cmd>:tabclose<CR>")
 
 -- local tscope = require('telescope.builtin')
 

@@ -43,7 +43,7 @@ return {
       require("noice").setup(opts)
     end,
     init = function()
-      map("n", "<leader>nd", "<Cmd>Noice dismiss<CR>", { noremap = true, desc = "Noice dismiss" })
+      map("n", "<leader>md", "<Cmd>Noice dismiss<CR>", { noremap = true, desc = "Noice dismiss" })
     end,
     dependencies = {
       -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries

@@ -1,4 +1,4 @@
-return function(mini) 
+return function(mini)
   return {
     evaluate_single = true,
     items = {
