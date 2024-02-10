@@ -15,8 +15,8 @@ map("i", "<C-l>", function()
     feedkey("<Plug>luasnip-expand-or-jump", "")
   end
 end, { desc = "luasnip expand or jump if in snippet", silent = true, noremap = true })
-map("n", "<leader>uiw", "gUiw`]a", { noremap = true, desc = "UPPERCASE inner word(see I just used it there)" })
-map("n", "<leader>tiw", "guiwgUl", { noremap = true, desc = "Title case inner word" })
+map("n", "<leader>cuiw", "gUiw`]a", { noremap = true, desc = "UPPERCASE inner word(see I just used it there)" })
+map("n", "<leader>ctiw", "guiwgUl", { noremap = true, desc = "Title case inner word" })
 map("n", "<leader>w", "<Cmd>w<cr>", { noremap = true, desc = "Save current buffer" })
 map("n", "<leader><leader>w", "<Cmd>lua vim.lsp.buf.format()<cr><Cmd>w<cr>",
   { noremap = true, desc = "Save current buffer" })
@@ -46,7 +46,7 @@ map("n", "<leader>mr", "<Cmd>lua RSTLNE()<cr>", { noremap = true, desc = "assign
 
 map("n", "<leader>br", "<Cmd>:bnext<CR>")
 map("n", "<leader>ba", "<Cmd>:bprevious<CR>")
-map("n", "<leader>dq", "<Cmd>:bdelete<CR>")
+map("n", "<leader>q", "<Cmd>:bdelete<CR>")
 map("n", "<leader>tq", "<Cmd>:tabclose<CR>")
 
 -- local tscope = require('telescope.builtin')
