@@ -6,9 +6,17 @@ map("n", "<leader>hg", "<Cmd>:Inspect<CR>", { noremap = true })
 map(
   "n",
   "<leader>f",
-  "<Cmd>lua vim.lsp.buf.format()<cr>",
-  { noremap = true, desc = "Use LSP to format current buffer" }
+  "<Cmd>GuardFmt<cr>",
+  { noremap = true, desc = "Use Guard to format current buffer" }
 )
+
+-- map(
+--   "n",
+--   "<leader>f",
+--   "<Cmd>lua vim.lsp.buf.format()<cr>",
+--   { noremap = true, desc = "Use LSP to format current buffer" }
+-- )
+
 map("i", "<C-l>", function()
   local luasnip = require("luasnip")
   if luasnip and luasnip.expand_or_jumpable() then

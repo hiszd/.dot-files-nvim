@@ -66,11 +66,20 @@ return {
 
       require('mason').setup({})
       require('mason-lspconfig').setup({
-        -- ensure_installed = { "prismals", "jsonls", "cssls", "tsserver", "rust_analyzer@nightly" },
         ensure_installed = { "gopls", "prismals", "jsonls", "cssls", "tsserver" },
         handlers = {
           lsp_zero.default_setup,
         },
+      })
+
+      lspconfig.cssls.setup({
+        init_options = {
+          provideFormatter = false,
+        },
+        on_attach = function(client, bufnr)
+          client.server_capabilities.document_formatting = false
+          lsp_zero.on_attach(client, bufnr)
+        end,
       })
 
       local lua_opts = lsp_zero.nvim_lua_ls({
