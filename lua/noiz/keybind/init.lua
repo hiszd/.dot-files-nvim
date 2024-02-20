@@ -57,6 +57,9 @@ map("n", "<leader>ba", "<Cmd>:bprevious<CR>")
 map("n", "<leader>q", "<Cmd>:bdelete<CR>")
 map("n", "<leader>tq", "<Cmd>:tabclose<CR>")
 
+
+map("n", "<C-j>", "<C-^>", { noremap = true })
+
 -- local tscope = require('telescope.builtin')
 
 -- local hid = require("noiz.keybind.hid")

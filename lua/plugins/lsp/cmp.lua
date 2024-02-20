@@ -11,11 +11,25 @@ return function()
         require('luasnip').lsp_expand(args.body)
       end,
     },
+    completion = {
+      autocomplete = {
+        require('cmp.types').cmp.TriggerEvent.TextChanged,
+      },
+      keyword_length = 1,
+    },
     mapping = cmp.mapping.preset.insert({
-      ["<C-p>"] = cmp.mapping.select_prev_item(cmp_select),
-      ["<C-n>"] = cmp.mapping.select_next_item(cmp_select),
-      ["<C-y>"] = cmp.mapping.confirm({ select = true }),
-      ["<C-Space>"] = cmp.mapping.complete(),
+      ["<C-p>"] = cmp.mapping({
+        i = cmp.mapping.select_prev_item(cmp_select),
+      }),
+      ["<C-n>"] = cmp.mapping({
+        i = cmp.mapping.select_next_item(cmp_select),
+      }),
+      ["<C-y>"] = cmp.mapping({
+        i = cmp.mapping.confirm({ select = true }),
+      }),
+      ["<C-Space>"] = cmp.mapping({
+        i = cmp.mapping.complete(),
+      }),
     }),
     sources = cmp.config.sources({
       { name = "nvim_lsp" },
@@ -44,23 +58,18 @@ return function()
 
   -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
   cmp.setup.cmdline(":", {
-    mapping = cmp.mapping.preset.insert({
-      ["<CR>"] = cmp.mapping({
-        i = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true }),
-        c = function(fallback)
-          if cmp.visible() then
-            cmp.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true })
-          else
-            fallback()
-          end
-        end,
-      }),
-    }),
+    completion = {
+      autocomplete = {
+        require('cmp.types').cmp.TriggerEvent.TextChanged,
+      },
+      keyword_length = 1,
+    },
+    mapping = cmp.mapping.preset.insert(),
     sources = cmp.config.sources({
       { name = 'cmdline' },
     }, {
       { name = 'path' }
     }),
-    preselect = cmp.PreselectMode.Item,
+    -- preselect = cmp.PreselectMode.Item,
   })
 end
