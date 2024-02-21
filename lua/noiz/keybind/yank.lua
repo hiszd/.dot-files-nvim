@@ -1,8 +1,8 @@
-map("n", "<leader>y", '"+y', { noremap = true, desc = "yank to clipboard" })
-map("v", "<leader>y", '"+y', { noremap = true, desc = "yank to clipboard" })
+map({ "n" }, "<leader>y", '"+y', { noremap = true, desc = "yank to clipboard" })
+map({ "v" }, "<leader>y", '"+y', { noremap = true, desc = "yank to clipboard" })
 
-map("n", "<leader>p", '"0p', { noremap = true })
-map("v", "<leader>p", '"0p', { noremap = true })
+map({ "n" }, "<leader>p", '"0p', { noremap = true })
+map({ "v" }, "<leader>p", '"0p', { noremap = true })
 
 local move_line = function(dir)
   local pos = vim.fn.getcurpos()
@@ -24,8 +24,8 @@ local move_line = function(dir)
   end
 end
 
-map("n", "I", function() move_line("up") end, { noremap = true })
-map("n", "N", function() move_line("down") end, { noremap = true })
+map({ "n" }, "I", function() move_line("up") end, { noremap = true })
+map({ "n" }, "N", function() move_line("down") end, { noremap = true })
 
-map("v", "N", ":m '>+1<CR>gv=gv", { noremap = true, desc = "move line down" })
-map("v", "I", ":m '<-2<CR>gv=gv", { noremap = true, desc = "move line up" })
+map({ "v" }, "N", ":m '>+1<CR>gv=gv", { noremap = true, desc = "move line down" })
+map({ "v" }, "I", ":m '<-2<CR>gv=gv", { noremap = true, desc = "move line up" })

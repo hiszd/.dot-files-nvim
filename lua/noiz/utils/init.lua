@@ -1,4 +1,4 @@
----@param mode string               #nvim mode(n,v,i, etc.)
+---@param mode table                #nvim mode(n,v,i, etc.)
 ---@param mapping string            #lhs(e.g. '<leader>y')
 ---@param command string | function #command to be executed
 ---@param options table?            #options for mapping
@@ -10,7 +10,9 @@ _G.map = function(mode, mapping, command, options)
   if options then
     options = vim.tbl_extend("force", options, options)
   end
-  vim.keymap.set(mode, mapping, command, options)
+  for v in pairs(mode) do
+    vim.keymap.set(mode[v], mapping, command, options)
+  end
 end
 
 ---@param mode string    #nvim mode(n,v,i, etc.)
@@ -129,7 +131,7 @@ end
 
 util.log = function()
   local curbuf = vim.api.nvim_get_current_buf()
-  local filetype = vim.api.nvim_buf_get_option(curbuf, "filetype")
+  local filetype = vim.api.nvim_get_option_value("filetype", { buf = curbuf })
   if filetype == "lua" then
     feedkey("vkwy<esc>A<enter><esc>Aprint(<esc>p<esc>", "")
   elseif filetype == "jsx" or filetype == "tsx" or filetype == "javascript" or filetype == "typescript" then

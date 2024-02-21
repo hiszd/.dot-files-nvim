@@ -80,7 +80,6 @@ vim.cmd([[
 
 ]])
 
-map("", "<Space>", "<Nop>", { noremap = true })
 vim.g.mapleader = " "
 vim.g.maplocalleader = ","
 

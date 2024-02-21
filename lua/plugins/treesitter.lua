@@ -54,7 +54,7 @@ local config = function()
   vim.cmd("set nofoldenable")
 
 
-  map("n", "<leader>ht", "<Cmd>TSHighlightCapturesUnderCursor<cr>", { noremap = true })
+  map({ "n" }, "<leader>ht", "<Cmd>TSHighlightCapturesUnderCursor<cr>", { noremap = true })
 end
 
 return {

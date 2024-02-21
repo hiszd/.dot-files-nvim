@@ -14,5 +14,5 @@ ListReset = function()
   return ""
 end
 
-map("i", "<C-f>", ListItem(), { noremap = true, expr = true, desc = "assign keys for RSTLNE" })
-map("i", "<C-r>", ListReset(), { noremap = true, expr = true, desc = "assign keys for RSTLNE" })
+map({ "i" }, "<C-f>", ListItem(), { noremap = true, expr = true, desc = "assign keys for RSTLNE" })
+map({ "i" }, "<C-r>", ListReset(), { noremap = true, expr = true, desc = "assign keys for RSTLNE" })

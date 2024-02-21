@@ -5,20 +5,20 @@ P = function(v)
 end
 
 RSTLNE = function()
-  map("n", "<leader>o", "A<CR>", { silent = true, nowait = true, desc = "Insert newline" })
-  map("", "i", "k", { silent = true, desc = "Move up" })
-  map("", "k", "i", { silent = true, desc = "Enter insert mode" })
-  map("", "n", "j", { silent = true, desc = "Move down" })
-  map("", "o", "l", { silent = true, desc = "Move right" })
-  -- map("", "l", "y", { silent = true, desc = "Move right" })
+  map({ "n" }, "<leader>o", "A<CR>", { silent = true, nowait = true, desc = "Insert newline" })
+  map({ "" }, "i", "k", { silent = true, desc = "Move up" })
+  map({ "" }, "k", "i", { silent = true, desc = "Enter insert mode" })
+  map({ "" }, "n", "j", { silent = true, desc = "Move down" })
+  map({ "" }, "o", "l", { silent = true, desc = "Move right" })
+  -- map({ "" }, "l", "y", { silent = true, desc = "Move right" })
   print("RSTLNE")
 end
 
 QWERTY = function()
-  map("", "n", "n")
-  map("", "i", "i")
-  map("", "o", "o")
-  map("", "k", "k")
+  map({ "" }, "n", "n")
+  map({ "" }, "i", "i")
+  map({ "" }, "o", "o")
+  map({ "" }, "k", "k")
   print("QWERTY")
 end
 

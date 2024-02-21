@@ -119,20 +119,20 @@ local config = function()
             show_path = "relative", -- "none", "relative", "absolute"
           },
         },
-        ["A"] = "add_directory",     -- also accepts the optional config.show_path option like "add".
+        ["A"] = "add_directory", -- also accepts the optional config.show_path option like "add".
         ["d"] = "delete",
         ["r"] = "rename",
         ["y"] = "copy_to_clipboard",
         ["x"] = "cut_to_clipboard",
         ["p"] = "paste_from_clipboard",
-        ["c"] = "copy",     -- takes text input for destination, also accepts the optional config.show_path option like "add":
+        ["c"] = "copy", -- takes text input for destination, also accepts the optional config.show_path option like "add":
         -- ["c"] = {
         --  "copy",
         --  config = {
         --    show_path = "none" -- "none", "relative", "absolute"
         --  }
         --}
-        ["m"] = "move",     -- takes text input for destination, also accepts the optional config.show_path option like "add".
+        ["m"] = "move", -- takes text input for destination, also accepts the optional config.show_path option like "add".
         ["q"] = "close_window",
         ["R"] = "refresh",
         ["?"] = "show_help",
@@ -259,8 +259,8 @@ local config = function()
     },
   })
 
-  map("n", "<leader>n", "<Cmd>Neotree reveal toggle<cr>", { noremap = true })
-  map("n", "<leader>gn", "<Cmd>Neotree float git_status<cr>", { noremap = true })
+  map({ "n" }, "<leader>n", "<Cmd>Neotree reveal toggle<cr>", { noremap = true })
+  map({ "n" }, "<leader>gn", "<Cmd>Neotree float git_status<cr>", { noremap = true })
 end
 
 return {

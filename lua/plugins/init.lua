@@ -38,7 +38,7 @@ return {
       show_basename = false,
     },
     init = function()
-      map("n", "<C-a>", "<Cmd>:lua require('barbecue.ui').navigate(-2)<cr>",
+      map({ "n" }, "<C-a>", "<Cmd>:lua require('barbecue.ui').navigate(-2)<cr>",
         { noremap = true, desc = "navigate up one level" })
     end,
   },
