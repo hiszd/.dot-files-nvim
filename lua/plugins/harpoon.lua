@@ -8,28 +8,10 @@ end
 local init = function()
   local h = require("harpoon")
 
-  -- basic telescope configuration
-  local conf = require("telescope.config").values
-  local function toggle_telescope(harpoon_files)
-    local file_paths = {}
-    for _, item in ipairs(harpoon_files.items) do
-      table.insert(file_paths, item.value)
-    end
-
-    require("telescope.pickers").new({}, {
-      prompt_title = "Harpoon",
-      finder = require("telescope.finders").new_table({
-        results = file_paths,
-      }),
-      previewer = conf.file_previewer({}),
-      sorter = conf.generic_sorter({}),
-    }):find()
-  end
-
   map({ "n" },
     "<C-e>",
     function()
-      toggle_telescope(require('harpoon'):list())
+      h.ui:toggle_quick_menu(h:list())
     end,
     { desc = "Open harpoon window" }
   )
@@ -56,7 +38,7 @@ local init = function()
       { "n" },
       "<leader>" .. i,
       function()
-        require('harpoon.ui').nav_file(i)
+        h:list():select(i)
       end,
       { noremap = true, desc = "Navigate to Harpoon file " .. i }
     )

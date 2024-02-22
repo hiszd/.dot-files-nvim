@@ -1,6 +1,4 @@
 return {
-  -- Rust LSP stuff
-  -- "simrat39/rust-tools.nvim",
 
   -- Theming and color
   "chriskempson/base16-vim",
@@ -13,10 +11,25 @@ return {
     end,
   },
   {
-    "numToStr/Comment.nvim",
-    config = function()
-      require("Comment").setup()
-    end,
+    'folke/todo-comments.nvim',
+    dependencies = {
+      'nvim-lua/plenary.nvim'
+    },
+    opts = {
+      signs = false,
+      keywords = {
+        TODO = { color = "todo" },
+      },
+      colors = {
+        todo = { "@comment.todo", "#ff9e64" },
+        error = { "Error", "ErrorMsg", "#DC2626" },
+        warning = { "Warnings", "#FBBF24" },
+        info = { "DiagnosticInfo", "#2563EB" },
+        hint = { "DiagnosticHint", "#10B981" },
+        default = { "Identifier", "#7C3AED" },
+        test = { "Identifier", "#FF00FF" }
+      },
+    }
   },
 
   -- UI
