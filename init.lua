@@ -43,42 +43,11 @@ vim.opt.conceallevel = 2
 vim.opt.completeopt = { "menu", "menuone", "noselect" }
 vim.o.undofile = true
 
--- vim.opt.gfn = "Delugia Mono"
+vim.g.rustfmt_autosave = 1
 
---vim.cmd('colorscheme base16-material-darker')
---vim.cmd('colorscheme base16-seti')
---vim.cmd('colorscheme base16-woodland')
---vim.cmd('let g:airline_theme="base16_classic_dark"')
---vim.cmd('let g:airline#extensions#tabline#enabled = 1')
+map({ "v" }, "//", "y/<C-R>=escape(@\",'/\\')<CR>")
 
-vim.cmd([[
-
-  let g:rustfmt_autosave = 1
-
-  vnoremap // y/\V<C-R>=escape(@",'/\')<CR><CR>
-  filetype plugin indent on
-
-  set list listchars=tab:▸\ ,space:·,precedes:←,extends:→
-
-  syntax on
-
-  syntax match eq "==" conceal cchar=≣
-  syntax match neq "!=" conceal cchar=≠
-  syntax match gteq ">=" conceal cchar=≥
-  syntax match lteq "<=" conceal cchar=≤
-
-  syntax match arrow "->" conceal cchar=→
-  syntax match rpipe "|>" conceal cchar=⊳
-  syntax match lpipe "<|" conceal cchar=⊲
-  syntax match rcomp ">>" conceal cchar=»
-  syntax match lcom "<<" conceal cchar=«
-  syntax match lambda "\\" conceal cchar=λ
-  syntax match cons "::" conceal cchar=∷
-  syntax match parse1 "|=" conceal cchar=⊧
-  syntax match parse2 "|." conceal cchar=⊦
-  syntax match neq "/=" conceal cchar=≠
-
-]])
+vim.opt.listchars = { eol = "↲", tab = "▸ ", trail = "·" }
 
 vim.g.mapleader = " "
 vim.g.maplocalleader = ","
@@ -92,6 +61,7 @@ vim.opt.shiftwidth = 2
 vim.opt.tabstop = 2
 vim.opt.wrap = false
 vim.opt.incsearch = true
+vim.opt.inccommand = 'split'
 vim.opt.scrolloff = 8
 vim.opt.signcolumn = "yes"
 vim.opt.colorcolumn = "80"
@@ -101,7 +71,7 @@ vim.opt.cursorline = true
 vim.opt.foldmethod = "indent"
 vim.opt.hlsearch = false
 
-vim.cmd("set termguicolors")
+vim.opt.termguicolors = true
 
 vim.env.PATH = "~/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/bin" .. ":" .. vim.env.PATH
 
