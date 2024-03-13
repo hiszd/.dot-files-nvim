@@ -82,6 +82,14 @@ return {
         end,
       })
 
+      lspconfig.tsserver.setup({
+        { "javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx" },
+        on_attach = function(client, bufnr)
+          client.server_capabilities.document_formatting = false
+          lsp_zero.on_attach(client, bufnr)
+        end,
+      })
+
       local lua_opts = lsp_zero.nvim_lua_ls({
         single_file_support = false,
         cmd = { "lua-language-server" },
