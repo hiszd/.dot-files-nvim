@@ -260,13 +260,12 @@ local config = function()
   })
 
   map({ "n" }, "<leader>n", "<Cmd>Neotree reveal toggle<cr>", { noremap = true })
-  map({ "n" }, "<leader>gn", "<Cmd>Neotree float git_status<cr>", { noremap = true })
 end
 
 return {
   {
     "nvim-neo-tree/neo-tree.nvim",
-    branch = "v2.x",
+    branch = "v3.x",
     dependencies = {
       "nvim-lua/plenary.nvim",
       "nvim-tree/nvim-web-devicons",
