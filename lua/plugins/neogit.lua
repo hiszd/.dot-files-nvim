@@ -2,15 +2,16 @@ local init = function()
   local neogit = require("neogit")
   neogit.setup({
     integrations = {
-      diffview = true
+      diffview = true,
+      telescope = true
     }
   })
 
   vim.keymap.set("n", "<leader>gc", function()
-    neogit.open({ "commit", kind = "split_above" })
+    neogit.open({ "commit", kind = "replace" })
   end)
   vim.keymap.set("n", "<leader>go", function()
-    neogit.open({ kind = "split_above" })
+    neogit.open({ kind = "replace" })
   end)
 end
 
