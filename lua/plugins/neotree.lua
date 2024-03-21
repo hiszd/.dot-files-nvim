@@ -194,6 +194,7 @@ local config = function()
           ["/"] = "fuzzy_finder",
           ["D"] = "fuzzy_finder_directory",
           ["f"] = "filter_on_submit",
+          ["i"] = "",
           ["<c-x>"] = "clear_filter",
           ["[g"] = "prev_git_modified",
           ["]g"] = "next_git_modified",
