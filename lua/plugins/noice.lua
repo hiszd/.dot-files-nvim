@@ -35,7 +35,7 @@ return {
   -- lazy.nvim
   {
     "folke/noice.nvim",
-    event = "VeryLazy",
+    priority = 99,
     config = function()
       require("notify").setup({
         timeout = 1000,

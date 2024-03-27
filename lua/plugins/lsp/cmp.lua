@@ -1,9 +1,4 @@
-return function()
-  local feedkey = function(key, mode)
-    vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(key, true, true, true), mode, true)
-  end
-
-  local cmp = require("cmp")
+return function(cmp)
   local cmp_select = { behavior = cmp.SelectBehavior.Select }
   cmp.setup({
     snippet = {
@@ -64,7 +59,7 @@ return function()
       },
       keyword_length = 1,
     },
-    mapping = cmp.mapping.preset.insert(),
+    mapping = cmp.mapping.preset.cmdline(),
     sources = cmp.config.sources({
       { name = 'cmdline' },
     }, {

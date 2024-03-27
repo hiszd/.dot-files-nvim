@@ -2,18 +2,29 @@ local relpath = "plugins.lsp."
 
 return {
   {
-    'hrsh7th/nvim-cmp',
+    'neovim/nvim-lspconfig',
     dependencies = {
-      { 'L3MON4D3/LuaSnip',
-        'onsails/lspkind.nvim' }
+      {
+        'hrsh7th/nvim-cmp',
+        dependencies = {
+          {
+            'L3MON4D3/LuaSnip',
+            'onsails/lspkind.nvim',
+            "hrsh7th/cmp-buffer",
+            "hrsh7th/cmp-path",
+            "hrsh7th/cmp-nvim-lua",
+            "hrsh7th/cmp-nvim-lsp",
+            "hrsh7th/cmp-cmdline",
+            "saadparwaiz1/cmp_luasnip",
+          }
+        },
+      },
     },
     config = function()
-      require(relpath .. "cmp")()
-    end,
-  },
-  {
-    'neovim/nvim-lspconfig',
-    config = function()
+      local cmp = require("cmp")
+      require(relpath .. "cmp")(cmp)
+      local capabilities = require('cmp_nvim_lsp').default_capabilities()
+
       local on_attach = function(_, bufnr)
         local opts = { buffer = bufnr, remap = false }
 
@@ -57,6 +68,7 @@ return {
         init_options = {
           provideFormatter = false,
         },
+        capabilities = capabilities,
         on_attach = function(client, bufnr)
           client.server_capabilities.document_formatting = false
           on_attach(client, bufnr)
@@ -65,6 +77,7 @@ return {
 
       lspconfig.tsserver.setup({
         { "javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx" },
+        capabilities = capabilities,
         on_attach = function(client, bufnr)
           client.server_capabilities.document_formatting = false
           on_attach(client, bufnr)
@@ -95,6 +108,7 @@ return {
             }
           })
         end,
+        capabilities = capabilities,
         settings = {
           Lua = {}
         }
@@ -125,11 +139,13 @@ return {
 
       lspconfig.html.setup({
         filetypes = { 'html', 'tera' },
+        capabilities = capabilities,
       })
 
       lspconfig.rust_analyzer.setup({
         -- cmd = { vim.fn.expand("~/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/bin/rust-analyzer") },
         cmd = { "rust-analyzer" },
+        capabilities = capabilities,
         settings = {
           ["rust-analyzer"] = {
             imports = {
@@ -154,6 +170,7 @@ return {
 
       for _, lsp in ipairs(servers) do
         lspconfig[lsp].setup {
+          capabilities = capabilities,
           on_attach = on_attach,
         }
       end
