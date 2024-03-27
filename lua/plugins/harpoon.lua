@@ -8,6 +8,8 @@ end
 local init = function()
   local h = require("harpoon")
 
+  local map = map_impl("Harpoon")
+
   map({ "n" },
     "<C-e>",
     function()
@@ -30,7 +32,7 @@ local init = function()
     function()
       h:list():remove()
     end,
-    { noremap = true, desc = "Add file to Harpoon" }
+    { noremap = true, desc = "Remove file from Harpoon" }
   )
 
   for i = 0, 9 do

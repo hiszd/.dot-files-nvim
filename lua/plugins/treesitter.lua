@@ -18,6 +18,10 @@ local config = function()
       "rust",
       "toml",
       "ocaml",
+      "vimdoc",
+      "markdown",
+      "yaml",
+      "json",
     }, -- Or run :TSUpdate org
     playground = {
       enable = true,
@@ -54,6 +58,7 @@ local config = function()
   vim.cmd("set nofoldenable")
 
 
+  local map = map_impl("Treesitter")
   map({ "n" }, "<leader>ht", "<Cmd>TSHighlightCapturesUnderCursor<cr>", { noremap = true })
 end
 

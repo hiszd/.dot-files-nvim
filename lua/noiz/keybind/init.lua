@@ -2,13 +2,9 @@ local feedkey = function(key, mode)
   vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(key, true, true, true), mode, true)
 end
 
+local map = map_impl("Noiz.Keybind")
+
 map({ "n" }, "<leader>hg", "<Cmd>:Inspect<CR>", { noremap = true })
-map(
-  { "n" },
-  "<leader>f",
-  "<Cmd>GuardFmt<cr>",
-  { noremap = true, desc = "Use Guard to format current buffer" }
-)
 
 -- map(
 --   { "n" },

@@ -73,6 +73,8 @@ local init = function()
 
   require("ztab").setup(opts)
 
+  local map = map_impl("ZTab")
+
   map({ "n" }, "<C-L>", "<Cmd>:tabnext #<cr>", { noremap = true })
 
   map({ "n" }, "<leader>br", "<Cmd>:lua R('ztab')<CR><Cmd>lua require('ztab').setup(require('plugins/ztab').opts)<CR>")

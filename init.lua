@@ -45,7 +45,7 @@ vim.o.undofile = true
 
 vim.g.rustfmt_autosave = 1
 
-map({ "v" }, "//", "y/<C-R>=escape(@\",'/\\')<CR>")
+map({ "v" }, "//", "y/<C-R>=escape(@\",'/\\')<CR>", { desc = "Search selected text" })
 
 vim.opt.listchars = { eol = "↲", tab = "▸ ", trail = "·" }
 

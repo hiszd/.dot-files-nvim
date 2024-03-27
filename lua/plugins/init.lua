@@ -57,6 +57,7 @@ return {
       show_basename = false,
     },
     init = function()
+      local map = map_impl("Barbecue")
       map({ "n" }, "<C-a>", "<Cmd>:lua require('barbecue.ui').navigate(-2)<cr>",
         { noremap = true, desc = "navigate up one level" })
     end,

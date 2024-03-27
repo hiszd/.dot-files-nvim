@@ -5,6 +5,7 @@ P = function(v)
 end
 
 RSTLNE = function()
+  local map = map_impl("RSTLNE")
   map({ "n" }, "<leader>o", "A<CR>", { silent = true, nowait = true, desc = "Insert newline" })
   map({ "" }, "i", "k", { silent = true, desc = "Move up" })
   map({ "" }, "k", "i", { silent = true, desc = "Enter insert mode" })
@@ -15,6 +16,7 @@ RSTLNE = function()
 end
 
 QWERTY = function()
+  local map = map_impl("QWERTY")
   map({ "" }, "n", "n")
   map({ "" }, "i", "i")
   map({ "" }, "o", "o")

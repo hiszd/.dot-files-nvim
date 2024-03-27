@@ -1,3 +1,4 @@
+local map = map_impl("Noiz.Keybind.Yank")
 map({ "n" }, "<leader>y", '"+y', { noremap = true, desc = "yank to clipboard" })
 map({ "v" }, "<leader>y", '"+y', { noremap = true, desc = "yank to clipboard" })
 

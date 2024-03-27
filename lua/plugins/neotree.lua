@@ -260,6 +260,7 @@ local config = function()
     },
   })
 
+  local map = map_impl("Neotree")
   map({ "n" }, "<leader>n", "<Cmd>Neotree reveal toggle<cr>", { noremap = true })
 end
 

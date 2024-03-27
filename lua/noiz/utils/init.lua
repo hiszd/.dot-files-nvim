@@ -1,4 +1,5 @@
----@param mode table                #nvim mode(n,v,i, etc.)
+---Map a key
+---@param mode NvimModes[]                #nvim mode(n,v,i, etc.)
 ---@param mapping string            #lhs(e.g. '<leader>y')
 ---@param command string | function #command to be executed
 ---@param options table?            #options for mapping
@@ -10,8 +11,16 @@ _G.map = function(mode, mapping, command, options)
   if options then
     options = vim.tbl_extend("force", options, options)
   end
-  for v in pairs(mode) do
-    vim.keymap.set(mode[v], mapping, command, options)
+  vim.keymap.set(mode, mapping, command, options)
+end
+
+---Create mapping implementation with special description
+---@param desc string
+_G.map_impl = function(desc)
+  return function(mode, mapping, command, options)
+    options = options or {}
+    options.desc = options.desc and options.desc .. " (" .. desc .. ")" or "(" .. desc .. ")"
+    map(mode, mapping, command, options)
   end
 end
 

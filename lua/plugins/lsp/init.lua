@@ -2,30 +2,19 @@ local relpath = "plugins.lsp."
 
 return {
   {
-    'VonHeikemen/lsp-zero.nvim',
-    branch = 'v3.x',
+    'hrsh7th/nvim-cmp',
     dependencies = {
-      {
-        'neovim/nvim-lspconfig',
-        dependencies = {
-          { 'hrsh7th/cmp-nvim-lsp' },
-        }
-      },
-      {
-        'hrsh7th/nvim-cmp',
-        dependencies = {
-          { 'L3MON4D3/LuaSnip',
-            'onsails/lspkind.nvim' }
-        },
-      },
-      { 'williamboman/mason.nvim' },
-      { 'williamboman/mason-lspconfig.nvim' },
+      { 'L3MON4D3/LuaSnip',
+        'onsails/lspkind.nvim' }
     },
     config = function()
-      local lsp_zero = require('lsp-zero')
-      lsp_zero.extend_lspconfig()
-
-      lsp_zero.on_attach(function(_, bufnr)
+      require(relpath .. "cmp")()
+    end,
+  },
+  {
+    'neovim/nvim-lspconfig',
+    config = function()
+      local on_attach = function(_, bufnr)
         local opts = { buffer = bufnr, remap = false }
 
         vim.keymap.set("n", "gd", function()
@@ -60,17 +49,9 @@ return {
         vim.api.nvim_set_option_value("formatexpr", "v:lua.vim.lsp.formatexpr()", { buf = bufnr })
         vim.api.nvim_set_option_value("omnifunc", "v:lua.vim.lsp.omnifunc", { buf = bufnr })
         vim.api.nvim_set_option_value("tagfunc", "v:lua.vim.lsp.tagfunc", { buf = bufnr })
-      end)
+      end
 
       local lspconfig = require("lspconfig")
-
-      require('mason').setup({})
-      require('mason-lspconfig').setup({
-        ensure_installed = { "gopls", "prismals", "jsonls", "cssls", "tsserver" },
-        handlers = {
-          lsp_zero.default_setup,
-        },
-      })
 
       lspconfig.cssls.setup({
         init_options = {
@@ -78,7 +59,7 @@ return {
         },
         on_attach = function(client, bufnr)
           client.server_capabilities.document_formatting = false
-          lsp_zero.on_attach(client, bufnr)
+          on_attach(client, bufnr)
         end,
       })
 
@@ -86,16 +67,61 @@ return {
         { "javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx" },
         on_attach = function(client, bufnr)
           client.server_capabilities.document_formatting = false
-          lsp_zero.on_attach(client, bufnr)
+          on_attach(client, bufnr)
         end,
       })
 
-      local lua_opts = lsp_zero.nvim_lua_ls({
-        single_file_support = false,
-        cmd = { "lua-language-server" },
-      })
+      require 'lspconfig'.lua_ls.setup {
+        on_init = function(client)
+          local path = client.workspace_folders[1].name
+          if vim.loop.fs_stat(path .. '/.luarc.json') or vim.loop.fs_stat(path .. '/.luarc.jsonc') then
+            return
+          end
+          client.config.settings.Lua = vim.tbl_deep_extend('force', client.config.settings.Lua, {
+            runtime = {
+              version = 'LuaJIT'
+            },
+            -- Make the server aware of Neovim runtime files
+            workspace = {
+              checkThirdParty = false,
+              library = {
+                vim.env.VIMRUNTIME,
+                "./lua",
+                -- "${3rd}/luv/library"
+                -- "${3rd}/busted/library",
+              }
+              -- or pull in all of 'runtimepath'. NOTE: this is a lot slower
+              -- library = vim.api.nvim_get_runtime_file("", true)
+            }
+          })
+        end,
+        settings = {
+          Lua = {}
+        }
+      }
 
-      lspconfig.lua_ls.setup(lua_opts)
+      vim.keymap.set('n', '[d', vim.diagnostic.goto_prev)
+      vim.keymap.set('n', ']d', vim.diagnostic.goto_next)
+
+      vim.api.nvim_create_autocmd('LspAttach', {
+        group = vim.api.nvim_create_augroup('UserLspConfig', {}),
+        callback = function(ev)
+          -- Enable completion triggered by <c-x><c-o>
+          vim.bo[ev.buf].omnifunc = 'v:lua.vim.lsp.omnifunc'
+          local opts = { buffer = ev.buf }
+          vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
+          vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
+          vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
+          vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts)
+          vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, opts)
+          vim.keymap.set('n', '<space>D', vim.lsp.buf.type_definition, opts)
+          vim.keymap.set('n', '<space>lrn', vim.lsp.buf.rename, opts)
+          vim.keymap.set({ 'n', 'v' }, '<space>lca', vim.lsp.buf.code_action, opts)
+          vim.keymap.set('n', '<space>f', function()
+            vim.lsp.buf.format { async = true }
+          end, opts)
+        end,
+      })
 
       lspconfig.html.setup({
         filetypes = { 'html', 'tera' },
@@ -124,9 +150,13 @@ return {
         },
       })
 
-      lsp_zero.setup_servers({ 'ocamllsp', 'gopls', 'nil_ls', 'prismals', 'jsonls', 'cssls', 'tsserver' })
+      local servers = { 'ocamllsp', 'gopls', 'nil_ls', 'prismals', 'jsonls', 'cssls', 'tsserver' }
 
-      require(relpath .. "cmp")()
+      for _, lsp in ipairs(servers) do
+        lspconfig[lsp].setup {
+          on_attach = on_attach,
+        }
+      end
 
       vim.diagnostic.config({
         virtual_text = true,
