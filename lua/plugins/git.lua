@@ -19,7 +19,6 @@ end
 
 local gitsigns_opts = {
   on_attach = function(bufnr)
-    print("attach on", bufnr)
     local gs = package.loaded.gitsigns
     local map = map_impl("GitSigns")
     -- Navigation
