@@ -202,6 +202,13 @@ local config = function()
   -- **************************************************************
 
   ins_right({
+    function()
+      return vim.api.nvim_call_function("codeium#GetStatusString", {})
+    end,
+    color = { fg = "orange" }
+  })
+
+  ins_right({
     "branch",
     icon = "",
     color = { fg = "orange", gui = "bold" },

@@ -96,4 +96,4 @@ require("lazy").setup("plugins",
   { dev = { path = "~/programming/nvim/" }, change_detection = { notify = true } }
 )
 require("noiz.keybind")
-RSTLNE()
+-- RSTLNE()
