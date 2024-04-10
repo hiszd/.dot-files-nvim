@@ -15,6 +15,9 @@ local neogit_init = function()
   map({ "n" }, "<leader>go", function()
     neogit.open({ kind = "replace" })
   end, { desc = "Open Neogit" })
+  map({ "n" }, "<leader>gl", function()
+    neogit.open({ "log", kind = "replace" })
+  end, { desc = "Open Neogit Log" })
 end
 
 local gitsigns_opts = {
