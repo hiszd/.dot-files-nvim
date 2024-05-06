@@ -32,7 +32,7 @@ return {
           -- vim.lsp.buf.definition()
           require("telescope.builtin").lsp_definitions()
         end, opts)
-        vim.keymap.set("n", "K", function()
+        vim.keymap.set("n", "I", function()
           vim.lsp.buf.hover()
         end, opts)
         vim.keymap.set("n", "<leader>lws", function()
@@ -55,6 +55,9 @@ return {
         end, opts)
         vim.keymap.set("i", "<C-h>", function()
           vim.lsp.buf.signature_help()
+        end, opts)
+        vim.keymap.set("n", "<leader>f", function()
+          vim.lsp.buf.format({ async = true })
         end, opts)
 
         vim.api.nvim_set_option_value("formatexpr", "v:lua.vim.lsp.formatexpr()", { buf = bufnr })

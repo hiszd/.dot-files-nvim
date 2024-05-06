@@ -57,6 +57,10 @@ map({ "n" }, "<leader>tq", "<Cmd>:tabclose<CR>")
 
 map({ "n" }, "<C-j>", "<C-^>", { noremap = true })
 
+map({ "n" }, "<leader>df", function()
+  vim.cmd("setlocal nofoldenable");
+end, { noremap = true, desc = "" })
+
 -- local tscope = require('telescope.builtin')
 
 -- local hid = require("noiz.keybind.hid")

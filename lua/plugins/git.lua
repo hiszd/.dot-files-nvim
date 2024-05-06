@@ -18,6 +18,20 @@ local neogit_init = function()
   map({ "n" }, "<leader>gl", function()
     neogit.open({ "log", kind = "replace" })
   end, { desc = "Open Neogit Log" })
+
+  -- local disable_fold = function(args)
+  --   -- {_id, _event, _group, _match, _buf, _file, _data}
+  --   if string.find(vim.bo[args.buf].filetype, "Neogit") or string.find(args.file, "Neogit") then
+  --     P("FOUND: Neogit")
+  --     vim.opt_local.foldlevel = 1000
+  --   end
+  -- end
+
+  -- local _global = vim.api.nvim_create_augroup("_global", { clear = true })
+  -- vim.api.nvim_create_autocmd({ "BufEnter", "BufWinEnter" }, {
+  --   callback = disable_fold,
+  --   group = _global,
+  -- })
 end
 
 local gitsigns_opts = {

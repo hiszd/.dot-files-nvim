@@ -25,8 +25,8 @@ local move_line = function(dir)
   end
 end
 
-map({ "n" }, "I", function() move_line("up") end, { noremap = true })
-map({ "n" }, "N", function() move_line("down") end, { noremap = true })
+map({ "n" }, "K", function() move_line("up") end, { noremap = true })
+map({ "n" }, "J", function() move_line("down") end, { noremap = true })
 
-map({ "v" }, "N", ":m '>+1<CR>gv=gv", { noremap = true, desc = "move line down" })
-map({ "v" }, "I", ":m '<-2<CR>gv=gv", { noremap = true, desc = "move line up" })
+map({ "v" }, "K", ":m '<-2<CR>gv=gv", { noremap = true, desc = "move line up" })
+map({ "v" }, "J", ":m '>+1<CR>gv=gv", { noremap = true, desc = "move line down" })

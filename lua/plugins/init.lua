@@ -25,13 +25,18 @@ return {
       signs = false,
       keywords = {
         TODO = { color = "todo" },
+        ERROR = { color = "error" },
+        WARNING = { color = "warning" },
+        INFO = { color = "info" },
+        HINT = { color = "hint" },
+        TEST = { color = "test" },
       },
       colors = {
         todo = { "@comment.todo", "#ff9e64" },
         error = { "Error", "ErrorMsg", "#DC2626" },
-        warning = { "Warnings", "#FBBF24" },
-        info = { "DiagnosticInfo", "#2563EB" },
-        hint = { "DiagnosticHint", "#10B981" },
+        warning = { "#FBBF24" },
+        info = { "#2563EB" },
+        hint = { "#10B981" },
         default = { "Identifier", "#7C3AED" },
         test = { "Identifier", "#FF00FF" }
       },
