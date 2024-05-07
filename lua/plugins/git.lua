@@ -18,68 +18,11 @@ local neogit_init = function()
   map({ "n" }, "<leader>gl", function()
     neogit.open({ "log", kind = "replace" })
   end, { desc = "Open Neogit Log" })
-
-  -- local disable_fold = function(args)
-  --   -- {_id, _event, _group, _match, _buf, _file, _data}
-  --   if string.find(vim.bo[args.buf].filetype, "Neogit") or string.find(args.file, "Neogit") then
-  --     P("FOUND: Neogit")
-  --     vim.opt_local.foldlevel = 1000
-  --   end
-  -- end
-
-  -- local _global = vim.api.nvim_create_augroup("_global", { clear = true })
-  -- vim.api.nvim_create_autocmd({ "BufEnter", "BufWinEnter" }, {
-  --   callback = disable_fold,
-  --   group = _global,
-  -- })
 end
 
 local neogit_opts = {
-  sections = {
-    sequencer = {
-      folded = false,
-      hidden = false,
-    },
-    untracked = {
-      folded = false,
-      hidden = false,
-    },
-    unstaged = {
-      folded = false,
-      hidden = false,
-    },
-    staged = {
-      folded = false,
-      hidden = false,
-    },
-    stashes = {
-      folded = true,
-      hidden = false,
-    },
-    unpulled_upstream = {
-      folded = true,
-      hidden = false,
-    },
-    unmerged_upstream = {
-      folded = false,
-      hidden = false,
-    },
-    unpulled_pushRemote = {
-      folded = false,
-      hidden = false,
-    },
-    unmerged_pushRemote = {
-      folded = false,
-      hidden = false,
-    },
-    recent = {
-      folded = false,
-      hidden = false,
-    },
-    rebase = {
-      folded = true,
-      hidden = false,
-    },
+  status = {
+    fold = false,
   },
 }
 
@@ -122,7 +65,7 @@ local gitsigns_opts = {
 
 return {
   {
-    "NeogitOrg/neogit",
+    "hiszd/neogit",
     branch = "nightly",
     dependencies = {
       "nvim-lua/plenary.nvim",
