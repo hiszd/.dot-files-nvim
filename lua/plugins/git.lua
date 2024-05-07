@@ -34,6 +34,55 @@ local neogit_init = function()
   -- })
 end
 
+local neogit_opts = {
+  sections = {
+    sequencer = {
+      folded = false,
+      hidden = false,
+    },
+    untracked = {
+      folded = false,
+      hidden = false,
+    },
+    unstaged = {
+      folded = false,
+      hidden = false,
+    },
+    staged = {
+      folded = false,
+      hidden = false,
+    },
+    stashes = {
+      folded = true,
+      hidden = false,
+    },
+    unpulled_upstream = {
+      folded = true,
+      hidden = false,
+    },
+    unmerged_upstream = {
+      folded = false,
+      hidden = false,
+    },
+    unpulled_pushRemote = {
+      folded = false,
+      hidden = false,
+    },
+    unmerged_pushRemote = {
+      folded = false,
+      hidden = false,
+    },
+    recent = {
+      folded = false,
+      hidden = false,
+    },
+    rebase = {
+      folded = true,
+      hidden = false,
+    },
+  },
+}
+
 local gitsigns_opts = {
   on_attach = function(bufnr)
     local gs = package.loaded.gitsigns
@@ -83,11 +132,12 @@ return {
       "nvim-telescope/telescope.nvim",
     },
     config = true,
+    opts = neogit_opts,
     init = neogit_init,
   },
   {
     "lewis6991/gitsigns.nvim",
-    opts = gitsigns_opts,
+    opts   = gitsigns_opts,
     config = true,
   }
 }

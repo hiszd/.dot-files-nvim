@@ -62,6 +62,45 @@ local config = function()
   map({ "n" }, "<leader>ht", "<Cmd>TSHighlightCapturesUnderCursor<cr>", { noremap = true })
 end
 
+local init = function()
+  local ts_utils = require("nvim-treesitter.ts_utils")
+
+  ---@param node TSNode
+  ---@return boolean
+  local filter_node = function(node)
+    local type = node:type()
+    if type == "parameters" then
+      return false
+    else
+      return true
+    end
+  end
+
+  local goto_parent = function()
+    local node = ts_utils.get_node_at_cursor()
+    local parent = node:parent()
+    ts_utils.goto_node(parent:parent())
+  end
+  local goto_next_sibling = function()
+    local node = ts_utils.get_node_at_cursor()
+    local sibling = ts_utils.get_next_node(node, false, false)
+    while sibling:parent() ~= node:parent() do
+      sibling = ts_utils.get_next_node(node, false, false)
+    end
+    ts_utils.goto_node(sibling)
+  end
+
+  local goto_previous_sibling = function()
+    local node = ts_utils.get_node_at_cursor()
+    ts_utils.goto_node(node:prev_sibling())
+  end
+
+  local map = map_impl("Treesitter")
+  map({ "n" }, "]f", function() goto_next_sibling() end, { noremap = true, desc = "Goto Next Sibling" })
+  map({ "n" }, "[f", function() goto_previous_sibling() end, { noremap = true, desc = "Goto Previous Sibling" })
+  map({ "n" }, "[p", function() goto_parent() end, { noremap = true, desc = "Goto Parent" })
+end
+
 return {
   "nvim-treesitter/nvim-treesitter",
   run = function()
@@ -72,4 +111,5 @@ return {
     "nvim-treesitter/playground",
   },
   config = config,
+  init = init,
 }
