@@ -95,10 +95,22 @@ local init = function()
     ts_utils.goto_node(node:prev_sibling())
   end
 
+  local highlight_node = function()
+    local node = ts_utils.get_node_at_cursor()
+    if node ~= nil then
+      local buf = vim.api.nvim_get_current_buf()
+      local ns = vim.api.nvim_create_namespace("TSTest")
+      local sr, _, er = node:range()
+      ts_utils.highlight_node(node, buf, ns, "@text.warning")
+      vim.defer_fn(function() vim.api.nvim_buf_clear_namespace(buf, ns, sr, er + 1) end, 3000)
+    end
+  end
+
   local map = map_impl("Treesitter")
   map({ "n" }, "]f", function() goto_next_sibling() end, { noremap = true, desc = "Goto Next Sibling" })
   map({ "n" }, "[f", function() goto_previous_sibling() end, { noremap = true, desc = "Goto Previous Sibling" })
   map({ "n" }, "[p", function() goto_parent() end, { noremap = true, desc = "Goto Parent" })
+  map({ "n" }, "hf", function() highlight_node() end, { noremap = true, desc = "Get Parent" })
 end
 
 return {
