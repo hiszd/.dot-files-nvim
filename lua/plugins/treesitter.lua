@@ -110,7 +110,7 @@ local init = function()
   map({ "n" }, "]f", function() goto_next_sibling() end, { noremap = true, desc = "Goto Next Sibling" })
   map({ "n" }, "[f", function() goto_previous_sibling() end, { noremap = true, desc = "Goto Previous Sibling" })
   map({ "n" }, "[p", function() goto_parent() end, { noremap = true, desc = "Goto Parent" })
-  map({ "n" }, "hf", function() highlight_node() end, { noremap = true, desc = "Get Parent" })
+  map({ "n" }, "<localleader>hf", function() highlight_node() end, { noremap = true, desc = "Get Parent" })
 end
 
 return {

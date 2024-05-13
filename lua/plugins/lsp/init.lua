@@ -28,37 +28,47 @@ return {
       local on_attach = function(_, bufnr)
         local opts = { buffer = bufnr, remap = false }
 
-        vim.keymap.set("n", "gd", function()
+        local map = map_impl("LSP")
+
+        map("n", "gd", function()
           -- vim.lsp.buf.definition()
           require("telescope.builtin").lsp_definitions()
         end, opts)
-        vim.keymap.set("n", "I", function()
+        map("n", "I", function()
           vim.lsp.buf.hover()
         end, opts)
-        vim.keymap.set("n", "<leader>lws", function()
+        map("n", "<leader>lws", function()
           vim.lsp.buf.workspace_symbol()
         end, opts)
-        vim.keymap.set("n", "[d", function()
+        map("n", "[d", function()
           vim.diagnostic.goto_next()
         end, opts)
-        vim.keymap.set("n", "]d", function()
+        map("n", "]d", function()
           vim.diagnostic.goto_prev()
         end, opts)
-        vim.keymap.set("n", "<leader>lca", function()
+        map("n", "<leader>lca", function()
           vim.lsp.buf.code_action()
         end, opts)
-        vim.keymap.set("n", "<leader>lrr", function()
+        map("n", "<leader>lrr", function()
           vim.lsp.buf.references()
         end, opts)
-        vim.keymap.set("n", "<leader>lrn", function()
+        map("n", "<leader>lrn", function()
           vim.lsp.buf.rename()
         end, opts)
-        vim.keymap.set("i", "<C-h>", function()
+        map("i", "<C-h>", function()
           vim.lsp.buf.signature_help()
         end, opts)
-        vim.keymap.set("n", "<leader>f", function()
+        map("n", "<leader>f", function()
           vim.lsp.buf.format({ async = true })
         end, opts)
+
+        map("n", "<leader>TD", function()
+          if vim.diagnostic.is_disabled() then
+            vim.diagnostic.enable()
+          else
+            vim.diagnostic.disable()
+          end
+        end, { desc = "Toggle Diagnostics", opts })
 
         vim.api.nvim_set_option_value("formatexpr", "v:lua.vim.lsp.formatexpr()", { buf = bufnr })
         vim.api.nvim_set_option_value("omnifunc", "v:lua.vim.lsp.omnifunc", { buf = bufnr })
@@ -169,7 +179,7 @@ return {
         },
       })
 
-      local servers = { 'ocamllsp', 'gopls', 'nil_ls', 'prismals', 'jsonls', 'cssls', 'tsserver' }
+      local servers = { 'ocamllsp', 'gopls', 'nil_ls', 'prismals', 'jsonls', 'cssls', 'tsserver', 'zls' }
 
       for _, lsp in ipairs(servers) do
         lspconfig[lsp].setup {
