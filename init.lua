@@ -13,6 +13,16 @@ else
   vim.opt.shell = "fish"
 end
 
+-- auto indent empty line when going into insert mode
+vim.cmd[[function! IndentWithI()
+    if len(getline('.')) == 0
+        return "\"_cc"
+    else
+        return "i"
+    endif
+endfunction
+nnoremap <expr> i IndentWithI()]]
+
 vim.cmd(":noh")
 
 vim.api.nvim_command("set viminfo='100,n$HOME/.config/nvim/.runtime/files/info/viminfo")

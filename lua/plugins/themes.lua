@@ -8,7 +8,6 @@ return {
   },
   {
     "hiszd/chillthm.nvim",
-    dev = true,
     config = function()
       vim.cmd("colorscheme chillthm")
     end,
