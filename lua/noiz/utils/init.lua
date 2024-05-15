@@ -16,6 +16,7 @@ end
 
 ---Create mapping implementation with special description
 ---@param desc string
+---@return fun(mode: NvimModes[], mapping: string, command: string | function, options: table?)
 _G.map_impl = function(desc)
   return function(mode, mapping, command, options)
     options = options or {}
