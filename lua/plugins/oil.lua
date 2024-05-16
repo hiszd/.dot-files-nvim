@@ -20,6 +20,7 @@ return {
       keymaps = {
         ["?"] = "actions.show_help",
         ["q"] = "actions.close",
+        ["<BS>"] = "actions.parent",
       },
     },
     init = init,

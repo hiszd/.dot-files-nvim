@@ -37,51 +37,51 @@ return {
 
         local map = map_impl("LSP")
 
-        map('n', 'gD', function()
+        map({ 'n' }, 'gD', function()
           vim.lsp.buf.declaration()
         end, combine({ desc = "Goto Declaration" }))
-        map("n", "gd", function()
+        map({ "n" }, "gd", function()
           -- vim.lsp.buf.definition()
           require("telescope.builtin").lsp_definitions()
         end, combine({ desc = "Goto Definition" }))
-        map("n", "I", function()
+        map({ "n" }, "I", function()
           vim.lsp.buf.hover()
         end, combine({ desc = "Show Hover" }))
-        map('n', 'gi', function()
+        map({ 'n' }, 'gi', function()
           vim.lsp.buf.implementation()
         end, combine({ desc = "Goto Implementation" }))
-        map('n', '<C-k>', function()
+        map({ 'n' }, '<C-k>', function()
           vim.lsp.buf.signature_help()
         end, combine({ desc = "Show Signature Help" }))
-        map('n', '<leader>D', function()
+        map({ 'n' }, '<leader>D', function()
           vim.lsp.buf.type_definition()
         end, combine({ desc = "Goto Type Definition" }))
-        map("n", "<leader>lws", function()
+        map({ "n" }, "<leader>lws", function()
           vim.lsp.buf.workspace_symbol()
         end, combine({ desc = "Workspace Symbol" }))
-        map("n", "]d", function()
+        map({ "n" }, "]d", function()
           vim.diagnostic.goto_next()
         end, combine({ desc = "Next Diagnostic" }))
-        map("n", "[d", function()
+        map({ "n" }, "[d", function()
           vim.diagnostic.goto_prev()
         end, combine({ desc = "Prev Diagnostic" }))
-        map("n", "<leader>lca", function()
+        map({ "n" }, "<leader>lca", function()
           vim.lsp.buf.code_action()
         end, combine({ desc = "Code Action" }))
-        map("n", "<leader>lrr", function()
+        map({ "n" }, "<leader>lrr", function()
           vim.lsp.buf.references()
         end, combine({ desc = "References" }))
-        map("n", "<leader>lrn", function()
+        map({ "n" }, "<leader>lrn", function()
           vim.lsp.buf.rename()
         end, combine({ desc = "Rename" }))
-        map("i", "<C-h>", function()
+        map({ "i" }, "<C-h>", function()
           vim.lsp.buf.signature_help()
         end, combine({ desc = "Show Signature Help" }))
-        map("n", "<leader>f", function()
+        map({ "n" }, "<leader>f", function()
           vim.lsp.buf.format({ async = true })
         end, combine({ desc = "Format Document" }))
 
-        map("n", "<leader>TD", function()
+        map({ "n" }, "<leader>TD", function()
           if vim.diagnostic.is_disabled() then
             vim.diagnostic.enable()
           else
@@ -197,6 +197,13 @@ return {
           },
         },
       })
+
+      lspconfig.taplo.setup {
+        capabilities = capabilities,
+        on_attach = on_attach,
+        cmd = { "taplo", "lsp", "stdio" }
+      }
+
 
       local servers = { 'ocamllsp', 'gopls', 'nil_ls', 'prismals', 'jsonls', 'cssls', 'tsserver', 'zls' }
 
