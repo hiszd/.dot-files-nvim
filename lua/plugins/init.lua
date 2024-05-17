@@ -32,13 +32,16 @@ return {
         TEST = { color = "test" },
       },
       colors = {
-        todo = { "@comment.todo", "#ff9e64" },
-        error = { "Error", "ErrorMsg", "#DC2626" },
-        warning = { "#FBBF24" },
-        info = { "#2563EB" },
-        hint = { "#10B981" },
-        default = { "Identifier", "#7C3AED" },
-        test = { "Identifier", "#FF00FF" }
+        todo = { "@comment.todo" },
+        -- TODO:
+        error = { "@comment.error" },
+        -- ERROR:
+        warning = { "@comment.warn" },
+        -- WARN:
+        info = { "@comment.info" },
+        -- INFO:
+        hint = { "@comment.hint" },
+        -- HINT:
       },
     }
   },
