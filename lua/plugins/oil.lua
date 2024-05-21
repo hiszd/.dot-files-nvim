@@ -1,6 +1,6 @@
 local init = function()
   local map = map_impl("Oil")
-  map({ "n" }, "<leader>n", function() require("oil").open_float() end, { noremap = true })
+  map({ "n" }, "<leader>n", function() require("oil").open() end, { noremap = true })
 end
 
 return {

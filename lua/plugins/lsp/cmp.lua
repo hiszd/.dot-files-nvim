@@ -1,5 +1,9 @@
 return function(cmp)
-  local cmp_select = { behavior = cmp.SelectBehavior.Select }
+  local cmp_select = { behavior = cmp.SelectBehavior.Insert }
+
+  vim.opt.completeopt = { "menu", "menuone", "noselect" }
+  vim.opt.shortmess:append "c"
+
   cmp.setup({
     snippet = {
       expand = function(args)

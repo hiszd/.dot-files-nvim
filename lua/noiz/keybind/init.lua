@@ -13,14 +13,8 @@ map({ "n" }, "<leader>hg", "<Cmd>:Inspect<CR>", { noremap = true })
 --   { noremap = true, desc = "Use LSP to format current buffer" }
 -- )
 
-map({ "i" }, "<C-l>", function()
-  local luasnip = require("luasnip")
-  if luasnip and luasnip.expand_or_jumpable() then
-    feedkey("<Plug>luasnip-expand-or-jump", "")
-  end
-end, { desc = "luasnip expand or jump if in snippet", silent = true, noremap = true })
-map({ "n" }, "<leader>cuiw", "gUiw`]a", { noremap = true, desc = "UPPERCASE inner word(see I just used it there)" })
-map({ "n" }, "<leader>ctiw", "guiwgUl", { noremap = true, desc = "Title case inner word" })
+map({ "n" }, "<leader>uiw", "gUiw`]a<Esc>b", { noremap = true, desc = "UPPERCASE inner word(see I just used it there)" })
+map({ "n" }, "<leader>tiw", "guiwgUl", { noremap = true, desc = "Title case inner word" })
 map({ "n" }, "<leader>w", "<Cmd>w<cr>", { noremap = true, desc = "Save current buffer" })
 map({ "n" }, "<leader><leader>w", "<Cmd>lua vim.lsp.buf.format()<cr><Cmd>w<cr>",
   { noremap = true, desc = "Save current buffer" })
@@ -55,7 +49,7 @@ map({ "n" }, "<leader>q", "<Cmd>:bdelete<CR>")
 map({ "n" }, "<leader>tq", "<Cmd>:tabclose<CR>")
 
 
-map({ "n" }, "<C-j>", "<C-^>", { noremap = true })
+map({ "n" }, "<C-H>", "<C-^>", { noremap = true })
 
 map({ "n" }, "<leader>df", function()
   vim.cmd("setlocal nofoldenable");

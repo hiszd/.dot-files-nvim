@@ -8,7 +8,11 @@ return {
         'hrsh7th/nvim-cmp',
         dependencies = {
           {
-            'L3MON4D3/LuaSnip',
+            {
+              "L3MON4D3/LuaSnip",
+              -- install jsregexp (optional!).
+              build = "make install_jsregexp"
+            },
             'onsails/lspkind.nvim',
             "hrsh7th/cmp-buffer",
             "hrsh7th/cmp-path",
@@ -21,12 +25,14 @@ return {
       },
     },
     config = function()
+      require(relpath .. "snippets")
       local cmp = require("cmp")
       require(relpath .. "cmp")(cmp)
       local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
       local on_attach = function(_, bufnr)
         vim.print("LSP Attached")
+        vim.lsp.inlay_hint.enable(true)
         vim.bo[bufnr].omnifunc = 'v:lua.vim.lsp.omnifunc'
         local opts = { buffer = bufnr, remap = false }
         ---@param optsl table
@@ -50,9 +56,9 @@ return {
         map({ 'n' }, 'gi', function()
           vim.lsp.buf.implementation()
         end, combine({ desc = "Goto Implementation" }))
-        map({ 'n' }, '<C-k>', function()
-          vim.lsp.buf.signature_help()
-        end, combine({ desc = "Show Signature Help" }))
+        -- map({ 'n' }, '<C-k>', function()
+        --   vim.lsp.buf.signature_help()
+        -- end, combine({ desc = "Show Signature Help" }))
         map({ 'n' }, '<leader>D', function()
           vim.lsp.buf.type_definition()
         end, combine({ desc = "Goto Type Definition" }))
@@ -82,10 +88,10 @@ return {
         end, combine({ desc = "Format Document" }))
 
         map({ "n" }, "<leader>TD", function()
-          if vim.diagnostic.is_disabled() then
-            vim.diagnostic.enable()
+          if vim.diagnostic.is_enabled() then
+            vim.diagnostic.enable(false)
           else
-            vim.diagnostic.disable()
+            vim.diagnostic.enable(true)
           end
         end, combine({ desc = "Toggle Diagnostics" }))
 
@@ -109,6 +115,30 @@ return {
 
       lspconfig.tsserver.setup({
         { "javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx" },
+        settings = {
+          typescript = {
+            inlayHints = {
+              includeInlayEnumMemberValueHints = true,
+              includeInlayFunctionLikeReturnTypeHints = true,
+              includeInlayFunctionParameterTypeHints = true,
+              includeInlayParameterNameHints = "all", -- 'none' | 'literals' | 'all';
+              includeInlayParameterNameHintsWhenArgumentMatchesName = true,
+              includeInlayPropertyDeclarationTypeHints = true,
+              includeInlayVariableTypeHints = true,
+            },
+          },
+          javascript = {
+            inlayHints = {
+              includeInlayEnumMemberValueHints = true,
+              includeInlayFunctionLikeReturnTypeHints = true,
+              includeInlayFunctionParameterTypeHints = true,
+              includeInlayParameterNameHints = "all", -- 'none' | 'literals' | 'all';
+              includeInlayParameterNameHintsWhenArgumentMatchesName = true,
+              includeInlayPropertyDeclarationTypeHints = true,
+              includeInlayVariableTypeHints = true,
+            },
+          },
+        },
         capabilities = capabilities,
         on_attach = function(client, bufnr)
           client.server_capabilities.document_formatting = false
@@ -119,7 +149,7 @@ return {
       require 'lspconfig'.lua_ls.setup {
         on_init = function(client)
           local path = client.workspace_folders[1].name
-          if vim.loop.fs_stat(path .. '/.luarc.json') or vim.loop.fs_stat(path .. '/.luarc.jsonc') then
+          if vim.uv.fs_stat(path .. '/.luarc.json') or vim.uv.fs_stat(path .. '/.luarc.jsonc') then
             return
           end
           client.config.settings.Lua = vim.tbl_deep_extend('force', client.config.settings.Lua, {
@@ -202,6 +232,12 @@ return {
         capabilities = capabilities,
         on_attach = on_attach,
         cmd = { "taplo", "lsp", "stdio" }
+      }
+
+      require 'lspconfig'.elixirls.setup {
+        capabilities = capabilities,
+        on_attach = on_attach,
+        cmd = { "elixir-ls" },
       }
 
 
