@@ -240,6 +240,17 @@ return {
         cmd = { "elixir-ls" },
       }
 
+      require 'lspconfig'.sqls.setup {
+        capabilities = capabilities,
+        on_attach = function (...)
+          vim.bo.commentstring="-- %s"
+          on_attach(...)
+        end,
+        cmd = { "sqls" },
+      }
+
+
+
 
       local servers = { 'ocamllsp', 'gopls', 'nil_ls', 'prismals', 'jsonls', 'cssls', 'tsserver', 'zls' }
 
