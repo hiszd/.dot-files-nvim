@@ -87,6 +87,15 @@ return {
           vim.lsp.buf.format({ async = true })
         end, combine({ desc = "Format Document" }))
 
+        map({ "n" }, "<leader>TI", function()
+          if vim.lsp.inlay_hint.is_enabled() then
+            vim.lsp.inlay_hint.enable(false)
+          else
+            vim.lsp.inlay_hint.enable(true)
+          end
+        end, combine({ desc = "Toggle Inlay Hints" }))
+
+
         map({ "n" }, "<leader>TD", function()
           if vim.diagnostic.is_enabled() then
             vim.diagnostic.enable(false)
