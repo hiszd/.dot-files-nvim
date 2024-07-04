@@ -174,7 +174,8 @@ local config = function()
     -- Lsp server name .
     function()
       local msg = "No Active Lsp"
-      local clients = vim.lsp.get_active_clients()
+      local bufnr = vim.api.nvim_get_current_buf()
+      local clients = vim.lsp.get_clients({bufnr = bufnr})
       if next(clients) == nil then
         return msg
       end
