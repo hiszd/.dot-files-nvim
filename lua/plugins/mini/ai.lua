@@ -1,4 +1,4 @@
-return function(mini)
+return function()
   return {
     n_lines = 500,
   }
