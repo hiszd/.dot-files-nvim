@@ -122,35 +122,35 @@ return {
         end,
       })
 
-      lspconfig.tsserver.setup({
+      lspconfig.ts_ls.setup({
         { "javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx" },
-        settings = {
-          typescript = {
-            inlayHints = {
-              includeInlayEnumMemberValueHints = true,
-              includeInlayFunctionLikeReturnTypeHints = true,
-              includeInlayFunctionParameterTypeHints = true,
-              includeInlayParameterNameHints = "all", -- 'none' | 'literals' | 'all';
-              includeInlayParameterNameHintsWhenArgumentMatchesName = true,
-              includeInlayPropertyDeclarationTypeHints = true,
-              includeInlayVariableTypeHints = true,
-            },
-          },
-          javascript = {
-            inlayHints = {
-              includeInlayEnumMemberValueHints = true,
-              includeInlayFunctionLikeReturnTypeHints = true,
-              includeInlayFunctionParameterTypeHints = true,
-              includeInlayParameterNameHints = "all", -- 'none' | 'literals' | 'all';
-              includeInlayParameterNameHintsWhenArgumentMatchesName = true,
-              includeInlayPropertyDeclarationTypeHints = true,
-              includeInlayVariableTypeHints = true,
-            },
-          },
-        },
+        -- settings = {
+        --   typescript = {
+        --     inlayHints = {
+        --       includeInlayEnumMemberValueHints = true,
+        --       includeInlayFunctionLikeReturnTypeHints = true,
+        --       includeInlayFunctionParameterTypeHints = true,
+        --       includeInlayParameterNameHints = "all", -- 'none' | 'literals' | 'all';
+        --       includeInlayParameterNameHintsWhenArgumentMatchesName = true,
+        --       includeInlayPropertyDeclarationTypeHints = true,
+        --       includeInlayVariableTypeHints = true,
+        --     },
+        --   },
+        --   javascript = {
+        --     inlayHints = {
+        --       includeInlayEnumMemberValueHints = true,
+        --       includeInlayFunctionLikeReturnTypeHints = true,
+        --       includeInlayFunctionParameterTypeHints = true,
+        --       includeInlayParameterNameHints = "all", -- 'none' | 'literals' | 'all';
+        --       includeInlayParameterNameHintsWhenArgumentMatchesName = true,
+        --       includeInlayPropertyDeclarationTypeHints = true,
+        --       includeInlayVariableTypeHints = true,
+        --     },
+        --   },
+        -- },
         capabilities = capabilities,
         on_attach = function(client, bufnr)
-          client.server_capabilities.document_formatting = false
+          client.server_capabilities.document_formatting = true
           on_attach(client, bufnr)
         end,
       })
@@ -251,8 +251,8 @@ return {
 
       require 'lspconfig'.sqls.setup {
         capabilities = capabilities,
-        on_attach = function (...)
-          vim.bo.commentstring="-- %s"
+        on_attach = function(...)
+          vim.bo.commentstring = "-- %s"
           on_attach(...)
         end,
         cmd = { "sqls" },
@@ -261,7 +261,7 @@ return {
 
 
 
-      local servers = { 'ocamllsp', 'gopls', 'nil_ls', 'prismals', 'jsonls', 'cssls', 'tsserver', 'zls' }
+      local servers = { 'ocamllsp', 'gopls', 'nil_ls', 'prismals', 'jsonls', 'cssls', 'zls' }
 
       for _, lsp in ipairs(servers) do
         lspconfig[lsp].setup {
