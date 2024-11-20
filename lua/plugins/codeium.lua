@@ -1,6 +1,6 @@
 return {
   {
-    "hiszd/codeium.vim",
+    "exafunction/codeium.vim",
     config = function()
       vim.g.codeium_disable_bindings = 1
       local map = map_impl("Codeium")
