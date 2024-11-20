@@ -1,12 +1,11 @@
-local config = function()
-  require("harpoon").setup({
+local init = function()
+  local h = require("harpoon")
+
+  h:setup({
     settings = {
       save_on_toggle = true,
     }
   })
-end
-local init = function()
-  local h = require("harpoon")
 
   local map = map_impl("Harpoon")
 
@@ -22,7 +21,7 @@ local init = function()
     { "n" },
     "<leader>ha",
     function()
-      h:list():append()
+      h:list():add()
     end,
     { noremap = true, desc = "Add file to Harpoon" }
   )
@@ -45,6 +44,22 @@ local init = function()
       { noremap = true, desc = "Navigate to Harpoon file " .. i }
     )
   end
+
+  map(
+    { "n" },
+    "<C-S-P>",
+    function()
+      h:list():prev();
+    end
+  )
+
+  map(
+    { "n" },
+    "<C-S-N>",
+    function()
+      h:list():next();
+    end
+  )
 end
 
 return {
@@ -53,6 +68,5 @@ return {
   dependencies = {
     "nvim-lua/plenary.nvim",
   },
-  config = config,
   init = init,
 }
