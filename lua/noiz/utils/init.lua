@@ -143,9 +143,13 @@ util.log = function()
   local curbuf = vim.api.nvim_get_current_buf()
   local filetype = vim.api.nvim_get_option_value("filetype", { buf = curbuf })
   if filetype == "lua" then
-    feedkey("vkwy<esc>A<enter><esc>Aprint(<esc>p<esc>", "")
-  elseif filetype == "jsx" or filetype == "tsx" or filetype == "javascript" or filetype == "typescript" then
-    feedkey("vkwy<esc>A<enter><esc>Aconsole.log(`${}<esc>hpA;<esc>", "")
+    feedkey("viwyviw sa)F(a\"<esc>pa: \", <esc>F(iprint<esc>_", "")
+  elseif filetype == "jsx" or filetype == "tsx" or filetype == "javascript" or filetype == "typescript" or filetype == "typescriptreact" then
+    feedkey(
+      "viwyviw sa{F{i$<esc>vf} sa`F`vf` sa)F(iconsole.log<esc>A;<esc>",
+      "")
+  else
+    print("filetype not supported ", filetype)
   end
 end
 

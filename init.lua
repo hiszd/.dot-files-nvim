@@ -80,6 +80,7 @@ vim.opt.updatetime = 1000
 vim.opt.cursorline = true
 vim.opt.foldmethod = "indent"
 vim.opt.hlsearch = false
+vim.opt.cmdheight = 0
 
 vim.opt.termguicolors = true
 

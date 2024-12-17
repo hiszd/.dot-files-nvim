@@ -32,6 +32,7 @@ return function(cmp)
     }),
     sources = cmp.config.sources({
       { name = "nvim_lsp" },
+      { name = "orgmode" },
       { name = "nvim_lua" },
       { name = 'luasnip' },
     }, {

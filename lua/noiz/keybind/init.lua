@@ -18,7 +18,9 @@ map({ "n" }, "<leader>tiw", "guiwgUl", { noremap = true, desc = "Title case inne
 map({ "n" }, "<leader>w", "<Cmd>w<cr>", { noremap = true, desc = "Save current buffer" })
 map({ "n" }, "<leader><leader>w", "<Cmd>lua vim.lsp.buf.format()<cr><Cmd>w<cr>",
   { noremap = true, desc = "Save current buffer" })
-map({ "n" }, "<leader>cr", '<Cmd>lua require("nvim-reload").Reload()<cr>',
+map({ "n" }, "<leader>cr", function()
+    require("nvim-reload").Reload()
+  end,
   { noremap = true, desc = "reload whole config" })
 map({ "n" }, "ge", "$", { noremap = true, desc = "go to end of line" })
 map({ "n" }, "gh", "^", { noremap = true, desc = "go to beginning of line" })
@@ -26,7 +28,9 @@ map({ "n" }, "gh", "^", { noremap = true, desc = "go to beginning of line" })
 map(
   { "n" },
   "<leader><leader>tnc",
-  '<Cmd>lua print(vim.fn.expand("%:p"))<cr>',
+  function()
+    print(vim.fn.expand("%:p"))
+  end,
   { noremap = true, desc = "Print current filename" }
 )
 
@@ -35,12 +39,18 @@ map({ "n" }, "<leader><leader>x", "<Cmd>so %<cr>", { noremap = true, desc = "sou
 map(
   { "n" },
   "<leader>l",
-  '<Cmd>lua require("noiz.utils").log()<cr>',
+  function()
+    require("noiz.utils").log()
+  end,
   { noremap = true, desc = "log inner word under cursor" }
 )
 
-map({ "n" }, "<leader>mq", "<Cmd>lua QWERTY()<cr>", { noremap = true, desc = "assign keys for QWERTY" })
-map({ "n" }, "<leader>mr", "<Cmd>lua RSTLNE()<cr>", { noremap = true, desc = "assign keys for RSTLNE" })
+map({ "n" }, "<leader>mq", function()
+  QWERTY()
+end, { noremap = true, desc = "assign keys for QWERTY" })
+map({ "n" }, "<leader>mr", function()
+  RSTLNE()
+end, { noremap = true, desc = "assign keys for RSTLNE" })
 
 
 map({ "n" }, "<leader>br", "<Cmd>:bnext<CR>")

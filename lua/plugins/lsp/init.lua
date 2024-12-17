@@ -124,6 +124,7 @@ return {
 
       lspconfig.ts_ls.setup({
         { "javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx" },
+        cmd = { "pnpx", "typescript-language-server", "--stdio" },
         -- settings = {
         --   typescript = {
         --     inlayHints = {

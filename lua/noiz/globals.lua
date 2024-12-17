@@ -17,10 +17,9 @@ end
 
 QWERTY = function()
   local map = map_impl("QWERTY")
-  map({ "" }, "n", "n")
-  map({ "" }, "i", "i")
-  map({ "" }, "o", "o")
-  map({ "" }, "k", "k")
+  for letter in pairs({ "n", "i", "o", "k" }) do
+    map({ "" }, letter, letter)
+  end
   print("QWERTY")
 end
 

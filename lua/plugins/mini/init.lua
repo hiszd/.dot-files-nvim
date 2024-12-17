@@ -10,10 +10,9 @@ local none = function() return {} end
 local config = function()
   reqs({
     -- ["mini.pairs"] = pairs,
-    ["mini.operators"] = none,
     ["mini.sessions"] = none,
     ["mini.doc"] = none,
-    ["mini.indentscope"] = none,
+    -- ["mini.indentscope"] = none,
     ["mini.surround"] = surround,
     ["mini.starter"] = starter,
     ["mini.ai"] = ai,
