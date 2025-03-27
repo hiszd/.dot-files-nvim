@@ -20,9 +20,19 @@ return {
               type = "postgres", -- type of database driver
               url = "postgres://postgres:H@ck3r345@localhost:5432/openticket_dev?sslmode=disable",
             },
+            {
+              id = "psql_remex",  -- only mandatory if you edit a file by hand. IT'S YOUR JOB TO KEEP THESE UNIQUE!
+              name = "psql_remex",
+              type = "postgres", -- type of database driver
+              url = "postgres://postgres:H@ck3r345@localhost:5432/remex?sslmode=disable",
+            },
           }),
         },
       })
+      local map = map_impl("DBee")
+      map({ "n" }, "<leader>dbt", function()
+        require("dbee").toggle()
+      end, { desc = "Open DBee" })
     end,
   },
 }
