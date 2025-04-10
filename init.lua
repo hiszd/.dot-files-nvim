@@ -52,6 +52,7 @@ vim.opt.concealcursor = "nc"
 vim.opt.conceallevel = 2
 vim.opt.completeopt = { "menu", "menuone", "noselect" }
 vim.o.undofile = true
+vim.opt.laststatus = 3
 
 vim.g.rustfmt_autosave = 1
 
