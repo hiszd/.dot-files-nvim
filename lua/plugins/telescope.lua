@@ -1,9 +1,11 @@
 local conf = function()
   local builtin = require("telescope.builtin")
+  require('telescope').load_extension('recent_files')
   local map = map_impl("Telescope")
   -- Telescope bindings
   map({ "n" }, "<leader>ts", "<Cmd>Telescope treesitter<cr>", { noremap = true, desc = "Treesitter" })
   map({ "n" }, "<leader>af", "<Cmd>Telescope find_files<cr>", { noremap = true, desc = "Find Files" })
+  map({ "n" }, "<leader>ao", "<Cmd>Telescope recent_files<cr>", { noremap = true, desc = "Find Files" })
   map({ "n" }, "<leader>tz", "<Cmd>Telescope colorscheme<cr>", { noremap = true, desc = "Color Schemes" })
   map({ "n" }, "<leader>ah", "<Cmd>Telescope help_tags<cr>", { noremap = true, desc = "Help Tags" })
   map({ "n" }, "<leader>axl", "<Cmd>Telescope quickfix<cr>", { noremap = true, desc = "Quickfix" })
@@ -38,6 +40,7 @@ return {
     dependencies = {
       "nvim-lua/plenary.nvim",
       "nvim-lua/popup.nvim",
+      "smartpde/telescope-recent-files",
     },
     config = conf,
   },

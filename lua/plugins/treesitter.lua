@@ -8,7 +8,6 @@ local config = function()
     },
     ensure_installed = {
       "comment",
-      "org",
       "lua",
       "tsx",
       "typescript",

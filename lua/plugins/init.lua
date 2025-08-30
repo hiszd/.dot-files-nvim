@@ -24,6 +24,7 @@ return {
         INFO = { color = "info" },
         HINT = { color = "hint" },
         TEST = { color = "test" },
+        CHANGEPOINT = { color = "changepoint" },
       },
       colors = {
         todo = { "@comment.todo" },
@@ -36,6 +37,10 @@ return {
         -- INFO:
         hint = { "@comment.hint" },
         -- HINT:
+        test = { "@comment" },
+        -- TEST:
+        changepoint = { "@comment.changepoint" },
+        -- CHANGEPOINT:
       },
     }
   },

@@ -78,7 +78,8 @@ vim.opt.colorcolumn = "100"
 vim.opt.cmdheight = 4
 vim.opt.updatetime = 1000
 vim.opt.cursorline = true
-vim.opt.foldmethod = "indent"
+-- vim.opt.foldmethod = "syntax"
+vim.opt.foldlevel = 20
 vim.opt.hlsearch = false
 vim.opt.cmdheight = 0
 
