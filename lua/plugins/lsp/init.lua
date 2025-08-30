@@ -5,30 +5,17 @@ return {
     'neovim/nvim-lspconfig',
     dependencies = {
       {
-        'hrsh7th/nvim-cmp',
-        dependencies = {
-          {
             {
               "L3MON4D3/LuaSnip",
               -- install jsregexp (optional!).
               build = "make install_jsregexp"
             },
             'onsails/lspkind.nvim',
-            "hrsh7th/cmp-buffer",
-            "hrsh7th/cmp-path",
-            "hrsh7th/cmp-nvim-lua",
-            "hrsh7th/cmp-nvim-lsp",
-            "hrsh7th/cmp-cmdline",
-            "saadparwaiz1/cmp_luasnip",
-          }
-        },
+          },
       },
-    },
     config = function()
       require(relpath .. "snippets")
-      local cmp = require("cmp")
-      require(relpath .. "cmp")(cmp)
-      local capabilities = require('cmp_nvim_lsp').default_capabilities()
+      local capabilities = require('blink.cmp').get_lsp_capabilities()
 
       local on_attach = function(_, bufnr)
         vim.print("LSP Attached")
@@ -244,11 +231,11 @@ return {
         cmd = { "taplo", "lsp", "stdio" }
       }
 
-      require 'lspconfig'.elixirls.setup {
-        capabilities = capabilities,
-        on_attach = on_attach,
-        cmd = { "elixir-ls" },
-      }
+      -- require 'lspconfig'.elixirls.setup {
+      --   capabilities = capabilities,
+      --   on_attach = on_attach,
+      --   cmd = { "~/.local/share/elixir-ls/release/language_server.sh" },
+      -- }
 
       require 'lspconfig'.sqls.setup {
         capabilities = capabilities,
