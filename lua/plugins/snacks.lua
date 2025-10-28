@@ -1,3 +1,5 @@
+local pfx = " (Snacks)"
+
 return {
   {
     "folke/snacks.nvim",
@@ -32,23 +34,23 @@ return {
       }
     },
     keys = {
-      { "<leader>z",   function() Snacks.zen() end,                     desc = "Toggle Zen Mode" },
-      { "<leader>Z",   function() Snacks.zen.zoom() end,                desc = "Toggle Zoom" },
-      { "<leader>.",   function() Snacks.scratch() end,                 desc = "Toggle Scratch Buffer" },
-      { "<leader>S",   function() Snacks.scratch.select() end,          desc = "Select Scratch Buffer" },
-      { "<leader>snh", function() Snacks.notifier.show_history() end,   desc = "Notification History" },
-      { "<leader>bd",  function() Snacks.bufdelete() end,               desc = "Delete Buffer" },
-      { "<leader>cR",  function() Snacks.rename.rename_file() end,      desc = "Rename File" },
-      { "<leader>gB",  function() Snacks.gitbrowse() end,               desc = "Git Browse" },
-      { "<leader>gb",  function() Snacks.git.blame_line() end,          desc = "Git Blame Line" },
-      { "<leader>gf",  function() Snacks.lazygit.log_file() end,        desc = "Lazygit Current File History" },
-      { "<leader>gg",  function() Snacks.lazygit() end,                 desc = "Lazygit" },
-      { "<leader>gl",  function() Snacks.lazygit.log() end,             desc = "Lazygit Log (cwd)" },
-      { "<leader>dn",  function() Snacks.notifier.hide() end,           desc = "Dismiss All Notifications" },
-      { "<c-/>",       function() Snacks.terminal() end,                desc = "Toggle Terminal" },
-      { "<c-_>",       function() Snacks.terminal() end,                desc = "which_key_ignore" },
-      { "]]",          function() Snacks.words.jump(vim.v.count1) end,  desc = "Next Reference",              mode = { "n", "t" } },
-      { "[[",          function() Snacks.words.jump(-vim.v.count1) end, desc = "Prev Reference",              mode = { "n", "t" } },
+      { "<leader>z",   function() Snacks.zen() end,                     desc = "Toggle Zen Mode" .. pfx },
+      { "<leader>Z",   function() Snacks.zen.zoom() end,                desc = "Toggle Zoom" .. pfx },
+      { "<leader>.",   function() Snacks.scratch() end,                 desc = "Toggle Scratch Buffer" .. pfx },
+      { "<leader>S",   function() Snacks.scratch.select() end,          desc = "Select Scratch Buffer" .. pfx },
+      { "<leader>snh", function() Snacks.notifier.show_history() end,   desc = "Notification History" .. pfx },
+      { "<leader>bd",  function() Snacks.bufdelete() end,               desc = "Delete Buffer" .. pfx },
+      { "<leader>cR",  function() Snacks.rename.rename_file() end,      desc = "Rename File" .. pfx },
+      { "<leader>gB",  function() Snacks.gitbrowse() end,               desc = "Git Browse" .. pfx },
+      { "<leader>gb",  function() Snacks.git.blame_line() end,          desc = "Git Blame Line" .. pfx },
+      { "<leader>gf",  function() Snacks.lazygit.log_file() end,        desc = "Lazygit Current File History" .. pfx },
+      { "<leader>gg",  function() Snacks.lazygit() end,                 desc = "Lazygit" .. pfx },
+      { "<leader>gl",  function() Snacks.lazygit.log() end,             desc = "Lazygit Log (cwd)" .. pfx },
+      { "<leader>dn",  function() Snacks.notifier.hide() end,           desc = "Dismiss All Notifications" .. pfx },
+      { "<c-/>",       function() Snacks.terminal() end,                desc = "Toggle Terminal" .. pfx },
+      { "<c-_>",       function() Snacks.terminal() end,                desc = "which_key_ignore" .. pfx },
+      { "]]",          function() Snacks.words.jump(vim.v.count1) end,  desc = "Next Reference" .. pfx,mode = { "n", "t" } },
+      { "[[",          function() Snacks.words.jump(-vim.v.count1) end, desc = "Prev Reference" .. pfx,mode = { "n", "t" } },
       {
         "<leader>N",
         desc = "Neovim News",

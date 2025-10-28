@@ -66,10 +66,10 @@ return {
           vim.lsp.buf.workspace_symbol()
         end, combine({ desc = "Workspace Symbol" }))
         map({ "n" }, "]d", function()
-          vim.diagnostic.goto_next()
+          vim.diagnostic.jump({count=1, float=true})
         end, combine({ desc = "Next Diagnostic" }))
         map({ "n" }, "[d", function()
-          vim.diagnostic.goto_prev()
+          vim.diagnostic.jump({count=-1, float=true})
         end, combine({ desc = "Prev Diagnostic" }))
         map({ "n" }, "<leader>lca", function()
           vim.lsp.buf.code_action()
@@ -109,9 +109,7 @@ return {
         vim.api.nvim_set_option_value("tagfunc", "v:lua.vim.lsp.tagfunc", { buf = bufnr })
       end
 
-      local lspconfig = require("lspconfig")
-
-      lspconfig.cssls.setup({
+      vim.lsp.config("cssls", {
         init_options = {
           provideFormatter = false,
         },
@@ -122,7 +120,7 @@ return {
         end,
       })
 
-      lspconfig.ts_ls.setup({
+      vim.lsp.config("ts_ls", {
         { "javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx" },
         cmd = { "pnpx", "typescript-language-server", "--stdio" },
         -- settings = {
@@ -156,10 +154,10 @@ return {
         end,
       })
 
-      require 'lspconfig'.lua_ls.setup {
+      vim.lsp.config("lua_ls", {
         on_init = function(client)
           local path = client.workspace_folders[1].name
-          if vim.uv.fs_stat(path .. '/.luarc.json') or vim.uv.fs_stat(path .. '/.luarc.jsonc') then
+          if uv.fs_stat(path .. '/.luarc.json') or uv.fs_stat(path .. '/.luarc.jsonc') then
             return
           end
           client.config.settings.Lua = vim.tbl_deep_extend('force', client.config.settings.Lua, {
@@ -185,7 +183,7 @@ return {
         settings = {
           Lua = {}
         }
-      }
+      })
 
       -- vim.api.nvim_create_autocmd('LspAttach', {
       --   group = vim.api.nvim_create_augroup('UserLspConfig', {}),
@@ -207,13 +205,13 @@ return {
       --   end,
       -- })
 
-      lspconfig.html.setup({
+      vim.lsp.config("html", {
         filetypes = { 'html', 'tera' },
         capabilities = capabilities,
         on_attach = on_attach,
       })
 
-      lspconfig.rust_analyzer.setup({
+      vim.lsp.config("rust_analyzer", {
         -- cmd = { vim.fn.expand("~/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/bin/rust-analyzer") },
         cmd = { "rust-analyzer" },
         capabilities = capabilities,
@@ -238,26 +236,26 @@ return {
         },
       })
 
-      lspconfig.taplo.setup {
+      vim.lsp.config("taplo", {
         capabilities = capabilities,
         on_attach = on_attach,
         cmd = { "taplo", "lsp", "stdio" }
-      }
+      })
 
-      require 'lspconfig'.elixirls.setup {
+      vim.lsp.config("elixirls", {
         capabilities = capabilities,
         on_attach = on_attach,
         cmd = { "elixir-ls" },
-      }
+      })
 
-      require 'lspconfig'.sqls.setup {
+      vim.lsp.config("sqls", {
         capabilities = capabilities,
         on_attach = function(...)
           vim.bo.commentstring = "-- %s"
           on_attach(...)
         end,
         cmd = { "sqls" },
-      }
+      })
 
 
 
@@ -265,10 +263,10 @@ return {
       local servers = { 'ocamllsp', 'gopls', 'nil_ls', 'prismals', 'jsonls', 'cssls', 'zls' }
 
       for _, lsp in ipairs(servers) do
-        lspconfig[lsp].setup {
+        vim.lsp.config(lsp, {
           capabilities = capabilities,
           on_attach = on_attach,
-        }
+        })
       end
 
       vim.diagnostic.config({

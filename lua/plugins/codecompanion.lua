@@ -15,18 +15,20 @@ return {
       },
     },
     adapters = {
-      ollama = function()
-        return require("codecompanion.adapters").extend("ollama", {
-          schema = {
-            model = {
-              default = "qwen2.5-coder:latest",
+      http = {
+        ollama = function()
+          return require("codecompanion.adapters").extend("ollama", {
+            schema = {
+              model = {
+                default = "qwen2.5-coder:latest",
+              },
             },
-          },
-          env = {
-            url = "http://192.168.1.4:11434",
-          },
-        })
-      end,
+            env = {
+              url = "http://192.168.1.4:11434",
+            },
+          })
+        end,
+      },
     },
 
   },
